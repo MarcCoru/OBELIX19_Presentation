@@ -1,0 +1,22 @@
+\RequirePackage{siunitx}
+
+\sisetup{
+  % list-units = brackets,
+  % range-units = brackets,
+  binary-units,
+  range-phrase = --,
+  range-units=single,
+  exponent-product = \cdot
+}
+
+\sisetup{detect-all} % use the standard text font for numerals
+
+\DeclareSIUnit[product-units=single]\pixel{px} % definition of new unit pixels
+\DeclareSIUnit[number-unit-product = ]\percent{\char`\%} % re-define \percent to remove the space between the number and the % sign
+
+% define weird body part units, rumored to be used in certain underdeveloped regions in the far, far west
+\DeclareSIUnit\foot{ft} % holy... it hurts defining this, using the word "si"
+\DeclareSIUnit\inch{in}
+\DeclareSIUnit\pound{lb}
+\DeclareSIUnit\mile{mi}
+\DeclareSIUnit\gallon{gal}

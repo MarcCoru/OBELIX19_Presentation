@@ -1,0 +1,183 @@
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+
+% computer modern for text, palatino for math
+% \let\temp\rmdefault
+% \usepackage{mathpazo}
+% \let\rmdefault\temp
+
+% \usepackage{euler} % variables not slanted!!!
+% \usefonttheme{professionalfonts} % use serif fonts for math
+
+\RequirePackage{upgreek}
+
+\DeclareMathAlphabet{\mathbit}{OT1}{cmr}{bx}{it}
+
+% define missing uppercase greek letters
+\newcommand{\Tau}{\ensuremath{T}}
+
+\providecommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}
+
+\RequirePackage{ifthen}
+\AtBeginDocument{\@ifpackageloaded{beamer}{%
+    \mode<beamer>{\providecommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}}
+    \mode<handout>{\providecommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}}
+  }{%
+    \providecommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}
+  }
+}
+
+% % \mode<beamer>{\newcommand{\mathsymbol}[1]{\ensuremath{\pmb{#1}}}}
+% \mode<beamer>{\newcommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}}
+% \mode<handout>{\newcommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}}
+% % \newcommand{\mathsymbol}[1]{\ensuremath{\boldsymbol{#1}}}
+
+\usepackage{mleftright}% provides \mleft and \mright without outer spaces
+\usepackage{xstring}
+
+% \newcommand{\function}[1]{\ensuremath{\mathit{\lowercase{#1}}}}
+\newcommand{\function}[1][f]{\ensuremath{\operatorname{#1}}}
+\newcommand{\functionAt}[2][f]{\ensuremath{\ifthenelse{\equal{#1}{}}{}{\function[#1]}\mleft(#2\mright)}}
+\newcommand{\functional}[1][f]{\ensuremath{\operatorname{#1}}}
+\newcommand{\functionalAt}[2][f]{\ensuremath{\functional[#1]_{#2}}}
+
+\newcommand{\ImageMat}{\ensuremath{\M{F}}}
+\newcommand{\ImageFkt}{\ensuremath{\function[F]}}
+
+% special formatting
+\newcommand{\V}[1]{\ensuremath{\mathsymbol{\lowercase{#1}}}}
+\newcommand{\M}[1]{\ensuremath{\mathsymbol{\uppercase{#1}}}}
+\newcommand{\p}[1]{\ensuremath{\mathsymbol{\lowercase{#1}}}}
+\renewcommand{\P}[1]{\ensuremath{\mathsymbol{\uppercase{#1}}}}
+\newcommand{\MatAt}[2]{\ensuremath{\left( #1 \right)_{#2}}}
+\newcommand{\Set}[1]{\ensuremath{\mathcal{\uppercase{#1}}}}
+
+\newcommand{\VecDef}[1]{\mleft( #1 \mright)}
+\newcommand{\MatDef}[1]{\left( #1 \right)}
+\newcommand{\SetDef}[1]{\left\{ #1 \right\}}
+
+\newcommand{\NumSet}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\N}{\ensuremath{\NumSet{N}}}
+\newcommand{\Z}{\ensuremath{\NumSet{Z}}}
+\newcommand{\Q}{\ensuremath{\NumSet{Q}}}
+\newcommand{\R}{\ensuremath{\NumSet{R}}}
+\newcommand{\C}{\ensuremath{\NumSet{C}}}
+
+% special characters
+\newcommand{\D}[1]{\ensuremath{\,\mathrm{d}#1}}
+% \newcommand{\CovMat}{\ensuremath{\M{\Sigma}}}
+\newcommand{\CovMat}{\ensuremath{\M{C}}}
+
+% constants
+\newcommand{\e}{\ensuremath{\mathrm{e}}}
+\newcommand{\I}{\ensuremath{\mathrm{i}}}
+\newcommand{\PI}{\ensuremath{\uppi}}
+
+% unary operators
+\newcommand{\T}{\ensuremath{^{\!\top\!}}}
+\newcommand{\inv}{\ensuremath{^{-1}}}
+
+% binary operators
+\newcommand{\conv}[2]{\ensuremath{#1 \ast #2}}
+\newcommand{\scalarprod}[2]{\ensuremath{\langle#1, #2\rangle}}
+\newcommand{\innerprod}[2]{\ensuremath{#1\T#2}}
+\newcommand{\outerprod}[2]{\ensuremath{#1#2\T}}
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\pnorm}[1]{\ensuremath{\left\lVert #1 \right\rVert}}
+\newcommand{\norm}[1]{\ensuremath{\pnorm{#1}_2}}
+\newcommand{\dist}{\ensuremath{\operatorname{d}}}
+\newcommand{\diverg}{\ensuremath{\operatorname{D}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+% functions
+\newcommand{\expect}[2][]{\ensuremath{\mathbb{E}_{#1}\mleft[#2\mright]}}
+\newcommand{\var}[2][]{\ensuremath{\mathbb{V}_{#1}\mleft[#2\mright]}}
+\newcommand{\cov}[2][]{\ensuremath{\operatorname{cov}_{#1}\mleft[#2\mright]}}
+
+% formatting
+
+% nomenclature
+\newcommand{\param}{\ensuremath{\theta}}
+\newcommand{\ParamVec}{\ensuremath{\V{\theta}}}
+
+% \newcommand{\point}{\ensuremath{\V{p}}}
+% \newcommand{\Point}{\ensuremath{\V{p}^\text{W}}}
+\newcommand{\point}[1][p]{\ensuremath{\p{#1}}}
+\newcommand{\Point}[1][p]{\ensuremath{\P{#1}}}
+% \newcommand{\Point}[1][p]{\ensuremath{\point[#1]^\text{W}}}
+
+\newcommand{\homp}[1][p]{\ensuremath{\widetilde{\point[#1]}}}
+\newcommand{\homP}[1][p]{\ensuremath{\widetilde{\Point[#1]}}}
+
+\newcommand{\datal}{x}
+\newcommand{\data}{\ensuremath{\datal}}
+\newcommand{\DataVec}{\ensuremath{\V{\datal}}}
+\newcommand{\DataSet}{\ensuremath{\Set{x}}}
+\newcommand{\DataMatrix}{\ensuremath{\M{\uppercase{\datal}}}}
+
+\newcommand{\datalabel}{\ensuremath{y}}
+\newcommand{\LabelVec}{\ensuremath{\V{\datalabel}}}
+\newcommand{\LabelSet}{\ensuremath{\Set{y}}}
+
+\newcommand{\Samples}{\ensuremath{\Set{D}}}
+
+\newcommand{\class}{\ensuremath{\varkappa}}
+\newcommand{\Classes}{\ensuremath{\Set{C}}}
+
+\newcommand{\angl}{\ensuremath{\phi}}
+\newcommand{\transf}{\ensuremath{\varphi}}
+\newcommand{\transfp}{\ensuremath{\tau}}
+\newcommand{\feature}{\ensuremath{\varrho}}
+\newcommand{\confidence}{\ensuremath{c}}
+\newcommand{\ConfM}{\ensuremath{\M{C}}}
+\newcommand{\weight}{\ensuremath{\omega}}
+\newcommand{\error}{\ensuremath{\varepsilon}}
+\newcommand{\DistNorm}{\ensuremath{\mathcal{N}}}
+\newcommand{\mean}{\ensuremath{\mu}}
+\newcommand{\MeanVec}{\ensuremath{\V{\mean}}}
+\newcommand{\variance}{\ensuremath{\sigma}}
+\newcommand{\ccorrcoef}{\ensuremath{\rho}}
+\newcommand{\LandauO}{\ensuremath{\mathcal{O}}}
+\newcommand{\eval}{\ensuremath{\lambda}}
+\newcommand{\evec}{\ensuremath{\V{v}}}
+\newcommand{\KernelFkt}{\ensuremath{\kappa}}
+\newcommand{\KernelMat}{\ensuremath{\M{K}}}
+\newcommand{\KernelVal}{\ensuremath{k}}
+\newcommand{\correspondence}{\ensuremath{\psi}}
+\newcommand{\CorrespondenceSet}{\ensuremath{\Set{C}}}
+
+\newcommand{\WeightVec}{\ensuremath{\V{\weight}}}
+\newcommand{\bias}{\ensuremath{\weight_0}}
+
+\newcommand{\ErrorVec}{\ensuremath{\V{\error}}}
+
+\newcommand{\region}{\ensuremath{\Set{R}}}
+
+\newcommand{\likelihood}{\ensuremath{\mathcal{L}}}
+% \newcommand{}{\ensuremath{}}
+
+
+
+
+\usepackage{siunitx}
+
+\sisetup{
+  binary-units,
+  range-phrase = --,
+  range-units=single,
+  exponent-product = \cdot,
+  per-mode=fraction,
+  fraction-function=\tfrac, % small fraction
+}%
+
+\AtBeginDocument{
+  \sisetup{
+    math-rm=\mathrm,
+    text-rm=\rmfamily,
+  }
+}
+\DeclareSIUnit[product-units=single]\pixel{px}
