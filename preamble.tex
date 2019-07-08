@@ -1,0 +1,347 @@
+\usepackage{tikz}  
+\usepackage{tikz-3dplot} 
+\usepackage{graphicx}
+\usepackage{media9}
+\usetikzlibrary{positioning}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% change the camera position
+\tdplotsetmaincoords{45}{135}
+
+\usepackage{tabularx}
+
+\usepackage{subcaption}
+
+\usepackage{animate}
+
+\usepackage{pgfmath}
+\newcommand\randmin{}
+\newcommand\randmax{}
+\newcommand\randmultof{}
+\newcommand\setrand[4]%
+{\def\randmin{#1}%
+	\def\randmax{#2}%
+	\def\randmultof{#3}%
+	\pgfmathsetseed{#4}%
+}
+\newcommand\nextrand
+{\pgfmathparse{int(int((rnd*(\randmax-\randmin+1)+\randmin)/\randmultof)*\randmultof)}%
+	\xdef\thisrand{\pgfmathresult}%
+}
+
+%\usepackage[backend=biber]{biblatex}
+%\addbibresource{bib/references.bib}
+
+\newcommand{\wave}{
+	\begin{tikzpicture}[xscale=.05,yscale=.2]
+	\draw[-,fill=white] plot[domain=0:10*pi,smooth] (\x,{sin(\x r)});
+	\end{tikzpicture}
+}
+
+
+\newcommand{\domain}[4]{
+	%% spatial,spectral,temporal
+	\draw[fill=#4, opacity=.2] (#1,0,0) -- (0,#2,0) -- (0,0,#3) -- (#1,0,0);
+}
+
+
+\newcommand{\radarwave}{
+	\begin{tikzpicture}[xscale=.1,yscale=.2]
+	\draw[-,fill=white] plot[domain=0:5*pi,smooth] (\x,{sin(\x r)});
+	\end{tikzpicture}
+}
+
+
+\newcommand{\earth}{
+	\begin{tikzpicture}[baseline=-.25em, inner sep=0]
+	\node{\includegraphics[width=8mm]{images/icons/earth}};
+	\end{tikzpicture}
+}
+
+\newcommand{\sat}{
+	\begin{tikzpicture}[baseline=-.25em, inner sep=0]
+	\node[rotate=270,anchor=center]{\includegraphics[width=8mm]{images/icons/sat2}};
+	\end{tikzpicture}
+}
+
+
+\usepackage[capitalize]{cleveref}
+\usepackage[square,sort,comma,numbers]{natbib}
+
+%% this hack seems to be nececessary due to incompatibilities of cvpr template and tikz... -> https://tex.stackexchange.com/questions/398223/tikz-gives-error-command-everyshipouthook-already-defined
+%\makeatletter
+%\@namedef{ver@everyshi.sty}{}
+%\makeatother
+%% hackend
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning, calc,arrows,arrows.meta, fit}
+%\usetikzlibrary{arrows.meta,calc,decorations.markings,math,arrows.meta}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{statistics} % provides boxplots
+\usepackage{xfrac}
+
+\newcommand{\tp}{tp}
+\newcommand{\tn}{tn}
+\newcommand{\fp}{fp}
+\newcommand{\fn}{fn}
+
+
+\usepackage{tumcolors}
+\usepackage{tummath}
+\newcommand{\yhat}{\hat{\V{y}}}
+\newcommand{\ycorrect}{\hat{y}^+}
+\newcommand{\thetadelta}{\V{\Theta}_\delta}
+\newcommand{\biasdelta}{b_\delta}
+\newcommand{\biasclass}{\V{b}_\text{c}}
+\newcommand{\thetaclass}{\V{\Theta}_\text{c}}
+\newcommand{\thetafeat}{\V{\Theta}_\text{feat}}
+\newcommand{\fclass}{f_\text{c}}
+\newcommand{\fdelta}{f_\delta}
+\newcommand{\ffeat}{f_\text{feat}}
+\newcommand{\f}{f}
+
+\newcommand{\rvtime}{T_c} 
+\newcommand{\xuptot}{\M{X}_{\rightarrow t}} 
+\newcommand{\deltauptot}{\delta_{\rightarrow t}} 
+\newcommand{\tstop}{\ensuremath{t_\text{stop}}}
+\newcommand{\meantstop}{\ensuremath{\bar{t}_\text{stop}}}
+\usepackage[super]{nth}
+\usepackage{mathtools}
+
+\definecolor{evalcolor}{HTML}{3F3F3F}
+\definecolor{traincolor}{HTML}{B98951}
+\definecolor{validcolor}{HTML}{3F4BBE}
+
+\definecolor{fdlcolor}{HTML}{142737}
+
+\usepackage{multimedia}
+
+\colorlet{colortrain}{tumblue}
+\colorlet{colorinfer}{tumblack}
+
+\colorlet{earlinesscolor}{tumblue}
+\colorlet{accuracycolor}{tumorange}
+
+\colorlet{stdcolor}{tumbluelight}
+\colorlet{mediancolor}{tumorange}
+\colorlet{meancolor}{tumblue}
+
+\colorlet{b1color}{tumdiagramaubergine}
+\colorlet{b2color}{tumdiagramnavyblue}
+\colorlet{b3color}{tumdiagramturquoise}
+\colorlet{b4color}{tumdiagramgreen}
+\colorlet{b5color}{tumdiagramlimegreen}
+\colorlet{b6color}{tumdiagramyellow}
+\colorlet{b7color}{tumdiagramsand}
+\colorlet{b8color}{tumdiagramredorange}
+\colorlet{b8Acolor}{tumdiagramred}
+\colorlet{b9color}{tumblack}
+\colorlet{b10color}{tumblue}
+\colorlet{b11color}{tumdiagramdarkred}
+\colorlet{b12color}{tumorange}
+
+% atmospheric bands
+\colorlet{b1color}{tumblack}%tumdiagramaubergine
+\colorlet{b9color}{tumblack}%tumblack
+\colorlet{b10color}{tumblack}%tumblue
+
+%visisble bands
+\colorlet{b2color}{tumblue}%tumdiagramnavyblue
+\colorlet{b3color}{tumblue}%tumdiagramturquoise
+\colorlet{b4color}{tumblue}%tumdiagramgreen
+
+% near infrared bands
+\colorlet{b5color}{tumdiagramred}%tumdiagramlimegreen
+\colorlet{b6color}{tumdiagramred}%tumdiagramyellow
+\colorlet{b7color}{tumdiagramred}%tumdiagramsand
+\colorlet{b8color}{tumdiagramred}%tumdiagramredorange
+\colorlet{b8Acolor}{tumdiagramred}%tumdiagramred
+
+% SWIR bands
+\colorlet{b11color}{tumorange}%tumdiagramdarkred
+\colorlet{b12color}{tumorange}%tumorange
+
+\colorlet{epsilon0color}{tumorange}
+\colorlet{epsilon1color}{tumblue}
+\colorlet{epsilon10color}{tumblack}
+
+\colorlet{gridcolor}{tumblue}
+\colorlet{activationcolor}{tumorange}
+
+\colorlet{meadowcolor}{tumbluemedium}
+\colorlet{wbarleycolor}{tumbluedark}
+\colorlet{corncolor}{tumorange}
+\colorlet{wheatcolor}{tumgreen}
+\colorlet{sbarleycolor}{tumdiagramred}
+\colorlet{clovercolor}{tumdiagramturquoise}
+\colorlet{triticalecolor}{tumdiagramsand}
+
+\tikzstyle{rnn}=[draw,circle, inner sep=.1em]
+\tikzstyle{norm}=[rounded corners,draw]
+\tikzstyle{annot}=[rounded corners, fill=tumblue!20]
+\tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
+\tikzstyle{loss}=[fill=tumblue!10, rounded corners, font=\small]
+\tikzstyle{grad}=[colortrain]
+
+\newcommand{\ptoffset}{\varepsilon}
+
+\tikzstyle{test} = [thick]
+\tikzstyle{train} = [thin, dotted]
+
+\usepackage[inline]{enumitem}
+\setenumerate{label=(\roman*),itemsep=3pt,topsep=3pt}
+
+\setlength{\belowcaptionskip}{-10pt}
+
+
+\colorlet{traincolor}{tumbluelight}
+\colorlet{validcolor}{tumbluedark}
+\colorlet{evalcolor}{tumorange}
+
+\colorlet{forwardcolor}{tumblue}
+\colorlet{backwardcolor}{tumorange}
+
+% defaultvalue -> might be replaced later
+\colorlet{tensorcolor}{forwardcolor}
+
+\colorlet{classcolor}{tumivory}
+\colorlet{encodercolor}{tumblue}
+\colorlet{encodercolor}{tumblue}
+\colorlet{colorblue}{tumblue}
+\colorlet{colororange}{tumorange}
+
+\colorlet{colorclassone}{tumblue}
+\colorlet{colorclasstwo}{tumblack}
+\colorlet{colorclassthree}{tumorange}
+\colorlet{colorclassfour}{tumgray}
+
+\colorlet{frh01color}{tumgray}
+\colorlet{frh02color}{tumorange}
+\colorlet{frh03color}{tumblue}
+\colorlet{frh04color}{tumblack}
+
+
+
+%\usepackage{media9}
+
+% notation
+\newcommand{\MWeight}{\ensuremath{\M{W}}}
+\newcommand{\VBias}{\ensuremath{\V{b}}}
+\newcommand{\VInput}{\DataVec}
+\newcommand{\VHidden}{\ensuremath{\V{h}}}
+\newcommand{\FActivation}{\ensuremath{\sigma}}
+\newcommand{\VCellState}{\ensuremath{\V{c}}}
+\newcommand{\VForgetGate}{\ensuremath{\V{f}}}
+\newcommand{\VModulationGate}{\ensuremath{\V{j}}}
+\newcommand{\VInputGate}{\ensuremath{\V{i}}}
+\newcommand{\VOutputGate}{\ensuremath{\V{o}}}
+\newcommand{\concat}[2]{\left[#1 \parallel #2\right]}
+
+
+\newcommand{\VResetGate}{\ensuremath{\V{r}}}
+\newcommand{\VUpdateGate}{\ensuremath{\V{u}}}
+
+
+%\usepackage{titlesec}
+%\titlespacing{\section}{0pt}{10pt}{3pt}
+
+
+\usetikzlibrary{3d}
+\tikzstyle{perspective3d}=[
+x={(0.5cm,0.5cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}]
+
+
+\usetikzlibrary{spy}
+
+\usetikzlibrary{external,pgfplots.dateplot}
+
+\usepackage[eulergreek]{sansmath}
+\pgfplotsset{
+	y tick label style={/pgf/number format/.cd,%
+		scaled y ticks = false,
+		set thousands separator={},
+		fixed},
+	x tick label style={/pgf/number format/.cd,%
+		scaled x ticks = false,
+		set decimal separator={,},
+		fixed},
+	tick label style = {font=\scriptsize\sansmath\sffamily},
+	every axis label = {
+		font=\scriptsize\sansmath\sffamily},
+	every axis/.append style={
+		axis lines=left, 
+		enlargelimits, 
+		thick},
+	legend style = {font=\scriptsize\sansmath\sffamily, draw=none, rounded corners=0, fill opacity=.5, text opacity=1},
+	label style = {font=\scriptsize\sansmath\sffamily},
+	grid style={line width=.1pt, draw=gray!10},
+	major grid style={line width=.2pt,draw=tumgraylight},
+}
+
+%\let\tempone\itemize
+%\let\temptwo\enditemize
+%\renewenvironment{itemize}{\tempone\addtolength{\itemsep}{-.5\baselineskip}}{\temptwo}
+
+\tikzstyle{circ} = [circle, draw=white, fill=tumblue, inner sep=1pt]
+\newcommand{\fcn}{
+	\begin{tikzpicture}[scale=0.2, rotate=0, baseline=-.25em, inner sep=1pt]
+	\node[circ](a0) at (0,-1){};
+	\node[circ](a1) at (0,0){};
+	\node[circ](a2) at (0,1){};
+	
+	\node[circ](b0) at (1,-0.5){};
+	\node[circ](b1) at (1,0.5){};
+	
+	\draw[-] (a0) -- (b0);
+	\draw[-] (a1) -- (b0);
+	\draw[-] (a2) -- (b0);
+	
+	\draw[-] (a0) -- (b1);
+	\draw[-] (a1) -- (b1);
+	\draw[-] (a2) -- (b1);
+	
+	\end{tikzpicture}
+}
+
+\newcommand{\lfcn}[1]{
+	\begin{tikzpicture}[scale=#1, rotate=0, baseline=-.25em, inner sep=1pt]
+	\node[circle, draw=white, fill=tumblue, inner sep=3](a0) at (0,-1){};
+	\node[circle, draw=white, fill=tumblue,  inner sep=3](a1) at (0,0){};
+	\node[circle, draw=white, fill=tumblue,  inner sep=3](a2) at (0,1){};
+	
+	\node[circle, draw=white, fill=tumblue,  inner sep=3](b0) at (1,-0.5){};
+	\node[circle, draw=white, fill=tumblue,  inner sep=3](b1) at (1,0.5){};
+	
+	\draw[-] (a0) -- (b0);
+	\draw[-] (a1) -- (b0);
+	\draw[-] (a2) -- (b0);
+	
+	\draw[-] (a0) -- (b1);
+	\draw[-] (a1) -- (b1);
+	\draw[-] (a2) -- (b1);
+	
+	\end{tikzpicture}
+}
+
+\newcommand{\hidden}[1]{
+	\begin{tikzpicture}[scale=.1, baseline=-.25em]	
+	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
+	\foreach \i in {1,...,#1}{
+		\node[circle, draw=white, fill=tumbluelight, inner sep=1pt] at (\i,0){};
+	}
+	\end{tikzpicture}
+}
+
+\newcommand{\drawvector}[1]{
+	\begin{tikzpicture}[scale=.1, baseline=-.25em]	
+	%\draw[step=1.0,black,thin] (0,0) grid (#1,1);
+	\foreach \i in {1,...,#1}{
+		\node[circ] at (\i,0){};
+	}
+	\end{tikzpicture}
+}

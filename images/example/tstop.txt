@@ -1,0 +1,2 @@
+tstop, label, prediction
+0.6285714285714286, winter barley, winter barley

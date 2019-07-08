@@ -1,0 +1,507 @@
+\usetheme{Rochester}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{calc}
+\RequirePackage{bigintcalc}
+\RequirePackage{bibunits}
+
+%% Fonts
+\RequirePackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\fontfamily{phv}\selectfont
+
+% \usefonttheme{professionalfonts} % use serif fonts for math
+% % \RequirePackage{eulervm}
+%%
+
+% \RequirePackage{setspace}
+
+\RequirePackage{eso-pic}
+\RequirePackage{translations}
+
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\RequirePackage{ifthen}
+
+\RequirePackage{tumcolors}
+
+% header and footer should be separated by lines
+\newboolean{seprules}
+\setboolean{seprules}{false}
+\DeclareOption{seprules}{
+  \setboolean{seprules}{true}
+}
+
+% using faculty and group logos
+\newboolean{uselogos}
+\setboolean{uselogos}{false}
+\DeclareOption{uselogos}{
+  \setboolean{uselogos}{true}
+}
+
+% show affiliation in header
+\newboolean{affiliationinhead}
+\setboolean{affiliationinhead}{false}
+\DeclareOption{affiliationinhead}{
+  \setboolean{affiliationinhead}{true}
+}
+
+% show affiliation in title page header
+\newboolean{affiliationintitlepagehead}
+\setboolean{affiliationintitlepagehead}{false}
+\DeclareOption{affiliationintitlepagehead}{
+  \setboolean{affiliationintitlepagehead}{true}
+}
+
+% set the slide title into the header or underneath
+\newboolean{titleinhead}
+\setboolean{titleinhead}{false}
+\DeclareOption{titleinhead}{
+  \ifthenelse{\boolean{affiliationinhead}}{%
+    \PackageWarning{beamerthemeTUM}{******* Option 'titleinhead' is not available when 'affiliationinhead' is defined! Ignored! *******}
+    \setboolean{titleinhead}{false}
+  }{
+    \setboolean{titleinhead}{true}
+  }%
+}
+
+% show navigation bar
+\newboolean{navigationbar}
+\setboolean{navigationbar}{false}
+\DeclareOption{navigationbar}{
+  \setboolean{navigationbar}{true}
+}
+
+% show navigation bar
+\newboolean{progressbar}
+\setboolean{progressbar}{false}
+\DeclareOption{progressbar}{
+  \setboolean{progressbar}{true}
+}
+
+% use title graphic, ie. clock tower
+\newboolean{usetitlegraphic}
+\setboolean{usetitlegraphic}{false}
+\DeclareOption{titlegraphic}{
+  \setboolean{usetitlegraphic}{true}
+}
+
+% show affiliation
+\newboolean{showaffiliation}
+\setboolean{showaffiliation}{false}
+\DeclareOption{affiliation}{
+  \setboolean{showaffiliation}{true}
+}
+
+\ProcessOptions
+
+\usecolortheme{TUMlight}
+
+% set dimensions
+% \beamer@headheight=0.10\paperwidth
+\beamer@headheight=0.11\paperheight
+
+% set general theme options
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+
+% set global colors
+% \ifthenelse{\equal{\colorscheme}{light}}{
+%   \usecolortheme[named=tumblue]{structure}
+%
+%   \setbeamercolor*{Title bar}           {bg=tumwhite,fg=tumblue}
+%   \setbeamercolor*{Location bar}        {bg=tumwhite,fg=tumblue}
+%   \setbeamercolor*{frametitle}          {parent=Title bar}
+%
+%   \setbeamercolor*{block title}         {bg=tumbluemedium,fg=tumgraylight!50!white}
+%   \setbeamercolor*{block body}          {bg=tumgraylight,fg=tumgraydark}
+%
+%   \setbeamercolor*{block title alerted} {bg=tumorange,fg=tumgraylight!50!white}
+%   \setbeamercolor*{block body alerted}  {bg=tumorange!25!white,fg=tumgraydark}
+%
+%   \setbeamercolor*{block title example} {bg=tumgreen,fg=tumgraylight!50!white}
+%   \setbeamercolor*{block body example}  {bg=tumgreen!25!white,fg=tumgraydark}
+%
+%   \setbeamercolor*{normal text}         {bg=white,fg=tumgraydark}
+%   \setbeamercolor*{alerted text}        {fg=tumorange}
+%   \setbeamercolor*{section in head/foot}{bg=tumwhite,fg=tumblue}
+%
+%   \colorlet{hrulecolor}{tumbluelight}
+% }{
+%   \usecolortheme[named=tumbluelight]{structure}
+%
+%   \setbeamercolor*{Title bar}           {fg=tumwhite,bg=tumblue}
+%   \setbeamercolor*{Location bar}        {fg=tumblue,bg=tumgraylight}
+%   \setbeamercolor*{frametitle}          {parent=Title bar}
+%   \setbeamercolor*{block title}         {fg=tumblue,bg=white}
+%   \setbeamercolor*{block body}          {fg=tumgraydark,bg=tumgraylight}
+%   \setbeamercolor*{block title alerted} {fg=white,bg=red}
+%   \setbeamercolor*{normal text}         {fg=tumgraylight,bg=tumgraydark}
+%   \setbeamercolor*{section in head/foot}{fg=tumwhite,bg=tumgraylight}
+%
+%   \colorlet{hrulecolor}{tumbluedark}
+% }
+
+% set fonts
+\setbeamerfont{section in head/foot}{size=\tiny,series=\normalfont}
+\setbeamerfont{frametitle}{size=\LARGE}
+
+\setbeamerfont{title}{size=\huge}
+\setbeamerfont{subtitle}{size=\normalsize}
+
+% set images and logos
+% \ifthenelse{\equal{\colorscheme}{light}}{
+%   \pgfdeclareimage[height=.45\beamer@headheight]{logo}{images/logo-blue-TUM}
+%   \pgfdeclareimage[height=.45\beamer@headheight]{logocomplete}{images/logo-blue-TUM}
+%   \ifthenelse{\boolean{uselogos}}{\pgfdeclareimage[height=.45\beamer@headheight]{logodept}{images/logo-blue-\org}}{}
+% }{
+%   \pgfdeclareimage[height=.45\beamer@headheight]{logo}{images/logo-white-TUM}
+%   \pgfdeclareimage[height=.45\beamer@headheight]{logocomplete}{images/logo-text-white-TUM}
+%   \ifthenelse{\boolean{uselogos}}{\pgfdeclareimage[height=.45\beamer@headheight]{logodept}{images/logo-white-\org}}{}
+% }
+
+% ----------------------------------------------------------------
+\vfuzz5pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz5pt % Don't report over-full h-boxes if over-edge is small
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Copyright statement
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\SlidesCopyright}{%
+\mode<handout>{
+  \begin{frame}
+    \begin{description}
+      \item[\textbf{\emph{Important: Terms of Use!}}]~\\
+            These slides and all material shown on them are subject to copyright laws of multiple property holders!
+            They are brought to you by a password protected platform, \textit{e.g.} Moodle.
+            You may download and use them for your personal purposes.
+            In any case, publication, reproduction, distribution, or reusing of this entire presentation or individual parts of it is strictly forbidden!
+
+      \item[\textbf{\emph{Wichtig: Nutzungsbedingungen!}}]~\\
+            Dieser Foliensatz sowie jegliche darin verwendenten Materialien unterliegen dem Urheberrecht verschiedener Rechteinhaber.
+            Sie wurden Ihnen \"uber eine passwortgesch\"utzte Platform \"uberlassen, beispielsweise Moodle.
+            Sie k\"onnen diese frei herunterladen und zu Ihrem eigenen Gebrauch verwenden.
+            Dar\"uber hinaus ist jegliche Ver\"offentlichung, Duplizierung, Verbreitung oder weiterer Gebrauch dieser Pr\"asentation oder dessen Teile strengstens untersagt!
+    \end{description}
+  \end{frame}
+}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Setting up the titlepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{title page}{%
+  \begingroup
+  \ifthenelse{\boolean{usetitlegraphic}}{%
+      \begin{tikzpicture}[remember picture, overlay]
+        \node [anchor=south east,xshift=-.5cm,yshift=-.15cm] at (current page.south east) {
+          \includegraphics[height=7cm]{images/titlegraphic}
+        };
+      \end{tikzpicture}%
+  }{}%
+  \vskip -10pt
+  % \vskip 5mm
+  
+  \begin{beamercolorbox}[wd=\paperwidth]{}%
+    \begin{minipage}{\linewidth}
+      \hspace{5mm}%
+      \usebeamerfont{title}%
+      \parbox{.95\linewidth}{\inserttitle}
+
+      \vspace{.2cm}%
+      \hspace{5mm}%
+      \usebeamerfont{subtitle}%
+      \insertsubtitle
+    \end{minipage}
+  \end{beamercolorbox}
+
+  \begin{beamercolorbox}[wd=\paperwidth]{}%
+    \vspace{1.5cm}%
+
+    \hspace{5mm}%
+    \usebeamerfont{author}%
+    \insertauthor
+
+    \ifthenelse{\boolean{showaffiliation}}{%
+      \vspace{.5cm}%
+      \hspace{5mm}%
+%       \ifthenelse{\boolean{usetitlegraphic}}{\hfill}{}%
+      \begin{minipage}[t]{.5\linewidth}%\vspace{-.5cm}
+%         \usebeamerfont{institute}%
+        \insertinstitute
+      \end{minipage}
+      \ifthenelse{\boolean{usetitlegraphic}}{\hfill}{}%
+    }{}%
+
+    \vspace{.5cm}
+    \hspace{5mm}%
+    \usebeamerfont{date}%
+    \insertdate
+
+  \end{beamercolorbox}
+  \endgroup
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Setting up the regular pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Frametitle
+\setbeamertemplate{frametitle}{
+  \ifthenelse{\boolean{titleinhead}}{%
+    \vskip-0.25\beamer@headheight
+    \vskip-\baselineskip
+  %   \vskip-0.2cm
+    \vskip-0.15cm
+%     \hskip-0.5cm%
+    \usebeamerfont*{frametitle}%
+    \insertframetitle
+  %   \vskip-0.10em
+    \vskip0.15em
+%     \hskip-0.5cm%
+    \usebeamerfont*{framesubtitle}%
+    \insertframesubtitle
+    \vskip-0.10em
+  }{%
+%     \hskip-0.5cm%
+    \usebeamerfont*{frametitle}%
+    \insertframetitle%
+
+%     \hskip-0.5cm%
+    \usebeamerfont*{framesubtitle}%
+    \insertframesubtitle%
+  }
+}
+
+\setbeamersize{%
+  text margin left=5mm,
+  text margin right=5mm,
+} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Header
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.2\beamer@headheight]{Title bar}%
+    \ifthenelse{\c@framenumber>1 \and \boolean{navigationbar}}{%
+      \insertsectionnavigationhorizontal{0pt}{\hskip0.22cm}{}%
+%         \insertsectionnavigationhorizontal{\paperwidth}{\hskip0pt plus1fill}{\hskip0pt plus1fill}%
+%         \fbox{\insertsectionnavigationhorizontal{10cm}{\fbox{\hskip0pt plus1fill}}{\fbox{\hfill\hfill}}}%
+      \ifthenelse{\boolean{seprules}}{\color{hrulecolor}\rule{\paperwidth}{.25pt}}{}%
+    }{%
+      \vphantom{\insertsectionnavigationhorizontal{0pt}{\hskip0.22cm}{}}%
+    }%
+  \end{beamercolorbox}%
+%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.8\beamer@headheight]{Title bar}%
+    \vspace{5pt}%
+    \ifthenelse{\not \boolean{titleinhead}}{%
+      \ifthenelse{\( \boolean{affiliationintitlepagehead} \and \c@framenumber=1 \) \or \boolean{affiliationinhead}}{%
+        \hspace{5mm}%
+        \resizebox{!}{\heightof{\pgfuseimage{logo}}}{%
+          \begin{minipage}[b]{5cm}%
+            \ifcurrentbaselanguage{English}{%
+              Remote Sensing Technology\\%
+              TUM Department of Civil, Geo and Environmental Engineering\\%
+              Technical University of Munich%
+            }{%
+              Lehrstuhl für Methodik der Fernerkundung\\
+              Ingenieurfakultät Bau~Geo~Umwelt\\
+              Technische Universität München%
+            }%
+          \end{minipage}%
+        }%
+      }{}%
+    }{}%
+    \hfill
+    {\includegraphics[height=.45\beamer@headheight]{images/logo-black-\coorg} \hspace{.5cm}}{}%
+    \pgfuseimage{logo}%
+    \hspace{5mm}
+  \end{beamercolorbox}%
+  \ifthenelse{\boolean{seprules}}{\color{hrulecolor}\rule{\paperwidth}{.5pt}}{}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Footer
+\setbeamertemplate{footline}{
+  \ifthenelse{\boolean{seprules}}{\color{hrulecolor}\rule{\paperwidth}{.5pt}}{}
+%   {\color{hrulecolor}\hrulefill}%
+%   \begin{beamercolorbox}[leftskip=.1cm,rightskip=.5cm,topskip=.5cm,bottomskip=.0cm,wd=\paperwidth,ht=.6\beamer@headheight,sep=0.05cm,  bg=black]{Location bar}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=.6\beamer@headheight,sep=0.05cm]{Location bar}
+    \usebeamerfont{section in head/foot}%
+    \ifthenelse{\boolean{uselogos} \and \not \isundefined{\coorg}}{%
+      \pgfuseimage{logodept}%
+      \hspace{.25cm}
+    }{}
+%     \color{tumblack}
+    \usebeamerfont{section in head/foot}
+    \insertshortauthor~(\insertshortinstitute)%
+    ~\textbar~%
+    \insertshorttitle
+    ~\textbar~%
+    \setbox0=\hbox{\insertshortsubtitle\unskip}\ifdim\wd0=0pt
+    \else
+      \insertshortsubtitle
+      ~\textbar~%
+    \fi
+    \insertshortdate%
+    \hfill
+%     \hspace{.5cm}
+%     \parbox{2cm}{\progressbar@progressbar}
+    \hspace{.5cm}
+    \insertframenumber~/~\inserttotalframenumber
+  \end{beamercolorbox}
+  \ifthenelse{\boolean{progressbar}}{\progressbar@progressbar}{}%
+%   \progressbar@progressbar%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Progressbar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definecolor{pbfill}{HTML}{tumblue}% filling color for the progress bar
+% \definecolor{pbbg}{HTML}{tumivory}% background color for the progress bar
+\colorlet{pbfill}{tumbluemedium}
+\colorlet{pbbg}{tumivory}
+
+\usepackage{tikz}
+\usetikzlibrary{
+    calc,
+    math,
+    backgrounds,
+    shapes,
+    shapes.geometric,
+    shapes.symbols,
+    shapes.arrows,
+    shapes.multipart,
+    shapes.callouts,
+    shapes.misc,
+    positioning,
+%     shadows,
+}
+\makeatletter
+\newcommand\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@tmpdim % auxiliary dimension
+
+\progressbar@pbwd=\paperwidth
+\progressbar@pbht=.05ex
+\newcommand\progressbar@ffn{1}% Anzahl frames für Titelseite und Inhaltsverzeichnis
+
+% the progress bar
+\def\progressbar@progressbar{%
+
+    % max frames
+    \progressbar@tmpcountb=\inserttotalframenumber
+    \advance\progressbar@tmpcountb by -\progressbar@ffn
+
+    \ifnum\progressbar@tmpcountb<1
+    \progressbar@tmpcountb=1
+    \fi
+
+    % curr frame
+    \progressbar@tmpcounta=\insertframenumber
+    \advance\progressbar@tmpcounta by -\progressbar@ffn
+
+    % position
+    \progressbar@tmpdim=\progressbar@pbwd
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+
+  \begin{tikzpicture}[%
+%     rounded corners=.2pt,
+    very thin,
+  ]
+
+    \shade[top color=pbbg!20,bottom color=pbbg!20,middle color=pbbg!50]
+      (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+
+      \shade[draw=pbfill,top color=pbfill!50,bottom color=pbfill!50,middle color=pbfill] %
+        (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+
+  \end{tikzpicture}%
+%   \fi%
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Configuring block environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \AtBeginDocument{\addtobeamertemplate{block begin}{\setlength\abovedisplayskip{0pt}}}
+% \addtobeamertemplate{block begin}{\setlength\abovedisplayskip{0pt}}
+% \AtBeginDocument{%
+%   \setlength\abovedisplayskip{0pt}
+%   \setlength\belowdisplayskip{0pt}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Playground!!!! Biohazard!!!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\twopton}{\if@twopt \catcode`\;=13 \setboolean{@twopt}{false}  \fi}
+\newcommand{\biblio}[2][\normalfont]{
+  \begin{center}
+    \usebeamercolor{block body}
+    \begin{tikzpicture}
+      \draw node[draw=black!20!bg, fill=bg, rounded corners=2pt] {%
+        \parbox{0.95\textwidth}{%
+          \vskip-0.1cm%
+          {#1\putbib[#2]}
+%           \vskip0.1cm%
+        }%
+      };
+    \end{tikzpicture}%
+    \twopton{}
+  \end{center}
+}
+
+\defbeamertemplate*{bibliography item}{tum theme}{
+  \begin{tikzpicture}[rounded corners=1pt, scale=.5]
+    \useasboundingbox (-0.1, 0.3) rectangle (0.4, 0.5);
+    \fill[fill=structure.fg!25!structure.bg] (0, 0.25) rectangle (0.4, 0.5);
+    \shade[bottom color=structure.bg,top color=structure.fg!25!structure.bg] (0, 0) -- (0.3, 0) -- (0.4, 0.12) -- (0.4, 0.3) -- (0, 0.3) -- cycle;
+   \shade[left color=structure.bg,right color=structure.fg!30!structure.bg] (0,0.27) .. controls (0.25,0.25) .. (0.4,0.5) -- (0,0.5) -- cycle;
+   \fill[fill=structure.bg!80!structure.fg] (0,0) rectangle (0.3,0.05);
+   \shade[left color=structure.bg!95!structure.fg,right color=structure.bg!80!structure.fg] (0,0) rectangle (0.05,0.5);
+   \shade[left color=structure.bg,right color=structure.bg!50!structure.fg,shading angle=45] (0.3,0) -- (0.3,0.12) -- (0.4,0.12) -- cycle;
+   \draw[draw=structure.fg!35!structure.bg] (0,0) -- (0.3,0) -- (0.4,0.12) -- (0.4,0.5) -- (0,0.5) -- cycle;
+   \draw[draw=structure.fg!35!structure.bg](0.3,0) -- (0.3,0.12) -- (0.4,0.12);
+  \end{tikzpicture}
+}
+
+\makeatletter
+\def\bibitem{\@ifnextchar<{\beamer@bibitem@store}{\gdef\beamer@bibstore{}\beamer@plainbibitem}}
+\def\beamer@bibitem@store<#1>{\gdef\beamer@bibstore{<#1>}\beamer@plainbibitem}
+\def\beamer@plainbibitem{\@ifnextchar[\@lbibitem\beamer@bibitem}\def\@lbibitem[#1]#2{\expandafter\item\beamer@bibstore[\@biblabel{#1}\hfill]%
+  \@ifundefined{beamerbib@#2@\the\c@framenumber}{\if@filesw%
+    {\let\protect\noexpand%
+      \immediate\write\@auxout%
+      {\string\bibcite{#2}{\noexpand\hyperlink{beamerbib#2}{#1}}}}\fi%
+    \global\@namedef{beamerbib@#2@\the\c@framenumber}{\relax}%
+    \hypertarget{beamerbib#2}{}%
+    }{}%
+  \def\newblock{\beamer@newblock}\newblock\hskip-0.8ex}% This is really dirty !
+%  \hbox{}\ignorespaces}
+\def\beamer@bibitem#1{\@bibitem{#1}\ignorespaces}
+\def\@bibitem#1{\expandafter\item\beamer@bibstore\@ifundefined{beamerbib@#1@\the\c@framenumber}%
+  {\if@filesw \immediate\write\@auxout
+    {\string\bibcite{#1}{\noexpand\hyperlink{beamerbib#1}{\the\value{\@listctr}}}}\fi%
+    \global\@namedef{beamerbib@#1@\the\c@framenumber}{\relax}%
+    \hypertarget{beamerbib#1}{}}%
+  {}%
+  \def\newblock{\beamer@newblock}\newblock}
+\makeatother
