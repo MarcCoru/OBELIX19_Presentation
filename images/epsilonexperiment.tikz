@@ -1,0 +1,65 @@
+\newcommand{\figepsilonzero}{
+\def\datapath{images/logs/data/epsilon0}
+\tikzsetnextfilename{epsilonexperiment}
+\begin{tikzpicture}
+	\begin{groupplot}[
+	group style = {
+		group size = 1 by 3,
+		x descriptions at=edge bottom,
+		vertical sep=.5em},
+	no markers,
+	height=2.8cm,
+%	legend style={at={(0.03,0.5)},anchor=west},
+	legend style={at={(1,1)},anchor=south east},
+	width=\linewidth,
+	xlabel=epochs,
+	legend columns=3, 
+	ytick={0,0.5,1},
+	yticklabels={0,0.5,1},
+	ylabel=$\meantstop$
+ 	]
+%	\nextgroupplot[legend columns=1, ylabel=loss]
+%
+%	\addplot[epsilon10color] table [x=epoch, y=loss_classification, col sep=comma] {images/logs/data/epsilon10/log_earliness_test.csv};
+%	\addplot[epsilon10color] table [x=epoch, y=earliness_reward, col sep=comma] {images/logs/data/epsilon10/log_earliness_test.csv};
+%	
+%	\addplot[epsilon1color] table [x=epoch, y=loss_classification, col sep=comma] {images/logs/data/epsilon1/log_earliness_test.csv};
+%	\addplot[epsilon1color] table [x=epoch, y=earliness_reward, col sep=comma] {images/logs/data/epsilon1/log_earliness_test.csv};
+%	
+%	\addplot[epsilon0color] table [x=epoch, y=loss_classification, col sep=comma] {images/logs/data/epsilon0/log_earliness_test.csv};
+%	\addplot[epsilon0color] table [x=epoch, y=earliness_reward, col sep=comma] {images/logs/data/epsilon0/log_earliness_test.csv};
+%	
+%	
+%%	\legend{total loss (eval), classification loss (eval), earliness reward (eval)}
+%%	
+%	\legend{$\mathcal{L}_\text{c} - \mathcal{R}_\text{e}$, $\mathcal{L}_\text{c}$, $\mathcal{R}_\text{e}$}
+%	
+	
+	
+	\nextgroupplot[]
+	\legend{$\epsilon = 10$,$\epsilon = 1$,$\epsilon = 0$,}
+	
+	\addplot[epsilon10color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon10_r0/log_earliness_test.csv};
+	\addplot[epsilon1color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon1_r0/log_earliness_test.csv};
+	\addplot[epsilon0color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon0_r0/log_earliness_test.csv};
+	
+	\nextgroupplot[]
+	
+	\addplot[epsilon10color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon10_r1/log_earliness_test.csv};
+	\addplot[epsilon1color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon1_r1/log_earliness_test.csv};
+	\addplot[epsilon0color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon0_r1/log_earliness_test.csv};
+	
+	
+	\nextgroupplot[]
+	
+	\addplot[epsilon10color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon10_r2/log_earliness_test.csv};
+	\addplot[epsilon1color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon1_r2/log_earliness_test.csv};
+	\addplot[epsilon0color] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/epsilon0_r2/log_earliness_test.csv};
+	
+	
+	
+	
+	\end{groupplot}
+\end{tikzpicture}
+
+}

@@ -1,0 +1,98 @@
+\newcommand{\figearlyreward}{
+\def\datapath{images/logs/data/early_reward_p2/classes}
+\tikzsetnextfilename{loss-accuracyplots}
+\begin{tikzpicture}
+	\begin{groupplot}[
+	group style = {
+		group size = 1 by 2,
+		x descriptions at=edge bottom,
+		vertical sep=1em},
+	no markers,
+	height=2.8cm,
+%	legend style={at={(0.03,0.5)},anchor=west},
+	width=\linewidth,
+	xlabel=epochs
+ 	]
+	\nextgroupplot[legend columns=3, ylabel=loss]
+
+	\addplot[test, tumblack] table [x=epoch, y=loss, col sep=comma] {\datapath/log_earliness_test.csv};
+	
+	\addplot[test, accuracycolor] table [x=epoch, y=loss_classification, col sep=comma] {\datapath/log_earliness_test.csv};
+	
+	\addplot[test, earlinesscolor] table [x=epoch, y=earliness_reward, col sep=comma] {\datapath/log_earliness_test.csv};
+	
+%	\legend{total loss (eval), classification loss (eval), earliness reward (eval)}
+%	
+	\legend{$(\mathcal{L}_\text{c} - \mathcal{R}_\text{e})$, $\mathcal{L}_\text{c}$, $\mathcal{R}_\text{e}$}
+	
+	
+	
+	\nextgroupplot[
+		legend columns=2, 
+		legend pos=south east,
+		ytick={0,0.5,1},
+		yticklabels={
+			0 ({\color{earlinesscolor} jan}),
+			0.5 ({\color{earlinesscolor} jun}),
+			1 ({\color{earlinesscolor} dec})},
+		ylabel=accuracy/$\meantstop$]
+	\addplot[test, accuracycolor] table [x=epoch, y=accuracy, col sep=comma] {\datapath/log_earliness_test.csv};
+	\addplot[test, earlinesscolor] table [x=epoch, y=earliness, col sep=comma] {\datapath/log_earliness_test.csv};
+
+	\legend{accuracy,$\meantstop$}
+	
+	\end{groupplot}
+\end{tikzpicture}
+
+}
+
+\newcommand{\figtwophasecrossentropy}{
+\begin{tikzpicture}
+\begin{groupplot}[
+group style = {
+	group size = 1 by 2,
+	x descriptions at=edge bottom,
+	vertical sep=1em},
+no markers,
+height=2.8cm,
+%	legend style={at={(0.03,0.5)},anchor=west},
+width=\linewidth,
+ymin=0,ymax=2.5,
+xlabel=epochs
+]
+\nextgroupplot[legend columns=3, ylabel=loss,
+legend style={at={(1,.85)}, anchor=north east}]
+
+\addplot[test, tumblack] table [x=epoch, y=loss, col sep=comma] {images/logs/data/twophasecrossentropy/log_earliness_test.csv};
+
+\addplot[test, accuracycolor] table [x=epoch, y=loss_classification, col sep=comma] {images/logs/data/twophasecrossentropy/log_earliness_test.csv};
+
+\addplot[test, earlinesscolor] table [x=epoch, y=loss_earliness, col sep=comma] {images/logs/data/twophasecrossentropy/log_earliness_test.csv};
+
+\draw[draw, thick] (axis cs:50,0) -- (axis cs:50,2) node[above, font=\sffamily\scriptsize](s){switch epoch};
+\node[left=1em of s, font=\sffamily\scriptsize]{accuracy only};
+\node[right=1em of s, font=\sffamily\scriptsize]{accuracy+earliness};
+
+\legend{$(\mathcal{L}_\text{c} + \mathcal{L}_\text{e})$, $\mathcal{L}_\text{c}$, $\mathcal{L}_\text{e}$}
+
+\nextgroupplot[
+legend columns=2, 
+ytick={0,0.5,1},
+ymin=0,ymax=1,
+legend style={at={(1,0)}, anchor=south east},
+yticklabels={
+	0 ({\color{earlinesscolor} jan}),
+	0.5 ({\color{earlinesscolor} jun}),
+	1 ({\color{earlinesscolor} dec})},
+ylabel=accuracy/$\meantstop$]
+\addplot[test, accuracycolor] table [x=epoch, y=accuracy, col sep=comma] {images/logs/data/twophasecrossentropy/log_earliness_test.csv};
+\addplot[test, earlinesscolor] table [x=epoch, y=earliness, col sep=comma] {images/logs/data/twophasecrossentropy/log_earliness_test.csv};
+
+\legend{accuracy,$\meantstop$}
+
+\draw[draw, thick] (axis cs:50,0) -- (axis cs:50,1.1);
+
+\end{groupplot}
+\end{tikzpicture}
+
+}

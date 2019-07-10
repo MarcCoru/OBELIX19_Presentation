@@ -1,0 +1,156 @@
+
+\tikzstyle{dummy} = [inner sep=0]
+\tikzstyle{flow} = [thin, -{Stealth[scale=.5]}]
+\tikzstyle{endflow} = [flow, shorten >= 0, shorten <= 0]
+\tikzstyle{operator} = [inner sep=0, font=\scriptsize]
+\tikzstyle{conn} = [-stealth, shorten >= .2em, inner sep=0]
+\tikzstyle{conntime} = [conn, tumgray]
+\tikzstyle{lstmcell} = [inner sep=0, fill=tumbluelight!20, rounded corners=1em]
+
+
+\newcommand{\act}{
+	\begin{tikzpicture}[scale=.3]
+		\node[circle, draw]{
+			\begin{tikzpicture}
+			\draw (0,0) to[out=0, in=180] (1,1);
+			\end{tikzpicture}
+		}
+	\end{tikzpicture}	
+}
+
+
+
+\newcommand{\lstm}{
+	\begin{tikzpicture}[inner sep=0, xscale=.5, yscale=.5]
+	\coordinate (-input) at (0,1); % top left
+	\coordinate (-output) at (0,-2.75); % top left
+	\node[inner sep=0](fgate) at (-1.5,0){\fcn};
+	\node[inner sep=0](igate) at (-.5,0){\fcn};
+	\node[inner sep=0](jgate) at (.5,0){\fcn};
+	\node[operator](jmult) at (0,-1.25) {$ \odot $};
+	\draw[endflow] (jgate) -- (jmult);
+	\draw[endflow] (igate) -- (jmult);
+	\node[inner sep=0](ogate) at (1.5,0){\fcn};
+
+	\draw[endflow] (-input) to[out=270,in=90] (ogate.north);
+	\draw[endflow] (-input) to[out=270,in=90] (jgate.north);
+	\draw[endflow] (-input) to[out=270,in=90] (igate.north); 
+	\draw[endflow] (-input) to[out=270,in=90] (fgate.north);
+
+	\node[operator](fmult) at (-1,-1.25) {$ \odot $};
+	\draw[endflow] (fgate) -- (fmult); 
+	\node[operator](cadd) at (0,-1.75) {$\oplus$};
+	\draw[endflow] (jmult) -- (cadd); 
+	\draw[endflow] (fmult) -- (cadd);		
+	
+	\node[operator](outtanh) at (1,-1.25) {$\odot$};
+	\draw[endflow] (cadd) -- (outtanh);
+	\draw[endflow] (ogate) -- (outtanh);
+	
+	\node[font=\tiny](c) at (-1,-2){$\V{c}_t$};
+	\draw[endflow] (c) -- (fmult);
+	\draw[endflow, tumgray] (cadd) -- (c);
+	
+	\draw (outtanh) to[in=90, out=270] (-output);
+	\end{tikzpicture}
+}
+
+\newcommand{\legend}{
+	\begin{tikzpicture}[yscale=.8, font=\scriptsize]
+		\node[label distance=-1em, label={above:fully connected}] at (0,0){$\fcn = \sigma\left(\M{\theta}\V{x}+\V{b}\right)$};
+		\node[label={above:hidden state}] at (0,1){$\hidden{6}: \V{a} \in \mathbb{R}^h$};
+		\node[label={above:observed state}] at (0,2){$\drawvector{6}: \V{a} \in \mathbb{R}^n$};
+%		\node[label={above:mapping}] at (0,3){
+%			\begin{tikzpicture}
+%				\node(a) at (0,0){$\V{a}_t$};
+%				\node(b) at (1.5,0){$\V{a^\prime}_t$};
+%				\draw[conn] (a) -- (b);
+%			\end{tikzpicture}
+%		};
+%		\node[label={above:mapping though time}] at (0,4){
+%			\begin{tikzpicture}
+%			\node(a) at (0,0){$\V{a}_{t-1}$};
+%			\node(b) at (1.5,0){$\V{a}_t$};
+%			\draw[conntime] (a) -- (b);
+%			\end{tikzpicture}
+%		};
+	\end{tikzpicture}
+}
+
+\tikzsetnextfilename{lstmmodel}
+\begin{tikzpicture}[node distance=1em and 3em, font=\sffamily]
+\node[fill=tumgraylight!20, rounded corners, inner sep=1pt](legend) at (3,-3.5){\legend};
+
+\node[label={left:$\V{x}_t$}](x0){\drawvector{13}};
+\node[norm, below= .7em of x0](nx0){\scriptsize LayerNorm};
+\node[lstmcell, below=of nx0](l0){\lstm};
+\node[below=of l0](l1){\dots};
+\node[lstmcell, below=of l1](l2){\lstm};
+\node[norm, below=of l2](ny0){\scriptsize LayerNorm};
+\node[below=.7em of ny0, label=left:$\V{h}_t$](h){\hidden{16}};
+
+
+\node[left=2em of l0](ll0){$\text{lstm}^1$};
+\node[left=2em of l2](ll2){$\text{lstm}^L$};;
+\draw[|-|] (ll0) -- node[midway,left]{$L$ layers} (ll2);
+
+%\node[below left= 2em and 1.3em of h, label={left:$\delta_t$}](d){\drawvector{1}};
+%\node[below right= 2em and 1em of h, label={right:$\yhat_t$}](y){\drawvector{6}};
+%\draw (h) -- node[fill=white, inner sep=2pt, label={right:}]{\fcn} (y);
+%\draw (h) -- node[fill=white, inner sep=2pt, label={left:}]{\fcn} (d);
+
+\draw[conn] (x0) -- (nx0);
+\draw[conn] (nx0) -- node[fill=white]{\drawvector{13}} (l0);
+\draw[conn] (l0) -- node[fill=white]{\hidden{16}}(l1);
+\draw[conn] (l1) -- node[fill=white]{\hidden{16}}(l2);
+\draw[conn] (l2) -- node[fill=white]{\hidden{16}}(ny0);
+\draw[conn] (ny0) -- (h);
+
+\draw[conntime] (l0)++(-4em,0) -- (l0);
+\draw[conntime] (l1)++(-4em,0) -- (l1);
+\draw[conntime] (l2)++(-4em,0) -- (l2);
+
+\draw[conntime] (l0) -- ++(4em,0);
+\draw[conntime] (l1) -- ++(4em,0);
+\draw[conntime] (l2) -- ++(4em,0);
+
+%\node[left=of x0, anchor=east]{\small inputs $x_t$};
+%\node[left=of h0, anchor=east]{\small model $f(\xuptot;\theta)$};
+%\node[left=of y0, anchor=east]{\small predictions $y_t$};
+%
+%\node[right=of x0](x1){$x_1$};
+%\node[rnn, below=of x1](h1){\small$\theta^{(1)}$};
+%\node[rnn, below=of h1](hh1){\small$\theta^{(2)}$};
+%\node[below=of hh1](y1){$h_1$};
+%\node[below left=1em and -.8em of y1]{$\delta_1$};
+%\node[below right=1em and -.8em of y1]{$\hat{y}_1$};
+%
+%\node[right=of x1](x2){$x_2$};
+%\node[rnn, below=of x2](h2){\small$\theta^{(1)}$};
+%\node[rnn, below=of h2](hh2){\small$\theta^{(2)}$};
+%\node[below=of hh2](y2){$h_2$};
+%\node[below left=1em and -.8em of y2]{$\delta_2$};
+%\node[below right=1em and -.8em of y2]{$\hat{y}_2$};
+%
+%\node[right=of x2](x3){};
+%\node[right=of h2](h3){};
+%\node[right=of hh2](hh3){};
+%\node[right=of y2](y3){};
+%
+%\draw[infer] (h0) -- (h1);
+%\draw[infer] (h1) -- (h2);
+%\draw[infer] (h3) -- (h3);
+%
+%\draw[infer] (hh0) -- (hh1);
+%\draw[infer] (hh1) -- (hh2);
+%\draw[infer] (hh2) -- (hh3);
+%
+%\foreach \i in {0,...,3}
+%{
+%	\draw[infer] (x\i) -- (h\i);
+%	\draw[infer] (h\i) -- (hh\i);
+%	\draw[infer] (hh\i) -- (y\i);
+%}
+
+\end{tikzpicture}
+

@@ -1,0 +1,89 @@
+\def\datapath{images/logs/data/early_reward_p2/classes}
+
+\tikzsetnextfilename{trainingstoppingclasses}
+\begin{tikzpicture}
+	\begin{groupplot}[
+	group style = {
+		group size = 1 by 7,
+		x descriptions at=edge bottom,
+		vertical sep=.75em},
+	title style={
+		font=\sffamily\scriptsize,
+		at={(0,1)},
+		anchor=north west
+	},
+	ymajorgrids,
+	no markers,
+	height=2.7cm,
+	legend style={at={(0.5,1)},anchor=south},
+	width=\linewidth,
+	xlabel=epochs,
+	ymax=1.1,
+	ymin=0.3,
+	ylabel=$\tstop$,
+	ytick={0,0.25,0.5,0.75,1},
+	yticklabels={Jan,Apr,Jun,Sep,Dec}
+	]
+	\nextgroupplot[title=meadows, legend columns=3]
+	\addplot[meancolor] table [x=epoch, y=meadows, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=meadows, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none,forget plot] table [x=epoch, y=meadows, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none,forget plot] table [x=epoch, y=meadows, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	
+	\legend{mean, median, mean $\mp$ std}
+	
+	\nextgroupplot[title=winter barley]
+	\addplot[meancolor] table [x=epoch, y=winter barley, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=winter barley, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none] table [x=epoch, y=winter barley, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none] table [x=epoch, y=winter barley, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	\nextgroupplot[title=corn]
+%	\addplot table [x=epoch, y=corn, col sep=comma] {images/logs/data/early_reward/classes/mean.csv};
+	
+	\addplot[meancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=corn, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none] table [x=epoch, y=corn, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	
+	\nextgroupplot[title=winter wheat]
+%	\addplot table [x=epoch, y=winter wheat, col sep=comma] {images/logs/data/early_reward/classes/mean.csv};
+%	
+	\addplot[meancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none] table [x=epoch, y=winter wheat, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	
+	\nextgroupplot[title=summer barley]
+%	\addplot table [x=epoch, y=winter barley, col sep=comma] {images/logs/data/early_reward/classes/mean.csv};
+	
+	\addplot[meancolor] table [x=epoch, y=summer barley, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=summer barley, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none] table [x=epoch, y=summer barley, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none] table [x=epoch, y=summer barley, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	
+	\nextgroupplot[title=clover]
+%	\addplot table [x=epoch, y=clover, col sep=comma] {images/logs/data/early_reward/classes/mean.csv};
+	
+	\addplot[meancolor] table [x=epoch, y=clover, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=clover, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none] table [x=epoch, y=clover, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none] table [x=epoch, y=clover, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+	
+	\nextgroupplot[title=winter triticale]
+%	\addplot table [x=epoch, y=winter triticale, col sep=comma] {images/logs/data/early_reward/classes/mean.csv};
+
+	\addplot[meancolor] table [x=epoch, y=winter triticale, col sep=comma] {\datapath/mean.csv};
+	\addplot[mediancolor] table [x=epoch, y=winter triticale, col sep=comma] {\datapath/median.csv};
+	\addplot+[name path=upper, draw=none,forget plot] table [x=epoch, y=winter triticale, col sep=comma] {\datapath/mean+std.csv};
+	\addplot+[name path=lower, draw=none,forget plot] table [x=epoch, y=winter triticale, col sep=comma] {\datapath/mean-std.csv};
+	\addplot[stdcolor] fill between[of=lower and upper];
+
+	
+	\end{groupplot}
+	\end{tikzpicture}
