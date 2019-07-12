@@ -6,13 +6,14 @@
 
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{subcaption}
 
 % change the camera position
 \tdplotsetmaincoords{45}{135}
 
 \usepackage{tabularx}
 
-\usepackage{subcaption}
+
 
 \usepackage{animate}
 
@@ -35,7 +36,7 @@
 %\addbibresource{bib/references.bib}
 
 \newcommand{\wave}{
-	\begin{tikzpicture}[xscale=.05,yscale=.2]
+	\begin{tikzpicture}[xscale=.03,yscale=.1]
 	\draw[-,fill=white] plot[domain=0:10*pi,smooth] (\x,{sin(\x r)});
 	\end{tikzpicture}
 }
@@ -61,8 +62,8 @@
 }
 
 \newcommand{\sat}{
-	\begin{tikzpicture}[baseline=-.25em, inner sep=0]
-	\node[rotate=270,anchor=center]{\includegraphics[width=8mm]{images/icons/sat2}};
+	\begin{tikzpicture}[baseline=-.25em, inner sep=0, remember picture]
+	\node(sat)[rotate=270,anchor=center]{\includegraphics[width=8mm]{images/icons/sat2}};
 	\end{tikzpicture}
 }
 
@@ -183,7 +184,8 @@
 
 \tikzstyle{rnn}=[draw,circle, inner sep=.1em]
 \tikzstyle{norm}=[rounded corners,draw]
-\tikzstyle{annot}=[rounded corners, fill=tumblue!20]
+\tikzstyle{annotation}=[rounded corners, fill=tumblue!20]
+\tikzstyle{annot}=[-Stealth, thick]
 \tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
 \tikzstyle{loss}=[fill=tumblue!10, rounded corners, font=\small]
 \tikzstyle{grad}=[colortrain]
@@ -345,3 +347,66 @@ x={(0.5cm,0.5cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}]
 	}
 	\end{tikzpicture}
 }
+
+%%%%%%%%%%%
+%Coordinate Grid for easier placement of nodes
+% \draw (0,1) to[grid with coordinates] (10,7);
+%%%%%%%%%%%
+\makeatletter
+\def\grd@save@target#1{%
+	\def\grd@target{#1}}
+\def\grd@save@start#1{%
+	\def\grd@start{#1}}
+\tikzset{
+	grid with coordinates/.style={
+		to path={%
+			\pgfextra{%
+				\edef\grd@@target{(\tikztotarget)}%
+				\tikz@scan@one@point\grd@save@target\grd@@target\relax
+				\edef\grd@@start{(\tikztostart)}%
+				\tikz@scan@one@point\grd@save@start\grd@@start\relax
+				\draw[minor help lines] (\tikztostart) grid (\tikztotarget);
+				\draw[major help lines] (\tikztostart) grid (\tikztotarget);
+				\grd@start
+				\pgfmathsetmacro{\grd@xa}{\the\pgf@x/1cm}
+				\pgfmathsetmacro{\grd@ya}{\the\pgf@y/1cm}
+				\grd@target
+				\pgfmathsetmacro{\grd@xb}{\the\pgf@x/1cm}
+				\pgfmathsetmacro{\grd@yb}{\the\pgf@y/1cm}
+				\pgfmathsetmacro{\grd@xc}{\grd@xa + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+				\pgfmathsetmacro{\grd@yc}{\grd@ya + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+				\foreach \x in {\grd@xa,\grd@xc,...,\grd@xb}
+				\node[anchor=north] at (\x,\grd@ya) {\pgfmathprintnumber{\x}};
+				\foreach \y in {\grd@ya,\grd@yc,...,\grd@yb}
+				\node[anchor=east] at (\grd@xa,\y) {\pgfmathprintnumber{\y}};
+			}
+		}
+	},
+	minor help lines/.style={
+		help lines,
+		step=\pgfkeysvalueof{/tikz/grid with coordinates/minor step}
+	},
+	major help lines/.style={
+		help lines,
+		line width=\pgfkeysvalueof{/tikz/grid with coordinates/major line width},
+		step=\pgfkeysvalueof{/tikz/grid with coordinates/major step}
+	},
+	grid with coordinates/.cd,
+	minor step/.initial=.2,
+	major step/.initial=1,
+	major line width/.initial=2pt,
+}
+\makeatother
+
+\newcommand\tikzmark[1]{
+	\tikz[remember picture,overlay] \coordinate (#1);
+}
+\newcommand\remembername[2]{
+	\begin{tikzpicture}[inner sep=0]
+		\node(#2){#1};
+	\end{tikzpicture}
+%	\tikz[remember picture,overlay] \coordinate (#1);
+}
+
+\newcommand{\bluebf}[1]{{\color{tumblue}\textbf{#1}}}
+\newcommand{\orangebf}[1]{{\color{tumorange}\textbf{#1}}}

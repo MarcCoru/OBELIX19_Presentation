@@ -1,0 +1,52 @@
+\begin{tikzpicture}
+
+\pgfplotstableread[col sep = comma]{images/qualitative_example/early_rnn_run-sample0.csv}\mydata
+
+\begin{groupplot}[
+	group style={
+		group name=my plots,
+		group size=1 by 5,
+		columns=1,
+		xlabels at=edge bottom,
+		xticklabels at=edge bottom,
+		vertical sep=5pt,
+	},
+	ylabel near ticks,
+	ylabel style={rotate=-90},
+	width=\textwidth,
+	height=3cm,
+	axis x line=bottom,
+	axis y line=left,
+	enlarge x limits=0.01,
+	ymajorgrids,
+]
+
+\nextgroupplot[no marks, enlarge y limits=0.05, hide x axis, ylabel={$x$}]
+\addplot[thick, tumblue] table[x=t, y=x]{\mydata};
+
+\nextgroupplot[no marks, ylabel={$\yhat_t$}, enlarge y limits=0.05, hide x axis]	
+\addplot[thick,colorclassone, name path=y1] table[x=t, y=y1]{\mydata};
+\addplot[thick,colorclasstwo, name path=y2] table[x=t, y=y2]{\mydata};
+\addplot[thick,colorclassthree, name path=y3] table[x=t, y=y3]{\mydata};
+\addplot[thick,colorclassfour, name path=y4] table[x=t, y=y4]{\mydata};
+
+%\addplot[colorblue!20] fill between[of = y1 and axis];
+%\addplot[colorhgray!20] fill between[of = y2 and axis];
+%\addplot[colorgreen!20] fill between[of = y3 and axis];
+%\addplot[colororange!20] fill between[of = y4 and axis];
+\only<2->{
+\nextgroupplot[ybar, bar width=1pt, ylabel={$\delta_t$}]
+\addplot[draw=none, fill=tumblue] table[x=t, y=dt]{\mydata};
+}
+
+\only<5->{
+\nextgroupplot[ybar, bar width=1pt, hide x axis, ylabel={$P(t)$}]
+\addplot[draw=none, fill=tumblue] table[x=t, y=pts]{\mydata};
+
+%\nextgroupplot[ybar, bar width=1pt, hide x axis, ylabel={$\prod_{t'<t}(1-\delta_{t'})$}]
+%\addplot[draw=none, fill=tumblue, xlabel={time $t$}] table[x=t, y=Bt]{\mydata};
+}
+
+\end{groupplot}
+
+\end{tikzpicture}

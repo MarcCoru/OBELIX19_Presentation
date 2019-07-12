@@ -1,0 +1,175 @@
+\newcommand{\good}[1]{\textbf{\color{tumblue}#1}}
+\newcommand{\bad}[1]{\textbf{\color{tumorange}#1}}
+
+
+\newcommand{\confmatgaf}[4]{
+
+\begin{tikzpicture}
+
+  \def\vmax{#3}
+  \def\dataindex{#2}
+  \def\nclasses{#4}
+  
+%
+%  \pgfplotsset{every axis label/.append style={font=\footnotesize},tick pos=right, ylabel near ticks}
+%  
+%  \pgfplotsset{
+%    axis line style={%
+%      opacity=0 
+%    }   
+%  }
+
+  \begin{groupplot}[
+  	group style={
+  		group size=2 by 1,
+  		xlabels at=edge bottom,
+  		ylabels at=edge left,
+  		xticklabels at=edge bottom,
+  		vertical sep=35pt,
+  		group name=seq_len_plot
+  	},
+  	axis line style={draw=none},
+  	title style={yshift=.75em,},
+    width=.6\textwidth,
+    height=.5\textwidth,
+    enlargelimits=false,
+    xtick=data,
+%     ymin=1,
+    xtick distance=1,
+    ytick distance=1,
+    colormap={example}{%
+		color=(tumwhite)
+		color=(tumblue)
+	},
+    ytick=data,
+    ytick align=outside,
+    xtick align=outside,
+%    tick style={draw=none},
+    ytick pos = left,  
+    tick label style = {font=\small\sansmath\sffamily},
+    %xticklabel = {xshift=-0.75cm}
+    yticklabel pos=left,
+    %yticklabel near ticks,
+    xlabel={Prädizierte Klasse},
+%    xlabel style={yshift=-2em},
+    x label style={at={(axis description cs:0.5,1.1)},anchor=south},
+    y label style={at={(axis description cs:0,.5)},anchor=south},
+    ylabel={Wahre Klasse},
+%     ylabel near ticks,
+%    xticklabels={},
+  ]
+  \nextgroupplot[
+%      yticklabels={
+%%      	{sugar beet},
+%%      	{summer oat},
+%%      	{meadow},
+%%      	{rape},
+%%      	%{vegetable},
+%%      	{hop},
+%%      	{winter spelt},
+%%      	{winter triticale},
+%%      	{beans},
+%%      	{peas},
+%%      	{potato},
+%%      	{soybeans},
+%%      	{asparagus},
+%%      	{winter wheat},
+%%      	{winter barley},
+%%      	{winter rye},
+%%      	{summer barley},
+%%      	{maize}
+%      },
+      xticklabels={
+      	\bad{1},2,\bad{3},\bad{4},5,6,7,\good{8},\good{9},10,11,12,13,14,\bad{15},\good{16},\bad{17},18,19,20,21,22
+      },
+        yticklabels={
+  	1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+  	},
+     %colorbar style={title={\precisionrecall}, xshift=0cm, font=\footnotesize},
+     colorbar right,
+     colorbar style={
+        	title={}, 
+        	font=\footnotesize,
+        	%at={(0,1)},
+        	anchor=north west,
+        	width=8pt,
+        	ticklabel pos=right,
+        	ticklabel style={xshift=2em},
+%        	label style={yshift=-1em},
+        	rounded corners=1pt
+     },
+  ]
+  
+    \addplot[
+      matrix plot,
+%      draw=tumwhite,
+%       nodes near coords=\coordindex,
+%       nodes near coords align={center},
+%       nodes near coords style={font=\scriptsize},
+        shader=faceted,
+        faceted color=tumgraylight!20,
+%       shader=faceted interp,
+      mesh/cols=\nclasses,
+      empty line=scanline,
+      point meta=explicit,
+      point meta min=0,
+      point meta max=\vmax,
+    ] table[meta index=\dataindex] {#1};
+%   \nextgroupplot[
+%       title=2017,
+%       %colorbar style={title={\precisionrecall}, xshift=0cm, font=\footnotesize},
+%       colorbar right,
+%       colorbar style={
+%       	title={a}, 
+%       	font=\footnotesize,
+%       	%at={(0,1)},
+%       	anchor=north west,
+%       	width=8pt,
+%       	ticklabel pos=right,
+%       	ticklabel style={xshift=1em},
+%       	label style={yshift=1em},
+%       	rounded corners=1pt
+%       },
+%       yticklabels={},
+%     xticklabels={
+%           	{sug.},
+%           	{s. oat},
+%           	{mead.},
+%           	{rape},
+%           	%{vegetable},
+%           	{hop},
+%           	{w. spelt},
+%           	{w. trit.},
+%           	{beans},
+%           	{peas},
+%           	{potato},
+%           	{soyb.},
+%           	{asp.},
+%           	{w. wheat},
+%           	{w. barley},
+%           	{w. rye},
+%           	{s. barley},
+%           	{maize}
+%     },
+%       ]
+%    
+%    \addplot[
+%    matrix plot,
+%%    draw=tumwhite,
+%    ,   
+%    %       nodes near coords=\coordindex,
+%    %       nodes near coords align={center},
+%    %       nodes near coords style={font=\scriptsize},
+%    shader=faceted,
+%    faceted color=tumgraylight,
+%    %       shader=faceted interp,
+%    mesh/cols=17,
+%    empty line=scanline,
+%    point meta=explicit,
+%    point meta min=0,
+%    point meta max=\vmax,
+%    ] table[meta index=\dataindex] {images/confmat/formatted_grucm2017.csv};
+    
+  \end{groupplot}
+\end{tikzpicture}
+}

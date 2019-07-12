@@ -1,0 +1,121 @@
+
+\tikzstyle{annot} = [thin, tumgray]
+
+\newcommand{\figheight}{4cm}
+
+\newcommand{\trainingexampleECG}{
+\begin{tikzpicture}
+\pgfplotstableread[col sep = comma]{images/data/ECG200_test.csv}\test
+\pgfplotstableread[col sep = comma]{images/data/ECG200_train.csv}\train
+
+\begin{groupplot}[
+group style={
+	group size=1 by 1,
+%	xlabels at=edge bottom,
+%	xticklabels at=edge bottom,
+},
+ymajorgrids,
+legend columns=2,
+legend style={at={(0.5,1)},anchor=south},
+width=\textwidth,
+height=\figheight,
+xtick={0,10,20,30,40,50,60},
+ytick={0,0.25,0.5,0.75,1},
+ylabel style={yshift=-1.2em}
+]
+
+\nextgroupplot[
+ylabel={accuracy/earliness},
+xlabel={epochs}]
+
+\addplot[tumblue] table[x=epoch, y=accuracy]{\test};
+\addplot[tumorange] table[x=epoch, y=earliness]{\test};
+
+\addplot[tumblue, dashed] table[x=epoch, y=accuracy]{\train};
+\addplot[tumorange, dashed] table[x=epoch, y=earliness]{\train};
+
+\legend{accuracy-test, earliness-test, accuracy-train, earliness-train}
+
+\node[font=\tiny] (overfitting) at (axis cs:50,0.6) {overfitting};
+\draw[-stealth, annot](overfitting) -- (axis cs:60,0.8);
+\draw[-stealth, annot](overfitting) -- (axis cs:60,1);
+
+\node[font=\tiny] (oscillation) at (axis cs:20,0.5) {oscillations};
+
+\draw[-stealth, annot](oscillation) -- (axis cs:10,0.1);
+\draw[-stealth, annot](oscillation) -- (axis cs:10,0.68);
+
+\draw[-stealth, annot](oscillation) -- (axis cs:18,0.25);
+%\draw[-stealth, thin](oscillation) -- (axis cs:60,1);
+
+%loss,loss_classification,earliness_reward
+
+
+%\nextgroupplot[
+%ylabel={loss},
+%xlabel={epochs}]
+%
+%\addplot[tumblue] table[x=epoch, y=loss_classification]{\test};
+%\addplot[tumorange] table[x=epoch, y=earliness_reward]{\test};
+%
+
+
+\end{groupplot}
+
+
+\end{tikzpicture}
+}
+
+\newcommand{\trainingexampleBavarianCrops}{
+	\begin{tikzpicture}
+	\pgfplotstableread[col sep = comma]{images/data/BavarianCrops_test.csv}\test
+	\pgfplotstableread[col sep = comma]{images/data/BavarianCrops_train.csv}\train
+	
+	\begin{groupplot}[
+	group style={
+		group size=1 by 1,
+%		xlabels at=edge bottom,
+%		xticklabels at=edge bottom,
+	},
+	ymajorgrids,
+	legend columns=2,
+	legend style={at={(0.5,1)},anchor=south},
+	width=\textwidth,
+	height=\figheight,
+	xtick={0,10,20,30,40,50,60},
+	ytick={0,0.25,0.5,0.75,1},
+	ylabel style={yshift=-1.2em}
+	]
+	
+	\nextgroupplot[
+	ylabel={accuracy/earliness},
+	xlabel={epochs}]
+	
+	\addplot[tumblue] table[x=epoch, y=accuracy]{\test};
+	\addplot[tumorange] table[x=epoch, y=earliness]{\test};
+	
+	\addplot[tumblue, dashed] table[x=epoch, y=accuracy]{\train};
+	\addplot[tumorange, dashed] table[x=epoch, y=earliness]{\train};
+	
+	\legend{accuracy-test, earliness-test, accuracy-train, earliness-train}
+	
+	\node[font=\tiny] (overfitting) at (axis cs:50,0.4) {no overfitting};
+	\draw[-stealth, annot](overfitting) -- (axis cs:60,0.8);
+	
+	\node[font=\tiny] (oscillation) at (axis cs:25,0.25) {single oscillation};
+	\draw[-stealth, annot](oscillation) -- (axis cs:10,0.1);
+	
+	\node[font=\tiny] (dec) at (axis cs:30,0.5) {gradual decrease};
+	\draw[-stealth, annot](dec) -- (axis cs:40,0.65);
+	
+%		\nextgroupplot[
+%	ylabel={loss},
+%	xlabel={epochs}]
+%	
+%	\addplot[tumblue] table[x=epoch, y=loss_classification]{\test};
+%	\addplot[tumorange] table[x=epoch, y=earliness_reward]{\test};
+%	
+	\end{groupplot}
+	
+	\end{tikzpicture}
+}

@@ -1,0 +1,75 @@
+\begin{tikzpicture}[node distance=1em and 1.5em]
+\node[](x0){$x_t$};
+\node[rnn, below=of x0](h0){\small$f\left(\xuptot\right)$};
+\node[below right= 2em and .0em of h0](y0){$\yhat_t$};
+\node[rnn, left=2em of h0,draw=lightgray](hprev){};
+\node[rnn, right=2em of h0,draw=lightgray](hnext){};
+
+\draw[infer] (x0) -- (h0);
+\draw[infer,draw=lightgray] (hprev) -- (h0);
+\draw[infer,draw=lightgray] (h0) -- (hnext);
+\draw[infer] (h0) -- (y0) node[midway,right, text=black](wc){$\theta_{cl}$};
+
+\visible<2->{
+\node[below left= 2em and .0em of h0](d0){$\delta_t$};
+\draw[infer] (h0) -- (d0) node[midway,left, text=black](wd){$\theta_{\delta}$};
+}
+
+\visible<3->{
+	\node[loss, below=of y0](L0){$\mathcal{L}_{cl}(\yhat,\V{y})$};
+	%\node[right=of L0](t0){$\V{y}_t$};
+	\draw[-stealth, grad] (y0) -- (L0);
+	%\draw[-stealth, grad] (t0) -- (L0);
+	%\draw[-stealth, grad] (L0) to [in=-25, out=25, looseness=2] node[midway, right, text=colortrain]{$\frac{\partial\mathcal{L}_{cl}}{\partial\theta_\text{rnn}}$}
+	%(h0);
+	
+	\draw[-stealth, grad] (L0) to [bend right=30] node[near end, right, text=colortrain]{$\frac{\partial\mathcal{L}_{cl}}{\partial\theta_\text{cl}}$}
+	(wc);
+}
+
+\only<4>{
+\node[below=7em of h0, loss](L){$\mathcal{L}(\V{y_t},\yhat_t) = \delta_t\mathcal{L}_{cl}(\V{y_t},\yhat_t)$};
+\draw[infer] (L0) -- (L);
+\draw[infer] (d0) -- (L);
+
+\draw[-stealth, grad] (L) to [bend right=30] node[midway, right, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial\mathcal{L}_{cl}}$}
+(L0);
+
+\draw[-stealth, grad] (L) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial\theta_\delta}$}
+(wd);
+
+}
+
+\only<5->{
+
+\node[below=of d0](pt){$P(t)$};
+\node[below=8em of h0, loss](L){$\mathcal{L}(\V{y_t},\yhat_t) = P(t)\mathcal{L}_{cl}(\V{y_t},\yhat_t)$};
+
+
+\draw[infer] (L0) -- (L);
+\draw[infer] (d0) -- (pt);
+\draw[infer] (pt) -- (L);
+
+%}
+%
+\only<5->{
+\node[left=.5em of pt](budget){\small $\prod_{t'<t}(1-\delta_{t'})$};
+\draw[infer] (budget) -- (pt);}
+
+%\only<7->{
+%	\node[left=.5em of pt](budget){$\mathcal{B}_{t-1}$};
+%	
+%}
+
+\draw[-stealth, grad] (L) to [bend right=30] node[midway, right, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial\mathcal{L}_{cl}}$}
+(L0);
+
+\draw[-stealth, grad] (L) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial\mathcal{L}}{\partial P(t)}$}
+(pt);
+
+\draw[-stealth, grad] (pt) to [bend left=30] node[midway, left, text=colortrain]{$\frac{\partial P(t)}{\partial \theta_{\delta}}$}
+(wd);
+
+}
+
+\end{tikzpicture}

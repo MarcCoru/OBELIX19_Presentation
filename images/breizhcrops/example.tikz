@@ -1,0 +1,101 @@
+%\tikzsetnextfilename{example}
+
+\newcommand{\dataexample}[1]{
+	
+	
+	
+
+
+\begin{tikzpicture}
+	
+	\tikzstyle{annot} = [font=\tiny\sffamily, text=tumblue]
+	\tikzstyle{point} = [thin, tumbluelight, shorten >= .25em, shorten <= .25em]
+	
+	% from /home/marc/projects/EV2019/images/example/tstop.txt
+	\def\tstopv{0.6285714285714286}
+	\def\class{winter barley}
+	
+	\begin{groupplot}[
+	group style={
+		group name=my plots,
+		group size=1 by 1,
+		columns=1,
+		xlabels at=edge bottom,
+		xticklabels at=edge bottom,
+		vertical sep=1em,
+	},
+	date coordinates in=x,
+	date ZERO=2017-01-01,
+	xmin=2017-01-01,
+	xmax=2017-12-31,
+	ylabel near ticks,
+	ylabel style={font=\sffamily\small, rotate=-90},
+	width=\textwidth,
+	height=3cm,
+	axis x line=bottom,
+	axis y line=left,
+%	enlarge x limits=0.01,
+	xtick={2017-01-01,2017-05-01,2017-08-01,2017-12-01},
+	xticklabels={January,April,August,December},
+	ymajorgrids,
+    ymax=10000
+	]
+	
+\nextgroupplot[thin,
+%	smooth=1pt,
+no marks,  
+ylabel={},
+draw opacity=.8,
+%		tension=0.001,
+legend columns=2,
+%y tick label style={rotate=90},
+legend style={at={(.5,1)},anchor=south, line width=1pt, fill=tumblue!10}
+]
+
+\addplot[b1color] table [x=doa, y=B1, col sep=comma, forget plot] {#1};
+\addplot[b9color] table [x=doa, y=B9, col sep=comma, forget plot] {#1};
+\addplot[b10color] table [x=doa, y=B10, col sep=comma] {#1};
+
+\addplot[b11color] table [x=doa, y=B11, col sep=comma, forget plot] {#1};
+\addplot[b12color] table [x=doa, y=B12, col sep=comma] {#1};
+
+\addplot[b5color] table [x=doa, y=B5, col sep=comma, forget plot] {#1};
+\addplot[b6color] table [x=doa, y=B6, col sep=comma, forget plot] {#1};
+\addplot[b7color] table [x=doa, y=B7, col sep=comma, forget plot] {#1};
+\addplot[b8color] table [x=doa, y=B8, col sep=comma, forget plot] {#1};
+\addplot[b8Acolor] table [x=doa, y=B8A, col sep=comma] {#1};
+
+\addplot[b2color] table [x=doa, y=B2, col sep=comma, forget plot] {#1};
+\addplot[b3color] table [x=doa, y=B3, col sep=comma, forget plot] {#1};
+\addplot[b4color] table [x=doa, y=B4, col sep=comma] {#1};
+	
+%	\draw [red, very thick, ->] ([xshift=5em]plt.north west) -- ([xshift=5em]plt.south west) node [midway, rotate=90, fill=white, yshift=2pt] {faster} ;
+%	\node(glab) at (10em,0.5) {ground (signal)};
+	
+%	\sample{images/example/3685593.csv}
+%	
+%	\sample{images/example/6053223.csv}
+%	\draw[fill=white, draw=none, opacity=.5] (axis cs:\tstopv,0) rectangle (axis cs:1,1.1);
+	
+%	\node[annot](cllab) at (axis cs:.2,1.3) {clouds (noise)};
+%	\draw[point] (cllab) -- (axis cs:.13,.7);
+%	\draw[point] (cllab) -- (axis cs:.25,.7);
+%	\draw[point] (cllab) -- (axis cs:.53,1);
+%	\draw[point] (cllab) -- (axis cs:.45,.85);
+%	
+%	\node[annot](glab) at (axis cs:.8,1.3) {ground (signal)};
+%	\draw[point] (glab) -- (axis cs:.38,.3);
+%	\draw[point] (glab) -- (axis cs:.21,.3);
+%	\draw[point] (glab) -- (axis cs:.7,.3);
+%	
+%	\draw (axis cs:\tstopv,0) -- (axis cs:\tstopv,1) node[above]{$\tstop$};
+%	
+%	
+%	
+%	\legend{3 atmospheric, 2 short-wave infrared, 5 near infrared, 3 visible bands}
+%	
+		\end{groupplot}
+	
+	\end{tikzpicture}
+	
+}

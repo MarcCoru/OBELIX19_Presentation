@@ -1,0 +1,158 @@
+
+\begin{frame}
+
+
+\begin{table}
+	\caption{Varying the weighting factor $\alpha$ for the two loss formulations \emph{early reward} (\cref{sec:earlynessreward}) and \emph{lateness penalty} (\cref{sec:twophasecrossentropy}).}
+	\label{tab:alpha}
+	
+	\setlength{\belowcaptionskip}{0pt}
+	
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		\hspace{0em}\begin{tabular}{lcccccc}
+			\toprule
+			\textbf{$\alpha$} & accuracy & $\meantstop$ & precision & recall & $f_1$ & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			.0 & .24 $\pm$ .29 & .00 $\pm$ .00 & .04 $\pm$ .04 & .15 $\pm$ .00 & .05 $\pm$ .05 & .00 $\pm$ .00 \\
+			.2 & .15 $\pm$ .08 & .00 $\pm$ .00 & .10 $\pm$ .05 & .15 $\pm$ .01 & .08 $\pm$ .03 & .01 $\pm$ .01 \\
+			.4 & .79 $\pm$ .05 & .39 $\pm$ .03 & .67 $\pm$ .05 & .71 $\pm$ .04 & .68 $\pm$ .04 & .69 $\pm$ .06 \\
+			.6 & .83 $\pm$ .03 & .59 $\pm$ .17 & .71 $\pm$ .03 & .74 $\pm$ .02 & .72 $\pm$ .02 & .74 $\pm$ .04 \\
+			.8 & .86 $\pm$ .01 & .86 $\pm$ .12 & .74 $\pm$ .01 & .76 $\pm$ .02 & .75 $\pm$ .02 & .79 $\pm$ .01 \\
+			1.0 & .86 $\pm$ .01 & 1.00 $\pm$ .00 & .75 $\pm$ .02 & .76 $\pm$ .02 & .75 $\pm$ .02 & .79 $\pm$ .02 \\
+			\bottomrule
+		\end{tabular}
+		\caption{two-phase \emph{lateness penalty} loss formulation}
+		\label{tab:alpha:xentropy}
+	\end{subtable}
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		\hspace{0em}\begin{tabular}{lcccccc}
+			\toprule\small
+			\textbf{$\alpha$} & accuracy & $\meantstop$  & precision & recall & $f_1$ & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			.0 & .25 $\pm$ .22 & .10 $\pm$ .17 & .19 $\pm$ .20 & .25 $\pm$ .17 & .16 $\pm$ .20 & .12 $\pm$ .19 \\
+			.2 & .81 $\pm$ .03 & .40 $\pm$ .02 & .70 $\pm$ .01 & .74 $\pm$ .01 & .71 $\pm$ .01 & .71 $\pm$ .04 \\
+			.4 & .80 $\pm$ .09 & .47 $\pm$ .03 & .71 $\pm$ .02 & .74 $\pm$ .01 & .71 $\pm$ .02 & .71 $\pm$ .10 \\
+			.6 & .85 $\pm$ .02 & .88 $\pm$ .07 & .73 $\pm$ .04 & .74 $\pm$ .03 & .73 $\pm$ .03 & .77 $\pm$ .03 \\
+			.8 & .84 $\pm$ .01 & .93 $\pm$ .05 & .72 $\pm$ .02 & .75 $\pm$ .01 & .73 $\pm$ .02 & .76 $\pm$ .02 \\
+			1.0 & .83 $\pm$ .03 & 1.00 $\pm$ .00 & .72 $\pm$ .03 & .75 $\pm$ .01 & .72 $\pm$ .03 & .75 $\pm$ .04 \\
+			\bottomrule
+		\end{tabular}
+		\caption{one phase \emph{early-reward} formulation}
+		\label{tab:alpha:earlyreward}
+	\end{subtable}
+	
+\end{table}
+
+\end{frame}
+
+
+\begin{frame}
+
+
+\begin{table}
+	\caption{Quantitative analysis of the $\ptoffset$ parameter on different trade-off factors between $\alpha$ earliness and accuracy. The illustrated figures show the mean and standard deviation of three runs with same parameters, but different initial random initialization.}
+	\label{tab:epsilon:quantitative}
+	\setlength{\belowcaptionskip}{0pt}
+	
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		%\begin{tabular}{lcccccc}
+		%	\toprule
+		%	\textbf{$\ptoffset$} & accuracy & earliness & $f_1$ & precision & recall & $\kappa$ \\
+		%	\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+		%0 & .05 $\pm$ .00 & .00 $\pm$ .00 & .01 $\pm$ .00 & .01 $\pm$ .00 & .14 $\pm$ .00 & .00 $\pm$ .00 \\
+		%1 & .41 $\pm$ .26 & .08 $\pm$ .13 & .12 $\pm$ .09 & .11 $\pm$ .09 & .19 $\pm$ .07 & .11 $\pm$ .17 \\
+		%10 & .25 $\pm$ .22 & .10 $\pm$ .17 & .16 $\pm$ .20 & .19 $\pm$ .20 & .25 $\pm$ .17 & .12 $\pm$ .19 \\
+		%	\bottomrule
+		%\end{tabular}
+		%\caption{\emph{$\alpha=0$}}
+		%\label{tab:epsilon:a0}
+		\hspace{-1em}\begin{tabular}{lcccccc}
+			\toprule
+			\textbf{$\ptoffset$} & accuracy & $\meantstop$  & $f_1$ & precision & recall & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			0 & .10 $\pm$ .02 & .02 $\pm$ .00 & .07 $\pm$ .01 & .13 $\pm$ .06 & .17 $\pm$ .00 & .02 $\pm$ .00 \\
+			1 & .75 $\pm$ .09 & .44 $\pm$ .06 & .65 $\pm$ .05 & .64 $\pm$ .03 & .69 $\pm$ .03 & .64 $\pm$ .10 \\
+			10 & .81 $\pm$ .03 & .40 $\pm$ .02 & .71 $\pm$ .01 & .70 $\pm$ .01 & .74 $\pm$ .01 & .71 $\pm$ .04 \\
+			\bottomrule
+		\end{tabular}
+		\caption{\emph{$\alpha=0.2$}}
+		\label{tab:epsilon:a02}
+	\end{subtable}
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		\hspace{-1em}\begin{tabular}{lcccccc}
+			\toprule
+			\textbf{$\ptoffset$} & accuracy & $\meantstop$  & $f_1$ & precision & recall & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			0 & .21 $\pm$ .20 & .02 $\pm$ .00 & .09 $\pm$ .04 & .18 $\pm$ .03 & .16 $\pm$ .01 & .04 $\pm$ .03 \\
+			1 & .80 $\pm$ .02 & .50 $\pm$ .05 & .68 $\pm$ .05 & .67 $\pm$ .05 & .70 $\pm$ .07 & .70 $\pm$ .03 \\
+			10 & .80 $\pm$ .09 & .47 $\pm$ .03 & .71 $\pm$ .02 & .71 $\pm$ .02 & .74 $\pm$ .01 & .71 $\pm$ .10 \\
+			\bottomrule
+		\end{tabular}
+		\caption{\emph{$\alpha=0.4$}}
+		\label{tab:epsilon:a04}
+	\end{subtable}
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		\hspace{-1em}\begin{tabular}{lcccccc}
+			\toprule
+			\textbf{$\ptoffset$} & accuracy & $\meantstop$  & $f_1$ & precision & recall & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			0 & .13 $\pm$ .04 & .02 $\pm$ .00 & .08 $\pm$ .01 & .16 $\pm$ .01 & .16 $\pm$ .01 & .02 $\pm$ .01 \\
+			1 & .80 $\pm$ .05 & .85 $\pm$ .14 & .71 $\pm$ .02 & .70 $\pm$ .02 & .74 $\pm$ .01 & .70 $\pm$ .06 \\
+			10 & .85 $\pm$ .02 & .88 $\pm$ .07 & .73 $\pm$ .03 & .73 $\pm$ .04 & .74 $\pm$ .03 & .77 $\pm$ .03 \\
+			\bottomrule
+		\end{tabular}
+		\caption{\emph{$\alpha=0.6$}}
+		\label{tab:epsilon:a06}
+	\end{subtable}
+	\begin{subtable}{.5\textwidth}
+		\scriptsize
+		\hspace{-1em}\begin{tabular}{lcccccc}
+			\toprule
+			\textbf{$\ptoffset$} & accuracy & $\meantstop$  & $f_1$ & precision & recall & $\kappa$ \\
+			\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+			0 & .11 $\pm$ .03 & .03 $\pm$ .01 & .08 $\pm$ .02 & .15 $\pm$ .02 & .17 $\pm$ .01 & .02 $\pm$ .01 \\
+			1 & .84 $\pm$ .03 & .98 $\pm$ .03 & .73 $\pm$ .03 & .72 $\pm$ .04 & .75 $\pm$ .02 & .76 $\pm$ .04 \\
+			10 & .84 $\pm$ .01 & .93 $\pm$ .05 & .73 $\pm$ .02 & .72 $\pm$ .02 & .75 $\pm$ .01 & .76 $\pm$ .02 \\
+			\bottomrule
+		\end{tabular}
+		\caption{\emph{$\alpha=0.8$}}
+		\label{tab:epsilon:a08}
+	\end{subtable}
+	%\begin{subtable}{.5\textwidth}
+	%	\scriptsize
+	%	\hspace{-1em}\begin{tabular}{lcccccc}
+	%		\toprule
+	%		\textbf{$\ptoffset$} & accuracy & $\meantstop$ & $f_1$ & precision & recall & $\kappa$ \\
+	%		\cmidrule(lr){0-0}\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+	%0 & .39 $\pm$ .30 & 1.00 $\pm$ .00 & .14 $\pm$ .15 & .13 $\pm$ .15 & .23 $\pm$ .14 & .12 $\pm$ .21 \\
+	%1 & .74 $\pm$ .14 & 1.00 $\pm$ .00 & .51 $\pm$ .36 & .50 $\pm$ .36 & .55 $\pm$ .35 & .49 $\pm$ .42 \\
+	%10 & .83 $\pm$ .03 & 1.00 $\pm$ .00 & .72 $\pm$ .03 & .72 $\pm$ .03 & .75 $\pm$ .01 & .75 $\pm$ .04 \\
+	%		\bottomrule
+	%	\end{tabular}
+	%	\caption{\emph{$\alpha=1.0$}}
+	%	\label{tab:epsilon:a1}
+	%\end{subtable}
+	
+\end{table}
+
+\end{frame}
+
+
+%\begin{frame}
+%Epsilon
+%\end{frame}
+
+\begin{frame}
+
+\input{images/epsilonexperiment.tikz}
+\figepsilonzero
+{The three runs with different random initialization per $\ptoffset$ offset and $\alpha=0.4$ of \cref{tab:epsilon:a04}.
+The $\ptoffset>0$ offset factor allows the models to recover from a too early classification, as is visible in the top two plots.}
+
+\end{frame}
+

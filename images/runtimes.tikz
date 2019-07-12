@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+\begin{axis}[
+xlabel=number of samples in the dataset,
+ylabel={runtime $[s]$},
+xmode=log,
+ymode=log,
+ylabel style={yshift=-1.5em},
+height=4cm,
+width=\textwidth,
+%    log ticks with fixed point,
+%x tick label style={/pgf/number format/1000 sep=\,},
+grid=both]
+
+% see https://github.com/MarcCoru/EarlyClassification/blob/master/runtimes
+
+\addplot[color=tumblue,mark=x] coordinates {
+	(10,792.0)
+	(100,1204.0)
+	(1000,11672.0)
+%	(3,-3.5301677)
+%	(4,-4.3050655)
+%	(5,-5.1413136)
+%	(6,-6.0322865)
+%	(7,-6.9675052)
+%	(8,-7.9377747)
+};
+
+% see https://github.com/rtavenar/early_rnn/blob/master/experiments/runtimes.log
+
+\addplot[color=tumorange,mark=x] coordinates {
+	(10,38)
+	(100,40)
+	(1000,49)
+	(10000,116)
+	(13515,146)
+	%	(3,-3.5301677)
+	%	(4,-4.3050655)
+	%	(5,-5.1413136)
+	%	(6,-6.0322865)
+	%	(7,-6.9675052)
+	%	(8,-7.9377747)
+};
+\legend{Mori et al., Ours}
+\end{axis}
+\end{tikzpicture}

@@ -4,8 +4,8 @@
   \begin{axis}[
         ybar, axis on top,
         title={},
-        height=3cm, width=8cm,
-        bar width=0.1cm,
+        height=6cm, width=\textwidth,
+        bar width=0.2cm,
         ymajorgrids, tick align=inside,
         major grid style={draw=tumgraylight},
         enlarge y limits={value=.1,upper},
@@ -24,41 +24,42 @@
             rounded corners=0,
             /tikz/every even column/.append style={column sep=0.5cm}
         },
-        ylabel={Percentage (\%)},
-        symbolic x coords={meadows,summer barley,corn,winter wheat,winter barley,clover,winter triticale},
+        ylabel={Häufigkeit (\%)},
+        symbolic x coords={Wiesen,Sommergerste,Silomais,Winterweizen,Wintergerste,Kleegras,Wintertritikale},
        xtick=data,
        tick label style={rotate=0},
-       tick label style={rotate=45,anchor=east}
+       tick label style={rotate=45,anchor=east},
+       ylabel near ticks,
        %nodes near coords={
        % \tiny \pgfmathprintnumber[precision=0]{\pgfplotspointmeta}
        %}
     ]
     \addplot [draw=none, fill=traincolor] coordinates {
-(meadows, 49.506024096385545)
-(summer barley, 13.560240963855422)
-(corn, 9.632530120481928)
-(winter wheat, 8.072289156626505)
-(winter barley, 8.05421686746988)
-(clover, 7.530120481927711)
-(winter triticale, 3.644578313253012)
+(Wiesen, 49.506024096385545)
+(Sommergerste, 13.560240963855422)
+(Silomais, 9.632530120481928)
+(Winterweizen, 8.072289156626505)
+(Wintergerste, 8.05421686746988)
+(Kleegras, 7.530120481927711)
+(Wintertritikale, 3.644578313253012)
   };
    \addplot [draw=none,fill=validcolor] coordinates {
-(meadows, 49.88550866862938)
-(summer barley, 13.706247955511941)
-(corn, 9.846254497873733)
-(winter wheat, 8.897612037945699)
-(winter barley, 8.27608766764802)
-(clover, 6.182531894013739)
-(winter triticale, 3.205757278377494)
+(Wiesen, 49.88550866862938)
+(Sommergerste, 13.706247955511941)
+(Silomais, 9.846254497873733)
+(Winterweizen, 8.897612037945699)
+(Wintergerste, 8.27608766764802)
+(Kleegras, 6.182531894013739)
+(Wintertritikale, 3.205757278377494)
   };
    \addplot [draw=none, fill=evalcolor] coordinates {
-(meadows, 57.32753103801357)
-(summer barley, 11.852041469345961)
-(corn, 8.524254447715347)
-(winter wheat, 6.962754383719442)
-(winter barley, 6.220401894278766)
-(clover, 4.876487904774095)
-(winter triticale, 4.236528862152822)
+(Wiesen, 57.32753103801357)
+(Sommergerste, 11.852041469345961)
+(Silomais, 8.524254447715347)
+(Winterweizen, 6.962754383719442)
+(Wintergerste, 6.220401894278766)
+(Kleegras, 4.876487904774095)
+(Wintertritikale, 4.236528862152822)
   };
 
     \legend{train,valid,eval}

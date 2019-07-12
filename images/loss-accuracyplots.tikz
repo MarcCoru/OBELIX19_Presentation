@@ -8,7 +8,7 @@
 		x descriptions at=edge bottom,
 		vertical sep=1em},
 	no markers,
-	height=2.8cm,
+	height=4cm,
 %	legend style={at={(0.03,0.5)},anchor=west},
 	width=\linewidth,
 	xlabel=epochs

@@ -1,0 +1,587 @@
+
+{\setbeamercolor{background canvas}{bg=tumbluedark}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{7em}
+			
+			\hfill 
+			Early Classification
+			\column{.5\textwidth}
+			
+			%\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+
+
+\tikzstyle{rnn}=[draw,circle]
+\tikzstyle{annot}=[rounded corners, fill=colorblue!20]
+\colorlet{colortrain}{colorblue}
+\colorlet{colorinfer}{colororange}
+\tikzstyle{infer}=[-stealth, shorten >=.0em, shorten <=.0em, colorinfer]
+\tikzstyle{loss}=[fill=colorblue!10, rounded corners, font=\small]
+\tikzstyle{grad}=[colortrain]
+
+\newcommand{\classimagepair}[1]{
+\def\sample{#1}
+\begin{tikzpicture}[node distance=.2em]
+\node[label=above:{inputs $\V{x}_t$}](a){\includegraphics[width=.5\textwidth]{images/classification_without_earliness/TwoPatterns30EpochsNoEarliness/sample_\sample_x.png}};
+\node[label=above:{softmaxed class scores $\yhat_t$}, right=of a](b){\includegraphics[width=.5\textwidth]{images/classification_without_earliness/TwoPatterns30EpochsNoEarliness/sample_\sample_p(y).png}};
+
+\visible<2->{
+%\draw (-2,-2) to[grid with coordinates] (8,4);
+\node[annot, yshift=3em](wiggle1) at ($ (a)!0.3!(b) $) {event \#1};
+\draw (wiggle1) -- (-1.5,0);
+\draw (wiggle1) -- (5.5,-1);
+}
+\visible<3->{
+\node[annot, yshift=-5em](wiggle2) at ($ (a)!0.3!(b) $) {event \#2};
+\draw (wiggle2) -- (1,0);
+\draw (wiggle2) -- (7.5,0);
+}
+
+\visible<4->{
+\draw[very thick] (8.5,-2) -- (8.5,2); 
+\node[annot, yshift=-5em, anchor=east](stop) at (10,-1) {...we could stop here};
+%		\draw[shorten >=1em] (stop)++(2,0.5) -- (8,0);
+}
+\end{tikzpicture}
+}
+
+\begin{frame}<presentation:1-4>{Class Predictions}
+\classimagepair{0}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Early Classification on Remote Sensing Data}
+\input{images/example.tikz}
+
+\url{https://arxiv.org/abs/1901.10681}
+
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Autoregressive Classification Model}
+%	
+%	\input{images/classmodel.tikz}
+%	
+%\end{frame}
+
+
+{\setbeamercolor{background canvas}{bg=tumbluedark}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{7em}
+			
+			\hfill 
+			Method
+			\column{.5\textwidth}
+			
+			%\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{Augmenting Classification Models}
+
+\begin{columns}
+	
+	\column{.5\textwidth}
+	\begin{center}
+		
+		\input{images/backprop_example.tikz}
+	\end{center}
+	\column{.5\textwidth}
+	\input{images/qualitative_example.tikz}
+	
+	
+\end{columns}
+
+\end{frame}
+%
+%\begin{frame}
+%\frametitle{Impact of Early Classification on Vegetation Data}
+%
+%\Large
+%
+%\begin{itemize}[itemsep=1em]
+%\item<1-> \textbf{supervised end-to-end} learning scenario
+%\item<2-> we get a stopping time \textbf{for free} solely from classifying labels
+%\item<3-> relate to \textbf{characteristic features}, i.e., \textbf{crop phenology}
+%\item<4-> next: assess seasonal shifts in \textbf{vegetation phenology} due to \textbf{environmental conditions}
+%\end{itemize}
+%
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Loss functions}
+	
+	{
+	\Large
+	
+	\begin{equation*}
+		\mathcal{L}(\M{X}, \V{y}) = \sum_{t=1}^{T} P(t) \left( \mathcal{L}_c (\xuptot, \V{y}) - \mathcal{R}_e(t, \ycorrect_t) \right)
+	\end{equation*} 
+	
+	earlyness reward: $ \mathcal{R}_e(t, \ycorrect_t) = \ycorrect_t \left(1 - \frac{t}{T}\right) $	
+	classificaiton loss: $-\log(\ycorrect_t)$ (aka. cross entropy)
+	
+	}
+
+	\vspace{1em}
+
+	\Large
+	\begin{itemize}
+		\item $\M{X}=(\V{x}_1,\V{x}_2,\dots,\V{x}_T)$: entire time series of observations $\V{x}$
+		\item $\xuptot=(\V{x}_1,\V{x}_2,\dots,\V{x}_t)$: time series until time $t$
+		\item $\V{y} \in \{0,1\}^C$: one-hot vector of the classes
+		\item $\ycorrect \in [0,1]$: prediction score of the correct class
+	\end{itemize}
+	
+	
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=tumbluedark}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{7em}
+			
+			\hfill 
+			Results
+			\column{.5\textwidth}
+			
+			%\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+%\begin{frame}
+%
+%\includegraphics[width=\textwidth]{mp4/run_twophase_fast.png}
+%\end{frame}
+
+\begin{frame}
+	
+%	\includegraphics[width=\textwidth]{mp4/run_earyreward_fast.png}
+	
+	\includemedia[
+	width=\textwidth,
+	activate=pageopen,
+	addresource=mp4/run_earyreward_fast.mp4,
+	flashvars={source=mp4/run_earyreward_fast.mp4&loop=true&
+		autoPlay=true}
+	]{\includegraphics[width=\textwidth]{mp4/run_earyreward_fast.png}}{mp4/run_earyreward_fast.mp4}
+	
+	
+\end{frame}
+
+
+
+\begin{frame}
+	
+	
+	\input{images/loss-accuracyplots.tikz}
+
+
+	\begin{columns}
+%	\column{.5\textwidth}
+%\figtwophasecrossentropy
+%{two-phase training first optimizing for accuracy-only and then for early classifications as well using \emph{lateness penalty} loss.}
+
+	\column{\textwidth}
+\figearlyreward
+{one training phase using the \emph{earliness reward} formulation.}
+\end{columns}
+	
+\end{frame}
+
+\begin{frame}
+	
+	
+		\input{images/trainingstoppingclasses.tikz}
+		{Class-wise analysis of the estimated stopping time during training in the evaluation set.}
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Stopping times per crop Class}
+
+\input{images/classboxplots.tikz}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{ICML AI for Social Good Workshop}
+	\begin{columns}
+	\column{.5\textwidth}
+	\includegraphics[width=.6\textwidth]{images/AI4SG_Poster}
+	
+	\column{.5\textwidth}
+	\includegraphics[width=.6\textwidth]{images/AI4SG_Paper}
+	
+	\end{columns}
+\end{frame}
+
+
+{\setbeamercolor{background canvas}{bg=tumbluedark}
+	\begin{frame}[plain]
+	
+	\vfill
+	\Huge\color{white}
+	\begin{center}
+		\begin{columns}
+			\column{.5\textwidth}
+			\vspace{7em}
+			
+			\hfill 
+			Crop Type Data
+			\column{.5\textwidth}
+			
+			%\includegraphics[width=7cm]{images/fdl}
+		\end{columns}
+	\end{center}
+	
+	\vfill
+\end{frame}
+}
+
+
+\begin{frame}
+\frametitle{Building Large-Scale Crop Type Mapping Datasets}
+
+\begin{columns}
+
+\column{.5\textwidth}
+
+\Large
+
+\begin{description}\setlength\itemsep{1em}
+	\item[\color{tumblue}collected] yearly within European \textbf{Common Agricultural Policy} (CAP)
+	\item[\color{tumblue}declared] by Farmers at \textbf{crop subsidy} applications
+	\item[\color{tumblue}today] slowly made publicly available (on a national basis by French \includegraphics[height=.9em]{images/IGN-logo}, Bavarian Stmelf \includegraphics[height=.9em]{images/stmelf-logo}, etc.)
+	\item[\color{tumblue}in future] further harmonized within \textbf{Europe's INSPIRE} directive
+\end{description}
+
+\column{.5\textwidth}
+\includegraphics[width=\textwidth]{images/europe_data2}
+
+
+
+
+\end{columns}
+
+\vspace{2em}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Area of Interest for Early Classification}
+
+\begin{columns}
+	\column{.4\textwidth}
+	\centering\includegraphics[width=\textwidth]{images/holl.pdf}
+	
+	The area of interest and partitioning in blocks of 4.5 km for training validation and evaluation
+	
+	\column{.6\textwidth}
+	\input{images/partition_histograms.tikz}
+	{Class distribution in the dataset with block-wise separation of train, valid and evaluation partitions.}
+	
+\end{columns}
+\end{frame}
+
+
+
+{\setbeamercolor{background canvas}{bg=white}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumblue}
+		
+		Here, we hand-selected 7 classes from a small region of interest...
+		%		
+	\end{center}
+	
+	
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{Large Scale Regional Variations}
+
+\includegraphics[width=5cm]{images/Bavaria}
+\includegraphics[width=8cm]{images/Large1954_cerial_growth_stages.png}
+
+\raggedleft { \small Large, E. C. (1954). Growth stages in \\ cereals illustration of the Feekes scale. Plant pathology, 3(4), 128-129. }
+\end{frame}
+
+\begin{frame}
+	\frametitle{Large Scale Regional Variations}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\includegraphics[width=\textwidth]{images/France}
+		\column{.5\textwidth}
+		\Large
+		
+		Questions:
+			\begin{itemize}
+				\item how do we learn models on these inter-regional scales?
+				\item the same class label will correspond to different representations in the data.
+			\end{itemize}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Outlook}
+	
+	\Large
+	
+	Goals:
+	\begin{itemize}
+		\item large-scale domain adaptation between regions of multi-temporal vegetation data
+		\item addressing long-tailed class distributions of $>$300 distinct (overlapping) categories with 90\% of data in $<$20 classes
+	\end{itemize}
+
+	Short-Term Objective:
+	\begin{itemize}
+		\item compile a large-scale inter-regional crop type mapping dataset to be able to evaluate these questions
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Goal}
+	\includegraphics[width=\textwidth]{images/generalization}
+\end{frame}
+
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumwhite}
+		\only<1>{
+			\textbf{Thank you!}
+			\includegraphics[width=6cm]{images/epic1}
+		}
+%		\only<2>{
+%			\textbf{Questions/Input?}
+%			\includegraphics[width=7cm]{images/France_white}
+%		}
+		%		\only<3>{
+		%			\textbf{Collaborations?}
+		%			\includegraphics[width=7cm]{images/France_white}
+		%		}
+		%		
+	\end{center}
+	
+	
+%	\vspace{1em}	
+%	\color{white}
+%	{Twitter}: \textbf{marccoru} | {Github}: \textbf{marccoru} or \textbf{tum-lmf} | \includegraphics[height=.9em]{images/TUM-white}~{Chair} \textbf{lmf.bgu.tum.de/vision} \\ 
+%	
+%	\vspace{1em}
+%	
+%	\Large
+%	\url{https://marccoru.github.io/}
+	
+	\vfill
+\end{frame}
+}
+
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+	\vfill
+	\begin{center}
+		\Huge\color{tumwhite}
+		\only<1>{
+			\textbf{backup slides...}
+		}
+			
+	\end{center}
+	
+	
+	\vfill
+\end{frame}
+}
+
+
+
+\begin{frame}
+\frametitle{BreizhCrops Dataset (ICML Workshop Submission)}
+
+\begin{center}
+	\includegraphics[width=3cm]{images/map/europe}
+	\includegraphics[width=3cm]{images/map/regions}
+	\includegraphics[width=3cm]{images/map/breizh}
+	\includegraphics[width=3cm]{images/map/parcels}
+\end{center}
+
+%\vspace{1em}
+
+\input{images/breizhcrops/example.tikz}
+\begin{columns}
+	\column{.5\textwidth}
+	
+	\textbf{corn grain and silage}
+	\dataexample{images/breizhcrops/example/6139251.csv}
+	
+	\column{.5\textwidth}
+	
+	\textbf{temporary meadows}
+	\dataexample{images/breizhcrops/example/3685593.csv}
+	
+\end{columns}
+
+%\vspace{1em}
+
+
+\begin{columns}
+	\column{.5\textwidth}
+	
+	580k samples of Time Series $\M{X}$ and labels $\V{y}$. \Large \url{https://github.com/TUM-LMF/BreizhCrops}
+	
+	\column{.5\textwidth}
+	
+	\small\raggedright
+	\textsl{
+		Rußwurm M., Lefèvre S., and Körner M (2019). \textbf{BreizhCrops: A Satellite Time Series Dataset for Crop Type Identification}. ICML 2019 Time Series Workshop. arXiv:1905.11893
+	}
+	
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Two Baseline Models}
+
+\Large
+Inspired by Models used in NLP, we implemented a \textbf{multi-layer LSTM} and a \textbf{(minified) Transformer encoder}.
+
+\vspace{1em}
+\normalsize
+
+%	\begin{table*}[b]
+%		\caption{Accuracy metrics for the Multi-layer bidirectional LSTM \cite{hochreiter1997long} and the Transformer-Encoder \cite{Vaswani:transformer}.}
+%		\label{tab:accuracies}
+%		\centering
+\begin{tabular}{lrrrrrrr}
+\toprule
+baseline & accuracy & $\kappa$ & mean f1 & mean precision  & mean recall \\
+\cmidrule(lr){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}
+Transformer {\small (Vaswani et al., 2017)} & \textbf{0.69}  &  \textbf{0.63} & 0.57 & {0.60} & 0.56 \\
+LSTM {\small (Hochreiter and Schmidhuber, 1997)} & 0.68 & 0.62 & \textbf{0.59} & \textbf{0.63} & \textbf{0.58} \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+
+\Large
+\textbf{Takeaway:} 
+\begin{itemize}
+\item models perform quite similar
+\item potential for improvement
+\item well-defined classes accurately classified
+\item broadly defined classes systematically confused
+\end{itemize}
+%	\end{table*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Challenges and Impact}
+
+\Large
+
+\begin{columns}[t]
+
+\column{.5\textwidth}
+
+\visible<1->{
+\Large\textbf{Impact}
+\vspace{1em}
+
+\begin{description}[itemsep=.5em]
+	\item large scale \bluebf{real-world dataset}
+	\item effectively \bluebf{unlimited data} (spatially and temporally)
+	\item \bluebf{assessing generalization} over large regions
+	\item extraction for further \bluebf{vegetation characteristics} in future work (drought indicator, early classification, crop yield)
+\end{description}
+}
+
+\column{.5\textwidth}
+
+\visible<2->{
+\Large\textbf{Challenges}
+\vspace{1em}
+
+\begin{description}[itemsep=.5em]
+	\item \bluebf{imbalanced} class \bluebf{labels} (>300 raw classes)
+	\item classes with \bluebf{similar characteristics}
+	\item non-Gaussian noise induced by \bluebf{clouds}
+	\item \bluebf{regional} \bluebf{variations} in the class distributions
+	\item \bluebf{spatial} \bluebf{autocorrelation}
+	\item \bluebf{irregular} temporal \bluebf{sampling} distance
+	\item \bluebf{variable} \bluebf{sequence} length
+\end{description}
+}
+
+
+\end{columns}
+\end{frame}
+
+
+\input{images/confmattwo_gaf.tikz}
+\begin{frame}
+\frametitle{Verwechslungen}
+
+\centering
+
+\vspace{-2em}
+
+\confmatgaf{images/data/TUM_ALL_rnn/npy/confmat_flat.csv}{3}{1}{22}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{83 Finale Kategorien}
+
+\includegraphics[width=.49\textwidth]{images/83_confmat1}
+\includegraphics[width=.49\textwidth]{images/83_confmat2}
+
+\end{frame}
+

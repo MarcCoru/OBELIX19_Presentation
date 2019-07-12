@@ -1,0 +1,33 @@
+\newcommand{\good}[1]{\only<2->{\textbf{\color{tumblue}#1}}\only<1>{#1}}
+\newcommand{\bad}[1]{\only<3->{\textbf{\color{tumorange}#1}}\only<1,2>{#1}}
+
+
+\begin{tabular}{rlcccc}
+\toprule
+\# & Klasse  &  Präzision & Genauigkeit & $f_1$-score & \#Felder \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}
+1 & \bad{Stilllegungen} &         \bad{19} &          \bad{17} &          \bad{18} &      \bad{451} \\
+2 & Stilllegungen mit Blühpflanzen &         58 &          54 &          56 &      279 \\
+3 & \bad{Klee- u./o. Luzernen u./o. Eiweißpflanzen} &         \bad{49} &          \bad{26} &          \bad{34} &     \bad{1266} \\
+4 & \bad{Gräser} &         \bad{17} &           \bad{8} &          \bad{11} &      \bad{568} \\
+5 & Wintergemenge &         17 &          11 &          13 &       19 \\
+6 & Sommergemenge &         28 &          20 &          23 &       35 \\
+7 & Eiweißpflanzengemenge &         50 &          15 &          23 &       34 \\
+8 & \good{Winterweizen} &         \good{88} &          \good{91} &          \good{89} &     \good{1519} \\
+9 & \good{Mais} &         \good{94} &          \good{96} &          \good{95} &     \good{2925} \\
+10 & Sommerweizen &         23 &          21 &          22 &       29 \\
+11 & Rüben &         75 &          52 &          62 &       46 \\
+12 & Hirsen &          0 &           0 &           0 &        6 \\
+13 & Kartoffeln &         37 &          21 &          27 &      173 \\
+14 & Mischanbau &          0 &           0 &           0 &        2 \\
+15 & \bad{Stilllegungen DG} &         \bad{17} &          \bad{15} &          \bad{16} &      \bad{168} \\
+16 & \good{DG mit Maschineneinsatz} &         \good{84} &          \good{91} &          \good{87} &    \good{11509} \\
+17 & \bad{DG mit Viehbesatz} &         \bad{14} &          \bad{21} &          \bad{17} &      \bad{314} \\
+18 & Rebflächen &          0 &           0 &           0 &        0 \\
+19 & Silphium &         57 &          27 &          36 &       15 \\
+20 & Miscanthus &         68 &          76 &          72 &       17 \\
+21 & Niederwald &         67 &          21 &          32 &       29 \\
+22 & Sonnenblumen &          0 &           0 &           0 &        3 \\
+\bottomrule
+\end{tabular}
+
