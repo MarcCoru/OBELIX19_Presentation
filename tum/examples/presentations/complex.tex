@@ -1,0 +1,941 @@
+% \documentclass[%
+%   aspectratio=169,
+%   9pt,
+% %   dark,
+%   light,
+%   mathserif,
+% %   serif, 
+% %   professionalfont
+% %  handout
+%   titlegraphic,
+%   %% The following options would violate the CD rules!
+% %   affiliation,
+% %   uselogos,
+%   navigationbar,
+% %   seprules,
+% %   titleinhead,
+% ]{beamer}
+
+\documentclass[%
+  aspectratio=169,
+  9pt,
+%   t,
+  USenglish,
+%   dark,
+  light,
+  mathserif,
+%   serif, 
+  professionalfont,
+%   notes,
+%  handout,
+  affiliationintitlepagehead, % only on titlepage
+%   affiliationinhead,        % everywhere (including titlepage)
+  titlegraphic,
+  %% The following options would violate the CD rules!
+%   affiliation,
+%   uselogos,
+  navigationbar,
+  progressbar,
+%   seprules,
+%   titleinhead,
+]{beamer}
+% \usepackage[german]{babel]
+
+% \usepackage[ngerman]{babel} % if you get errors on compile: rm *aux *out *log *nav *snm *toc
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+\mode<handout>{
+  \usepackage{pgfpages}
+% feel free to use one of these layouts
+%   \pgfpagesuselayout{1 on 1}[a4paper,border shrink=5mm]
+  \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{3 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 landscape}[a4paper,border shrink=5mm]
+%   
+% you can also add room for notes, but then the widescreen aspect ratio messes up a little
+%   \usepackage{handoutWithNotes}
+%   \pgfpagesuselayout{1 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{4 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 with notes landscape}[a4paper,border shrink=5mm]
+}
+
+\newcommand{\org}{LMF}
+% \newcommand{\org}{FPF}
+\newcommand{\coorg}{DLR}
+
+\usetheme{TUM}
+\usepackage{thumbpdf}
+\usepackage{wasysym}
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
+\usepackage{verbatim}
+\usepackage{csquotes}
+
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb,epsfig,color}
+\usepackage{psfrag,subfigure}
+\usepackage{times}
+\usepackage{textcomp}
+\usepackage{eurosym}
+\usepackage{amsthm,amsmath,amsfonts,mathbbol,mathrsfs,stmaryrd,textcomp}
+
+\usepackage{blindtext}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{definition}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{exep}[thm]{Example}
+\numberwithin{equation}{section}
+
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\Rea}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\gauss}[2]{\mathscr{N}(#1,#2)}
+\newcommand{\Lp}[1]{\mathbb{L}^{#1}\left(\Omega,\mathscr{F},\mathbb{P}\right)}
+\newcommand{\Lpt}[2]{\mathbb{L}^{#1}\left(\Omega,\mathscr{F}_{#2},\mathbb{P}\right)}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\Tob}{\longmapsto}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathscr{A}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\simequiv}{\sim}
+\DeclareMathOperator*{\dom}{dom}
+
+
+
+\title[Presentation]{A very fancy Presentation}
+\subtitle[Ridiculously]{Ridiculously fancy!}
+% \author[M. Körner \and R. Bamler]{Dr. rer. nat. Marco Körner\inst{1} \and Prof. Dr.-Ing. Richard Bamler\inst{1,2}}
+% \institute[TU Munich]{
+%   \inst{1}
+%   Technical University of Munich, Germany\\Remote Sensing Technology\\Computer Vision Research Group\\\url{www.lmf.bgu.tum.de/vision}
+%   \and
+%   \inst{2}
+%   German Aerospace Center (DLR), Oberpfaffenhofen, Germany\\Remote Sensing Technology Institute (IMF)
+% }
+\author[M. Körner]{Dr{.}\,rer{.}\,nat{.} Marco Körner}
+\institute[TU Munich]{Technical University of Munich, Germany\\Remote Sensing Technology\\Computer Vision Research Group\\\url{www.lmf.bgu.tum.de/vision}}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Show the TOC prior to each new section
+\AtBeginSection[]{
+  \frame<handout:0>{% not in handout mode!
+    \frametitle{Outline}
+    \tableofcontents[currentsection,hideallsubsections]
+  }
+}
+
+% Show the TOC prior to each new subsection
+\AtBeginSubsection[]{
+  \frame<handout:0>{% not in handout mode!
+    \frametitle{Outline}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]
+  }
+}
+
+% you can highlight text on handout or presentation slides only
+\newcommand<>{\highlighton}[1]{%
+  \alt#2{\structure{#1}}{{#1}}%
+}
+
+% you can use images as logos within the text
+\newcommand{\icon}[1]{\pgfimage[height=1em]{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}[t]
+  \titlepage
+\end{frame}
+
+\SlidesCopyright % Inserts a copyright statement right after the title (only effective in handout mode)
+
+\section*{}
+\begin{frame}[t]
+  \frametitle{Outline}
+%   \tableofcontents[section=1,hideallsubsections]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Uncertainty, Risk and Duality}
+
+\begin{frame}
+  \frametitle{Blocks}
+  \framesubtitle{and colors}
+  \begin{block}{Block Caption}
+    Text
+  \end{block}
+  \begin{alertblock}{Alertblock Caption}
+    Text
+  \end{alertblock}
+  \begin{exampleblock}{Exampleblock Caption}
+    Text
+  \end{exampleblock}
+  \begin{definition}{Definition Caption}
+   
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Markups}
+  \only<2->{\framesubtitle{and colors}}
+  
+  \begin{itemize}
+    \item text can be either \emph{emphasized}, \alert{alerted}, or \structure{structured}
+    \item text can be set in \textbf{bold} font, but please do not \underline{underline}!
+    \item in general, you should only use primary color, i.e., {\color{tumblue}tumblue}, {\color{tumblack}tumblack}, \colorbox{tumblue}{\color{tumwhite}tumwhite}, {\color{tumivory}tumivory}
+    \item for further differentiation, you can use {\color{tumbluelight}tumblue}, {\color{tumbluemedium}tumbluemedium}, {\color{tumbluedark}tumbluedark}, {\color{tumgray}tumgray}
+    \item for special complexity, you can use {\color{tumorange}tumorange}, {\color{tumgreen}tumgreen}, or {\color{tumivory}tumivory}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[c]
+  \begin{center}
+    \huge{{Uncertainty, Risk and Duality}}
+  \end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+  \frametitle{Motivation}
+  \framesubtitle{Motivation}
+  
+  \blindtext[5]
+\end{frame}
+
+\mode<beamer>{
+  \begin{frame}
+    This frame will only be shown in \highlighton<beamer>{beamer} mode
+  \end{frame}
+}
+
+\mode<handout>{
+  \begin{frame}
+    This frame will only be shown in handout mode
+  \end{frame}
+}
+
+\mode<beamer:0>{
+  \begin{frame}
+    This frame will not be shown in presentation mode
+  \end{frame}
+}
+
+\mode<handout:0>{
+  \begin{frame}
+    This frame will not be shown in handout mode
+  \end{frame}
+}
+
+
+\begin{frame}[c]
+  \frametitle{Motivation}
+  \begin{itemize}
+    \item Risk is a colloquial and widely used term. %\emph{(worten: Everybody has an intuitive understanding).}
+    \item[]
+    \item Still ambiguous notion: economics, finance, sociology or medicine have their own concepts,
+      instruments and language for different types of risk.
+    \item[]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Motivation}
+  \begin{quotation}
+    The late apparition in History of circumstances indicated by means of the new term 'risk' is probably due to the fact that it accommodates a \textbf{plurality of distinctions within one concept}, thus constituting the unity of this plurality.
+    \begin{flushright}
+      \textsc{Luhmann} -- Modern Society Shocked by its Risks
+    \end{flushright}
+  \end{quotation}
+
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Motivation}
+  \begin{center}
+    Economic theory: \textsc{Knight}.
+  \end{center}
+  \begin{itemize}
+    \item \emph{Measurable Uncertainty} \alert{Measurable Uncertainty} \textcolor{orange}{\textbf{Measurable Uncertainty}}
+
+      A \emph{single} \enquote{objective} probability measure $P$ is given.
+
+    \item \textcolor{orange}{\textbf{Unmeasurable Uncertainty}}: 
+
+      No \enquote{a priori} probability measure is given, e.g. more than one $P$.
+  \end{itemize}
+  \only<1-2>{
+    \uncover<2->{
+      \begin{center}
+        Knight's identification:
+        \begin{equation*}
+          \text{\textcolor{red}{\textbf{Risk}}}:=\text{\textcolor{orange}{\textbf{Measurable Uncertainty}}}  
+        \end{equation*}
+      \end{center}
+    }
+  }
+  \only<3->{
+    \begin{center}
+      Monetary risk measures
+      $$\rho(X)=\sup_Q\left\{ E_Q\left[ -X \right]-\alpha(Q) \right\}$$
+      risk induced by the consideration of different probability models
+
+      \vspace{8pt}
+      Monetary risk measures does not fit under Knight's definition of risk
+      
+      \vspace{8pt}
+      
+      \begin{equation*}
+        \text{\textcolor{red}{\textbf{Risk}}}\neq\text{\textcolor{orange}{\textbf{Measurable Uncertainty}}}  
+      \end{equation*}
+    \end{center}
+
+  }
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Motivation}
+
+  Normative approaches to risk:  %\emph{Oral, context specific}
+  $$ $$
+
+  \begin{center}
+  \begin{tabular}{l|l}
+    \underline{Economics} & \underline{Financial Mathematics} \\[5mm]
+    $\bullet$ Expected utilities \\[1mm]
+    \color{blue}{von Neumann and Morgenstern} \\[3mm]
+    $\bullet$  Maxmin expected utilities & $\bullet$ Coherent risk measures \\[1mm]
+    \color{blue}{Gilboa and Schmeidler} & \color{blue}{Artzner, Delbaen, Eber, Heath} \\[3mm]
+    $\bullet$  Variational preferences & $\bullet$ Convex risk measures \\[1mm]
+    \color{blue}{Macceroni, Marinacci, Rustichini} & \color{blue}{F\"ollmer and Schied} \\[3mm]
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Motivation}
+  Risk perception is a 
+  \begin{itemize}
+    \item[]
+    \item {\color{orange} subjective notion}
+    \item depends on the {\color{orange} underlying context} 
+    \item[]
+  \end{itemize}
+  \uncover<2>{
+    Mathematically:
+    \begin{itemize}
+      \item[]
+      \item space of possible alternatives: {\color{red} ${\cal X}=\set{x,y,\ldots}$}  %(context dependent)
+      \item decide whether $x$ is less or more risky than $y$ %(subjective)
+        \[{\color{red}x\preccurlyeq y}\quad\mbox{ or }\quad {\color{red}y\preccurlyeq x}\quad\mbox{?}\quad \leadsto \text{ risk ordering}\]  
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}%[t]
+  \frametitle{Motivation}
+  $$ $$
+  Context independent key features for risk orders:  
+
+  \begin{itemize}
+    \item[]
+    \item \textcolor{red}{\enquote{diversification should not increase the risk}}\\
+      $\leadsto$ quasi-convexity
+    \item[]
+    \item \textcolor{red}{\enquote{the better for sure, the less risky}}\\
+      $\leadsto$ monotonicity
+  \end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}<beamer>
+  \vspace{2.5cm}
+  \begin{center}
+    \huge{{How to quantify risk ?}}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{General Risk Measures (Drapeau, Kupper [11])}
+  $$  \mbox{\color{orange}{risk order} } \preccurlyeq \quad \left\{ \begin{array}{l} \mbox{diversification should not increase risk} \\
+    \mbox{monotone} \end{array}\right.$$
+  $$ \Updownarrow $$
+  $$ \rho(x) \quad = \quad \mbox {\color{orange}{risk measure}} \quad \left\{ \begin{array}{l} \mbox{quasi-convex} \\
+    \mbox{monotone} \end{array}\right.$$
+  \uncover<2>{
+    $$ \Updownarrow  \mbox{ Duality} $$
+    \vspace{-0.1cm}
+    \begin{align*}
+      \boxed{\begin{matrix} \text{}\\ \hspace{2cm} \color{red}{ \displaystyle\rho(x)=\sup_{x^\ast} R \left( x^\ast, \langle x^\ast,-x \rangle \right)}
+        \hspace{2cm}\\ \text{}\end{matrix}}
+    \end{align*}
+    \vspace{5pt}
+    \begin{center}
+       Dual Representation \textcolor{red}{$\leadsto$ generic interpretation of risk perception}
+    \end{center}
+  }
+\end{frame}
+
+
+
+\begin{frame}[c]
+  \frametitle{General Risk Measures}
+  \framesubtitle{Context dependent interpretation}
+  \begin{center}
+    Setting's specification \textcolor{red}{$\leadsto$ differentiated interpretation of risk perception}
+    \vspace{10pt}
+    \begin{itemize}
+      \item[]
+        \begin{itemize}
+          \item Random variables $X$ \textcolor{orange}{$\leadsto$ risk under model uncertainty}
+            \begin{equation*}
+              \rho(X)=\sup_{\substack{Q\\\text{\textcolor{orange}{probability measures}}}} R\left( Q,E_{Q}\left[ -X \right] \right)
+            \end{equation*}
+          \item Probability distributions (lotteries) $\mu$ \textcolor{orange}{$\leadsto$ risk under distributional uncertainty}
+            \begin{equation*}
+              \rho(\mu)=\sup_{\substack{l\\\text{\textcolor{orange}{loss functions}}}} R\left( l,-\int_{}^{}l(x)\mu(dx) \right)
+            \end{equation*}
+          \item Consumption streams $c$ \textcolor{orange}{$\leadsto$ risk under discounting uncertainty}
+            \begin{equation*}
+              \rho(c)=\sup_{\substack{D\\\text{\textcolor{orange}{discounting functions}}}}R\left( D,-\int_{0}^{T}D_s dc_s \right)
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{General Risk Measures}
+
+  Unified approach to (risk) preferences:
+  \begin{enumerate}
+    \item Expected utilities (\textsc{Von Neumann} and \textsc{Morgenstern})
+    \item Mean variance preferences (\textsc{Markowitz})
+    \item Coherent and convex risk measures (\textsc{Artzner et al.} and \textsc{F\"ollmer} and \textsc{Schied})
+      $$  \color{orange}{\rho(X)=\sup_{Q}\{E_Q\left[ -X \right]-\alpha(Q)}\} $$
+    \item Performance measures such as the Sharpe ratio 
+    \item Value at risk
+    \item Intertemporal preference functionals (\textsc{Hindy}, \textsc{Huan} and \textsc{Kreps})
+    \item Multiprior maxmin expected utilities (\textsc{Gilboa} and \textsc{Schmeidler})
+    \item Variational preferences (\textsc{Maccheroni et al.})
+    \item General uncertainty averse preferences (\textsc{Cerreia et al.})
+  \end{enumerate}
+
+\end{frame}
+
+
+\section{Minimal Supersolutions of BSDEs}
+
+\begin{frame}[c]
+  \begin{center}
+    \huge{{Minimal Supersolutions of Backward Stochastic Differential Equations}}
+  \end{center}
+\end{frame}
+
+
+%\begin{frame}[c]
+%  \frametitle{Motivation}
+%  \begin{center}
+%    \textcolor{red}{Superhedging}  \\
+%    \vspace{0.4cm}
+%    $S_t(\omega)=$ price process of financial asset (stock)\\
+%    \includegraphics[width=7cm]{asset}\\
+%    \vspace{0.3cm}
+%    Contingent claim $\xi$, for instance a call option $\xi=(S_T-K)^+$\\
+%    \vspace{0.3cm}
+%    \textcolor{red}{Goal}: Find a hedging strategy for the contingent claim $\xi$.
+%  \end{center}
+%\end{frame}
+%
+
+\begin{frame}
+  \frametitle{Motivation}
+  \framesubtitle{Supersolutions of Backward Stochastic Differential Equations}
+  \vspace{10pt}
+  \begin{definition}
+    \begin{center}
+      $(Y,Z)$ is a {\color{red} supersolution} of the Backward Stochastic Differential Equation with driver $g$ and terminal condition $\xi$ if
+    \end{center}
+    \vspace{-0.2cm}
+    $$
+    Y_t -\underbrace{\int_t^T g(Y_u,Z_u)du}_{\mbox{drift part}} +\underbrace{\int_t^T Z_u dW_u}_{\mbox{martingale part}}\ge \xi\quad \forall t\in[0,T]
+    $$
+  \end{definition}
+  \only<1>{
+
+    \begin{itemize}
+      \item {\color{red} $Y$ = value process}
+      \item {\color{red} $Z$ = control process}
+    \end{itemize}
+  }
+
+  \only<2>{
+    Equality instead of inequality: $(Y,Z)$ is {\color{orange} solution} of the BSDE. \\[4mm]
+    Extensively studied:\\ 
+    {\color{blue} $\leadsto$ Bismut, Pardoux, Peng, Ma, Protter, Yong, Briand, Hu, Kobylanski, Touzi, Delbaen, Imkeller, El Karoui, ...}\\[4mm]
+    Applications in utility maximization, stochastic games, stochastic equilibria, \dots
+  }
+
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Block Caption}
+    Text
+  \end{block}
+  \begin{alertblock}{Alertblock Caption}
+    Text
+  \end{alertblock}
+  \begin{exampleblock}{Exampleblock Caption}
+    Text
+  \end{exampleblock}
+  \begin{definition}{Definition Caption}
+   
+  \end{definition}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Motivation}
+  \framesubtitle{Supersolutions of Backward Stochastic Differential Equations}
+  \begin{itemize}
+    \item Supersolutions are typically not unique.
+    \item Find a {\color{red} minimal supersolution} $( Y^{\min}, Z^{\min})$!\\
+      That is $ Y^{\min}\le Y$ for any other supersolution $(Y,Z)$. 
+  \end{itemize}
+  \vspace{5pt}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  \begin{center}
+
+    $(\Omega,\mathcal{F},(\mathcal{F}_t),P)$ with filtration $(\mathcal{F}_t)$ generated by a Brownian motion $W$ 
+    \begin{equation}
+      Y_s -\int_s^t g(Y_u,Z_u)du +\int_s^t Z_u dW_u\ge Y_t, \quad0\leq s\leq t\leq T\quad\text{and } Y_T\ge \xi
+      \label{eq:superbsde3}
+    \end{equation}
+
+    \begin{enumerate}
+      \item $\xi$ is $\mathcal{F}_T$-measurable.
+      \item $Y$ is $(\mathcal{F}_t)$-adapted and c\`adl\`ag $\leadsto \mathcal{S}$
+      \item $Z$ is $(\mathcal{F}_t)$-progressive, such that $\int_{0}^{T}Z_u^2 du< +\infty$ and \only<1>{{\color{red} !}}\uncover<2->{{\color{red} $Z$ is admissible}, i.e. $\int Z dW$ is a supermartingale 
+        ({\color{blue} $\rightarrow$ Dudley and Harrison/Pliska}) $\leadsto \mathcal{L}$}
+        \uncover<3->{
+        }
+    \end{enumerate}
+    \vspace{10pt}
+    \uncover<3->{
+      The set of \textcolor{red}{supersolutions} with driver $g$ and terminal condition $\xi$ 
+      \begin{equation*}
+        \mathcal{A}:=\left\{(Y,Z)\in \mathcal{S}\times \mathcal{L}: (Y,Z)\text{ fulfills }\eqref{eq:superbsde3}\right\}
+      \end{equation*}
+    }
+
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  A generator is a lower semicontinuous function %(normal integrand)
+  \[g:{\mathbb R}\times{\mathbb R}^d\rightarrow ]-\infty,\infty].\]
+
+  \vspace{0.2cm}
+
+  Additional properties:
+  \begin{itemize}
+    \item[] {\bf (Pos)} \quad {\color{blue} $g\left( y,z \right)\in\left[ 0,+\infty \right]$} for all $(y,z)$.
+    \item[]
+    \item[] {\bf (Conv)} \quad {\color{blue} $z \mapsto g\left( y,z \right)$} is {\color{blue} convex}.
+    \item[]
+    \item[] {\bf (Mon)} \quad  {\color{blue} $g\left(y,z  \right)\geq g\left( y^\prime ,z\right)$} for all {\color{blue} $y\geq y^\prime$}.
+    \item[]
+    \item[] {\bf (Mon')} \quad {\color{blue} $g\left(y,z  \right)\leq g\left( y^\prime ,z\right)$} for all {\color{blue} $y\geq y^\prime$}. 
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}<beamer>
+  \frametitle{Minimal Supersolutions}
+
+  \vspace{0.3cm}
+  A natural candidate for the value process of a minimal supersolution:
+  \begin{equation*}
+    \hat{\mathcal{E}}_t=\essinf\set{Y_t:(Y,Z)\in \mathcal{A}},\quad t \in [0,T]
+  \end{equation*}
+  % It is clearly timewise minimal.
+  \only<1>{
+
+    \vspace{1cm}
+
+    Question: Does there exist a c\`adl\`ag modification $\mathcal{E}$ of $\hat{\mathcal{E}}$ and a control process $Z \in \mathcal{L}$ such that $(\mathcal{E},Z)$ is a supersolution? 
+  }
+
+  \only<2->{
+    \vspace{0.3cm}
+    \begin{alertblock}{Theorem:} 
+      Assume $(Pos)$, $(Conv)$ and either $(Mon)$ or $(Mon')$. Suppose $\xi^-\in L^1 $ and $\mathcal{A} \neq \emptyset$. 
+      Then, there exists a \emph{unique minimal supersolution} $(\mathcal{E},Z)\in \mathcal{A}$ and it holds
+      \[\mathcal{E}_t:=\hat{\mathcal{E}}^+_t=\lim_{s\downarrow t, s\in{\mathbb Q}} \hat{\mathcal E}_s\]
+    \end{alertblock}
+    \vspace{0.3cm}
+  }
+  \only<3->{
+    Classical BSDE-method: Banach's fixpoint theorem.
+
+    Here, we use a {\color{blue} compactness} argument. 
+  }
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  \framesubtitle{Compactness}
+  \begin{itemize}
+    \item Any sequence $(x_n)$ in ${\mathbb R}^d$ such that $\sup_{n\in{\mathbb N}} \|x_n\|<\infty$ has a subsequence $(x_{n_k})$ converging to some $x\in {\mathbb R}^d$.
+    \item[]
+    \item Let $(X_n)$ be a sequence of random variables in $L^2(\Omega,{\cal F}, P)$ such that $\sup_{n\in{\mathbb N}} E[X^2_n]<\infty$. Then there exists a sequence $Y_n\in \mathop{\rm conv}(X_n, X_{n+1}, \dots)$ such that $Y_n\to Y$ in  $L^2(\Omega,{\cal F}, P)$.
+    \item[]
+    \item (Delbaen/Schachermayer) Let $(\int H^n dW)$ be a ${\cal H}^1$-bounded sequence of martingales. Then there exist $K^n\in\mathop{\rm conv}\{H^n,H^{n+1},\dots\}$ and a localizing sequence of stopping times $(\tau^n)$ such that $(\int K^n dW)^{\tau^n} \to \int K dW$ in ${\cal H}^1$.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  \framesubtitle{Idea of the proof}
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item[1)] Paste strategies between stopping times $\leadsto$ For any $n,k\in{\mathbb N}$, let $t^n_k=kT/2^n$.
+      There exist {\color{blue} $(Y^n,Z^n)\subset{\cal A}$} such that, for all $n\in\N$,
+      \[{\color{blue}\hat{{\cal E}}_{t^n_k}\ge Y^n_{t^n_k}-1/n},\] 
+      and
+      \[{\color{blue} Y^{n}_{t}\geq Y^{n+1}_{t}},\]
+    \item[2)] Define$ Y=\lim_{n\to\infty} Y^n$. Since $Y$ and $\hat{\cal E}$ are {\color{blue} supermartingales} we have {\color{blue} \[{\cal E}:=\hat{\cal E}^{+}= Y^+.\]}
+    \item[3)] Show that {\color{blue} $\hat{\cal E}_{t}\geq {\cal E}_{t}$}.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  \framesubtitle{Idea of the proof}
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item[4)] There is a localizing sequence $(\sigma_k)$ such that
+      \[{\color{blue} \left( \int Z^n dW \right)^{\sigma_k}} \]
+      is bounded in ${\cal H}^1$.
+    \item[]
+    \item[5)] By means of the compactness argument by \textsc{Delbaen} and \textsc{Schachermayer}, there exist convex combinations such that 
+      \[ {\color{blue}\int_0^{t} \tilde{Z}^n_s dW_s \xrightarrow[n\rightarrow +\infty]{}\int_0^{t } Z_s dW_s.}\]%\quad \forall t \in [0,T],\, P\text{-almost surely.}\]
+    \item[]
+    \item[6)] Verification with $({\cal E}, Z)$ is based on {\color{blue} Fatou's lemma}.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[c]
+  \frametitle{Minimal Supersolutions}
+  \frametitle{Non-positive generators}
+  \begin{itemize}
+    \item In applications, the assumption that $g$ is positive is too restrictive (e.g.~in utility maximization).
+    \item[]
+    \item[] {\bf (Pos')} Assume {\color{blue}$g(y,z)\geq az+b$}. 
+    \item[]
+    \item Under (Pos') the existence and uniqueness result also holds.
+  \end{itemize}
+\end{frame}
+
+
+\section{Non-Linear Expectations: Stability - Duality}
+
+\begin{frame}[c]
+  \begin{center}
+    \huge{Minimal Supersolutions}
+    $$ \Updownarrow $$
+    \huge{Nonlinear Expectations: Stability - Duality}
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Stability results}
+  \begin{center}
+    Given a generator $g$ with the sufficient assumptions, we consider
+    \begin{equation*}
+      \mathcal{E}:\xi \mapsto \text{minimal supersolution with terminal condition }\xi
+    \end{equation*}
+    \uncover<2->{
+
+
+      \vspace{5pt}
+      Well defined for $\xi \in L^0$ such that $\xi^- \in L^1$, like classical expectation.
+
+      ($+\infty$ if $\mathcal{A}(\xi)=\emptyset$)
+    }
+    \uncover<3->{
+
+      \vspace{8pt}
+      Satisfies structural properties depending on $g$
+      
+      \vspace{5pt}
+
+      \begin{tabular}{lc|c}
+        & {\color{orange} $\xi\mapsto {\cal E}^g_0(\xi)$} & {\color{orange} $E[\xi]=\int_\Omega \xi(\omega) P(d\omega)$}  \\[1mm] \hline && \\
+        {\color{orange} (N)} &  ${\cal E}^g_0(m)=m$ & $E\left[m\right]=m$ \\   
+        {\color{orange} (T)} &  ${\cal E}^g_0(\xi+m)={\cal E}^g_0(\xi)+m$ & $E[\xi+m]=E[\xi]+m$ \\
+        {\color{orange} (TC)} &  ${\cal E}^g_0(\xi)={\cal E}^g_0\left({\cal E}^g_t(\xi)\right)$ & $E[\xi]=E\left[E[\xi\mid{\cal F}_t]\right]$\\
+        {\color{orange} Linearity:} & --- & $E[\lambda \xi^1+\xi^2]= \lambda E[\xi^1]+ E[\xi^2]$ 
+      \end{tabular}
+      \only<3>{
+
+        \vspace{2mm}
+        {\color{red} $\leadsto$ non-linear expectation, (Peng's g-expectation)}
+      }
+    }
+
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[c]
+  \frametitle{Stability results}
+  \begin{center}
+    Central features of classical expectation
+    \begin{itemize}
+      \item[]
+      \item Monotone convergence;
+      \item Fatou's lemma;
+      \item Dominated convergence;
+    \end{itemize}
+    \uncover<2->{
+      \vspace{10pt}
+
+      The nonlinear expectation ${\cal E}$ satisfies 
+      \begin{itemize}
+        \item[]
+        \item {\color{orange} Monotone convergence}:
+          \begin{equation*}
+            {\cal E}_{0}(\xi)=\lim_{n}\mathcal{E}_{0}(\xi^n)\quad\text{whenever } \xi^n \uparrow \xi\text{ and }\xi^n\geq \eta \in L^1
+          \end{equation*}
+
+        \item {\color{orange} Fatou's lemma}: 
+          \begin{equation*}
+            \mathcal{E}_{0}(\liminf_{n} \xi^n)\leq \liminf_{n}\mathcal{E}_{0}(\xi^n)\quad \text{whenever }\xi^n\geq \eta \in L^1
+          \end{equation*}
+      \end{itemize}
+    }
+
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Duality}
+  \begin{center}
+    If the generator $g$ is jointly convex in $y,z$ (e.g. $g(y,z)=z^2/y$) then
+    \begin{equation*}
+      \xi\mapsto \mathcal{E}_0(\xi)\quad\text{is }\sigma(L^1,L^\infty)\text{-lower semicontinuous}
+    \end{equation*}
+    \vspace{10pt}
+    
+    Hence, we obtain a robust representation.
+    For instance, if $g$ is independent of $y$, by convex duality it holds
+    \begin{align*}
+      {\cal E}_0(\xi) & =\sup_{Q\ll P}\left\{ E_{Q}[\xi]-\alpha_{\min}(Q)\right\} \\
+      & = \mbox{ representation of a {\color{orange}monetary risk measure} } 
+    \end{align*}
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Duality (Drapeau, Gianin, Kupper, Tangpi. Work in progress)}
+  \begin{center}
+    Following \textsc{Delbaen}, \textsc{Peng} et al. we search for a dual representation of $\mathcal{E}$ in terms of processes.
+    \vspace{10pt}
+
+    If $(y,z)\mapsto g(y,z)$ is jointly convex, it holds
+    \begin{equation*}
+      \xi \mapsto \mathcal{E}_0(\xi)\quad \text{is }\sigma(\mathcal{H}^1,BMO)\text{-lower semicontinuous}
+    \end{equation*}
+
+    \begin{alertblock}{Proposition}
+      Assuming that $g$ fulfills (Pos), (JConv) and (Mon'), it holds
+      \begin{equation*}
+        \mathcal{E}_0(\xi)=\sup_{\substack{M \in BMO\\M_T\geq 0\text{ and }E[M_T]\leq 1 }}\left\{ E\left[ M_T \xi \right]-\mathcal{E}_0^\ast(M) \right\},\quad \xi \in \mathcal{H}^1
+      \end{equation*}
+      where
+      \begin{equation*}
+        \mathcal{E}^\ast_0(M)=\sup_{\xi \in \mathcal{H}^1}\left\{ E\left[ M_T \xi \right]-\mathcal{E}_0(\xi) \right\},\quad M \in BMO
+      \end{equation*}
+    \end{alertblock}
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Duality (Drapeau, Gianin, Kupper, Tangpi. Work in progress)}
+  \vspace{5pt}
+  Parametrization of probability measures
+  \begin{align*}
+    \mathcal{Q}=\left\{ q:\exp\left( -\int_{}^{}q_s dW_s-\frac{1}{2}\int_{}^{}q^2_s ds \right) \in BMO \right\}
+  \end{align*}
+  and $Q^q$ the related probability measure for $q \in \mathcal{Q}^q$.
+  \begin{center}
+    \begin{alertblock}{$\lambda$ Theorem$+(1-\lambda)$ Conjecture. Cash Additivity}
+      Assuming that $g$ fulfills (Pos), (JConv) and is independent of $y$, it holds
+      \begin{equation*}
+        \mathcal{E}_0(\xi)=\sup_{  q\in \mathcal{Q}^q } \left\{ E_{Q^q}\left[ \xi -\int_{0}^{T}g^\ast(q_s)ds\right] \right\},\quad \xi \in \mathcal{H}^1
+      \end{equation*}
+      where
+      \begin{equation*}
+        g^\ast(q)=\sup_{z}\left\{ \langle q, z\rangle -g(z) \right\}
+      \end{equation*}
+    \end{alertblock}
+
+    \vspace{5pt}
+
+    \textcolor{red}{$\leadsto$ risk under model uncertainty}
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Duality (Drapeau, Gianin, Kupper, Tangpi. Work in progress)}
+  \vspace{5pt}
+  Parametrization of discounting functions
+  \begin{align*}
+    \mathcal{D}=\left\{ D=\exp\left( -\int_{}^{}\beta_s ds \right):\beta\geq 0\right\}
+  \end{align*}
+  
+  \begin{center}
+    \begin{alertblock}{$\tilde{\lambda}$ Theorem$+(1-\tilde{\lambda})$ Conjecture. Sub-Cash Additivity}
+      Assuming that $g$ fulfills (Pos), (JConv) and (Mon'), it holds
+      \begin{equation*}
+        \mathcal{E}_0(\xi)=\sup_{  q\in \mathcal{Q}^q, D \in \mathcal{D} } \left\{ E_{Q^q}\left[ D_T\xi -\int_{0}^{T}D_s g^\ast(\beta_s,q_s)ds\right] \right\},\quad \xi \in \mathcal{H}^1
+      \end{equation*}
+      where
+      \begin{equation*}
+        g^\ast(\beta,q)=\sup_{y\geq 0,z}\left\{ -\langle y,\beta\rangle+ \langle q, z\rangle -g(y,z) \right\}
+      \end{equation*}
+    \end{alertblock}
+
+    \vspace{5pt}
+
+    \textcolor{red}{$\leadsto$ risk under model and discounting uncertainty}
+  \end{center}
+\end{frame}
+\section{Summary and Outlook}
+\begin{frame}[c]
+  \begin{center}
+    \huge{Summary and Outlook}
+  \end{center}
+\end{frame}
+
+\begin{frame}[c]
+  \frametitle{Summary}
+  \begin{center}
+    Duality $\leadsto$ key to provide a differentiated interpretation of risk perception.
+    $$$$
+    $$ \Downarrow$$
+    $$$$
+    Nonlinear expectations$\quad\longleftrightarrow\quad$ Risk Measures
+    $$$$
+    $$
+    \Uparrow
+    $$
+    $$$$
+    (Super)solutions to Backward Stochastic Differential equations
+  \end{center}
+\end{frame}
+\begin{frame}[c]
+  \frametitle{Outlook}
+  \framesubtitle{Set Valued Duality (Drapeau, Hamel, Kupper [12])}
+  \begin{center}
+    \begin{itemize}
+      \item $X$ lctvs, $V$ vector space, and $0\in K\subseteq V$ convex cone.
+      \item We consider set valued functions
+        \begin{equation*}
+          F:X \longrightarrow \mathcal{K}(Z,K)
+        \end{equation*}
+        where $\mathcal{K}(Z,K)\sim \left\{ A \subseteq Z:A+K\subseteq A \right\}$ are monotone subset of $Z$.
+      \item On $\mathcal{K}(Z,K)$ a partial order is defined by means of $A\preccurlyeq B$ if $A\supseteq B$.
+      \item We say that $F$ is quasiconvex if
+        \begin{equation*}
+          F(\lambda x+(1-\lambda)y)\preccurlyeq \max\set{F(x),F(y)}
+          \label{}
+        \end{equation*}
+        and lower semicontinuous if
+        \begin{equation*}
+          \mathcal{L}_{F}(z)=\left\{ x \in X: F(x)\preccurlyeq z \right\}\quad\text{is closed}
+        \end{equation*}
+
+    \end{itemize}
+  \end{center}
+\end{frame}
+\begin{frame}[c]
+  \frametitle{Outlook}
+  \framesubtitle{Set Valued Duality (Drapeau, Hamel, Kupper [12])}
+  \begin{center}
+    \begin{alertblock}{Theorem}
+      Suppose that $K\setminus (-K)\neq \emptyset$, and $F:X \to \mathcal{K}(Z,K)$ is a lower semicontinuous risk function (quasiconvex), then there exists a uniquely characterized function $R:X^\ast \times \mathbb{R}\to \mathcal{K}(Z,K)$ such that the following robust representation holds
+      \begin{equation*}
+        F(x)=\sup_{x^\ast}R(x^\ast,\langle x^\ast,x\rangle),\quad x \in X
+      \end{equation*}
+    \end{alertblock}
+%
+  \end{center}
+\end{frame}
+
+
+% \frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}
+% \frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}\frame{foo}
+
+\begin{frame}[c]
+  \begin{center}
+    {\Huge{Thank You!}}
+  \end{center}
+\end{frame}
+\end{document}
+
+
+

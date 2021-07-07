@@ -1,0 +1,161 @@
+\documentclass[%
+  aspectratio=169,
+  9pt,
+%   t,
+  USenglish,
+%   dark,
+  light,
+  mathserif,
+%   serif, 
+  professionalfont,
+%  handout,
+%   affiliationinhead,
+  titlegraphic,
+  %% The following options would violate the CD rules!
+%   affiliation,
+%   uselogos,
+%   navigationbar,
+  progressbar,
+%   seprules,
+%   titleinhead,
+]{beamer}
+
+\newcommand{\org}{LMF}
+% \newcommand{\org}{FPF}
+\newcommand{\coorg}{DLR}
+\usetheme{TUM}
+
+% \usepackage[ngerman]{babel} % if you get errors on compile: rm *aux *out *log *nav *snm *toc
+
+\mode<handout>{
+  \usepackage{pgfpages}
+% feel free to use one of these layouts
+%   \pgfpagesuselayout{1 on 1}[a4paper,border shrink=5mm]
+  \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{3 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 landscape}[a4paper,border shrink=5mm]
+%   
+% you can also add room for notes, but then the widescreen aspect ratio messes up a little
+%   \usepackage{handoutWithNotes}
+%   \pgfpagesuselayout{1 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{3 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{4 on 1 with notes}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{1 on 1 with notes landscape}[a4paper,border shrink=5mm]
+%   \pgfpagesuselayout{2 on 1 with notes landscape}[a4paper,border shrink=5mm]
+}
+
+%% Custom Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Beamer Template]{TUM-\{LMF,FPF,SiPEO\} \LaTeXe{} Beamer Template}
+\subtitle{A brief HowTo}
+\author[M. Körner]{Dr{.}\,rer{.}\,nat{.} Marco Körner}
+\institute[TUM]{Technical University of Munich, Germany\\Remote Sensing Technology\\Computer Vision Research Group\\\url{www.lmf.bgu.tum.de/vision}}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Show the TOC prior to each new section
+\AtBeginSection[]{
+  \frame<handout:0>{% not in handout mode!
+    \frametitle{Outline}
+    \tableofcontents[currentsection,hideallsubsections]
+  }
+}
+
+% Show the TOC prior to each new subsection
+\AtBeginSubsection[]{
+  \frame<handout:0>{% not in handout mode!
+    \frametitle{Outline}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}[t]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation}
+\begin{frame}[fragile=singleslide]
+  \frametitle{Installation}
+  \begin{itemize}
+    \item realized as a \LaTeXe{} beamer style file (\texttt{beamerthemeTUM.sty})
+    \item maintained as a \text{git} repository, check it out:\\
+\begin{minted}[bgcolor=black,formatcom=\color{white}]{bash}
+cd ~/texmf             # Go to your local texmf directory
+git init               # initialize git environment
+                       # connect to git repo
+git remote add origin git@gitlab.lrz.de:marco.koerner/texmf.git 
+git pull origin master # fetch files from git repo
+\end{minted}
+    \item see examples in \texttt{~/texmf/tex/latex/tum/example}
+  \end{itemize}
+\end{frame}
+
+\section{Usage}
+\begin{frame}[fragile]
+  \frametitle{Usage}
+  \framesubtitle{Minimal Working Example}
+%   
+  \begin{columns}[onlytextwidth]
+    \column[T]{.4\linewidth}
+      \inputminted[fontsize=\tiny]{latex}{minimal.tex}
+    \column[T]{.6\linewidth}
+      \centering
+      \fbox{\includegraphics[page=1,height=.35\textheight]{minimal}}\\
+      \fbox{\includegraphics[page=2,height=.35\textheight]{minimal}}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Usage}
+  \framesubtitle{Minimal Working Example}
+%   
+  \begin{columns}[onlytextwidth]
+    \column[T]{.4\linewidth}
+      \inputminted[fontsize=\tiny]{latex}{minimal_wo_titlegraphic.tex}
+    \column[T]{.6\linewidth}
+      \centering
+      \fbox{\includegraphics[page=1,height=.35\textheight]{minimal_wo_titlegraphic}}\\
+      \fbox{\includegraphics[page=2,height=.35\textheight]{minimal_wo_titlegraphic}}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Usage}
+  \framesubtitle{Generating Handouts}
+%   
+  \begin{columns}[onlytextwidth]
+    \column[T]{.4\linewidth}
+      \inputminted[fontsize=\tiny]{latex}{minimal_handout.tex}
+    \column[T]{.6\linewidth}
+      \centering
+      \fbox{\includegraphics[page=1,height=.7\textheight]{minimal_handout}}
+%       \fbox{\includegraphics[page=2,height=.35\textheight]{minimal_handout}}
+  \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+

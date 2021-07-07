@@ -1,0 +1,79 @@
+\documentclass[lang=english]{tumarxivarticle}
+
+\usepackage[
+    backend=biber,
+    style=numeric,
+    maxbibnames=99,
+    maxcitenames=1,
+    doi=false,
+    isbn=false,
+    url=false,
+    date=year,
+    sorting=ydnt
+  ]{biblatex}
+
+\usepackage{filecontents}
+\begin{filecontents}{bib.bib}
+  @Book{Liebel18,
+    author = {Lukas Liebel},
+    title  = {The TUM-LMF arXiv Documentclass and Me VI},
+    year   = {2018},
+  }
+\end{filecontents}
+\bibliography{bib.bib}
+
+\usepackage{blindtext}
+
+\begin{document}
+
+% --------------------------------------------------------------------------------------------------------- HEADER
+
+\title{
+  \normalfont
+  Documentclass for arXiv Articles
+  }
+
+\setkomafont{author}{\large}
+\author{
+  Lukas Liebel
+  }
+\publishers{\normalsize
+  Computer Vision Research Group, Chair of Remote Sensing Technology \\ Technical University of Munich, Germany \\ lukas.liebel@tum.de \\[0.25cm]
+}
+\date{}
+
+
+\twocolumn[
+  \maketitle
+  \renewcommand{\abstractname}{}
+  \begin{onecolabstract}
+
+    \blindtext
+
+  \end{onecolabstract}
+  \vspace{1cm}
+]
+
+% reset all abbreviations and emphasize all gls entries at first use from now on
+\glsresetall
+\defglsentryfmt{\ifglsused{\glslabel}{\glsgenentryfmt}{\emph{\glsgenentryfmt}}}
+
+
+% --------------------------------------------------------------------------------------------------------- CONTENT
+
+\section{Content}
+\blindtext
+
+\subsection{Related Work}
+\Textcite{Liebel18}
+
+\subsection{More Blindtext}
+\blindtext[3]
+
+
+% --------------------------------------------------------------------------------------------------------- REFERENCES
+
+\printbibliography
+
+
+\end{document}

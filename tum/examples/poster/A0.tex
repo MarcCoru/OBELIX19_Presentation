@@ -1,0 +1,123 @@
+\documentclass[a0]{tumposter}
+
+\usepackage[english]{babel}
+
+\usepackage{blindtext}
+
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+% for printing fontsizes
+\usepackage{printlen}
+\uselengthunit{mm}
+
+\usepackage[utf8]{inputenc}
+
+\title{
+	Demonstration poster to illustrate design and syntax of the reimplemented tumposter class
+	}
+	
+\author{
+	Marc Rußwurm
+	}
+
+\header{
+	Remote Sensing Technology \\
+	TUM Department of Civil, Geo and Environmental Engineering \\
+	Technical University of Munich
+	}
+	
+\begin{document}
+\maketitle
+\section{Motivation}
+
+This poster demonstrates design and syntax of the \texttt{tumposter} class.
+It follows TUM Corporate Design and is inspired by modifications of Lukas Liebel (2016).
+The latex files are rewritten with tex syntax in mind.
+At the current state it has only been tested at A0 format in portrait mode.
+The macros \texttt{author}, \texttt{title}, and \texttt{header} are defined in the preambel and written via the \texttt{maketitle} command.
+The footer definitions of the footer (fontsize) are stored in the \texttt{footer} environment.
+This poster is also used for debugging purposes.
+
+\subsection{Subsection without rule}	
+
+This is a subsection.
+\blindtext
+
+\section{Lists and Indentation}
+
+\begin{multicols}{2}
+
+This is at \texttt{itemize} list
+\begin{itemize}
+	\item first item
+	\item this is the second item
+	\item here is the third item
+	\item here comes the next indentation list
+	\begin{itemize}
+		\item second level of indentation
+		\item started here
+		\item third element
+	\end{itemize}
+\end{itemize}
+\columnbreak
+
+This is at \texttt{enumerate} list
+\begin{enumerate}
+	\item first item
+	\item this is the second item
+	\item here is the third item
+	\item here comes the next indentation list
+	\begin{enumerate}
+		\item second level of indentation
+		\item started here
+		\item third element
+	\end{enumerate}
+\end{enumerate}
+\end{multicols}
+
+\section{Lengths}
+\begin{multicols}{3}
+\begin{itemize}
+	\item \texttt{headerheight} \printlength\headerheight	
+	\item \texttt{footerheight} \printlength\footerheight
+	\item \texttt{tumlogowidth} \printlength\tumlogowidth
+	\item \texttt{columnsep} \printlength\columnsep
+	\item \texttt{paperheight} \printlength\paperheight
+	\item \texttt{paperwidth} \printlength\paperheight
+	\item \texttt{papermargin} \printlength\papermargin
+	\item \texttt{titleskip} \printlength\titleskip
+	\item \texttt{parskip} \printlength\parskip
+	\item \texttt{linewidth} \printlength\linewidth
+	\end{itemize}
+	
+\end{multicols}
+
+\section{Figures and Tables (tbd)}
+
+\caption{This is a caption}
+\blindtext
+
+\begin{multicols}{3}[\section{Results}]
+	\blindtext
+\end{multicols}
+
+% footer environment places \hfill and sets fontsize
+\begin{footer}
+	\begin{multicols}{2}
+		\textbf{Technical University of Munich}\\
+		TUM Department of Civil, Geo and Environmental Engineering \\
+		Remote Sensing Technology, Computer Vision Research Group \\
+		Arcisstr. 21, 80333 Munich, Germany \\
+		www.lmf.bgu.tum.de/vision
+	\vfill\columnbreak
+	%right
+		\textbf{Authors} \\
+		Marc Rußwurm \\ (marc.russwurm@tum.de) \\
+		Marco Körner \\ (marco.koerner@tum.de)
+	\vfill
+	\end{multicols}
+\end{footer}
+
+\end{document}

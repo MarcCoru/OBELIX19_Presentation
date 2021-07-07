@@ -1,0 +1,144 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TUM-Vorlage: Brief
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Rechteinhaber:
+%     Technische Universität München
+%     https://www.tum.de
+% 
+% Gestaltung:
+%     ediundsepp Gestaltungsgesellschaft, München
+%     http://www.ediundsepp.de
+% 
+% Technische Umsetzung:
+%     eWorks GmbH, Frankfurt am Main
+%     http://www.eworks.de
+%
+% Modifictations:
+%     24.02.2018 - Code reorganized and packaged to tumletter class, style unchanged (marc.russwurm@tum.de)
+
+% tumletter inherits from scrlttr2
+\documentclass{tumletter} % Dokumentenklasse: KOMA-Skript Letter
+
+% Anpassbare Kopf- und Fußzeilen für KOMA-Skript:
+%\usepackage{scrlayer-scrpage}
+
+\usepackage[ngerman]{babel} % Deutsche Lokalisierung
+\usepackage{graphicx} % Grafiken
+
+% Silbentrennung:
+\usepackage{hyphenat}
+%\tolerance 2414
+%\hbadness 2414
+%\emergencystretch 1.5em
+%\hfuzz 0.3pt
+%\widowpenalty=10000     % Hurenkinder
+%\clubpenalty=10000      % Schusterjungen
+%\vfuzz \hfuzz
+
+\hyphenation{} % eigene Silbentrennung
+
+\setkomavar{fromname}{Technische Universität München}
+\setkomavar{fromaddress}{
+	@Adresse@\\%
+	@Plz@~@Ort@%
+}
+
+\newcommand{\Absender}{%
+	Technische Universität München \\
+	Arcisstraße~21\\%
+	80333~München \\
+	2.~Adresszeile erscheint automatisch
+}
+
+\newcommand{\EmpfaengerAdresse}{%
+	Fa. Muster Mechanik\\
+	Herrn Max Mustermann\\
+	Musterstraße 12\\
+	12345 München\\
+	~\\
+	Adressfeld mit bis zu 6 Zeilen
+}
+
+\setkomavar{date}{Datum}
+\setkomavar{place}{@Ort@}
+\setkomavar{subject}{Betreffzeile}
+\setkomavar{signature}{Erika~Mustermann}
+
+%%%%% Footer %%%%%
+\setkomavar{firstfoot}{
+	\TabPositions{2em}%
+	\begin{minipage}[t][\FusszeileHoehe][t]{\FusszeileBreiteGross}%
+		\usekomafont{pagefoot}%
+		\textbf{Technische Universität München}%
+		\newline%
+		@Fakultät@%
+		\newline%
+		@Lehrstuhlname@%
+	\end{minipage}%
+	%
+	\hspace*{\FusszeileZwischenabstand}%
+	\begin{minipage}[t][\FusszeileHoehe][t]{\FusszeileBreiteGross}%
+		\raggedright\usekomafont{pagefoot}%
+		\textbf{@Ansprechpartner@}\newline%
+		\usekomavar{fromaddress}%
+	\end{minipage}%
+	%
+	\hspace*{\FusszeileZwischenabstand}%
+	\begin{minipage}[t][\FusszeileHoehe][t]{\FusszeileBreiteKlein}%
+		\raggedright\usekomafont{pagefoot}%
+		Tel.\tab{@Telefon@}%
+		\newline Fax\tab{@Fax@}%
+		\newline\newline%
+		@E-Mail@\newline%
+		\href{http://@Web@}{@Web@}\newline%
+		\href{http://www.tum.de}{www.tum.de}%
+	\end{minipage}%
+	%
+	\hspace*{\FusszeileZwischenabstand}%
+	\begin{minipage}[t][\FusszeileHoehe][t]{\FusszeileBreiteKlein}%
+		\raggedright\usekomafont{pagefoot}%
+		Bayerische Landesbank\newline%
+		IBAN-Nr.: DE10700500000000024866\newline%
+		BIC: BYLADEMM\newline%
+		Steuer-Nr.: 143/241/80037\newline%
+		USt-IdNr.: DE811193231\newline%
+	\end{minipage}%
+	\pagemark%
+}
+
+\begin{document}
+\raggedright
+\begin{letter}
+
+\opening{Sehr geehrter Herr Mustermann,}
+
+dies ist die Vorlage für den Brief der Technischen Universität München (TUM).
+Die Vorlage ist nach dem aktuellen Corporate Design der TUM gestaltet und
+verbindlich. Die Vorlage ist für "`TeX Live 2015"' kompatibel.
+
+Bitte geben Sie Ihren individuellen Text an den vorgesehenen Stellen ein. Zum
+Ändern des Absenders beachten Sie den Hinweis zur Datei
+"`\_Einstellungen.tex"'. Bitte konfigurieren Sie stets den Lehrstuhl und
+achten Sie bei Ihrem Namen darauf den vollständigen akademischen Grad
+anzugeben. Es sollten keine Änderung an der vorgegebenen Gestaltung des
+Dokuments durchgeführt werden. In der Kopfzeile steht nur das Logo der TUM in
+der Markenfarbe.
+
+Achten Sie ebenfalls darauf, dass das Dokument in Originalgröße gedruckt wird,
+also keine Anpassung an die Druckränder bei Ihren Druckereinstellungen
+aktiviert ist.
+
+Weitere Informationen zum Corporate Design der TUM finden Sie unter
+\href{http://www.tum.de/cd}{www.tum.de/cd}
+
+
+Mit freundlichen Grüßen,
+\vspace*{3\baselineskip} \newline % signature spacing
+\usekomavar{signature} \newline % defined before document
+
+\setkomavar{enclseparator}[Anlage]{~}
+\encl{}
+
+\end{letter}
+\end{document}

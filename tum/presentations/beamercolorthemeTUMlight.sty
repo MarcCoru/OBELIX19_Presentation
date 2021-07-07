@@ -1,0 +1,27 @@
+\newcommand{\colorscheme}{light}
+
+\usecolortheme[named=tumblue]{structure}
+
+\setbeamercolor*{Title bar}           {bg=tumwhite,fg=tumblue}
+\setbeamercolor*{Location bar}        {bg=tumwhite,fg=tumblue}
+\setbeamercolor*{frametitle}          {parent=Title bar}
+
+\setbeamercolor*{block title}         {bg=tumbluemedium,fg=tumgraylight!50!white}
+\setbeamercolor*{block body}          {bg=tumgraylight,fg=tumgraydark}
+
+\setbeamercolor*{block title alerted} {bg=tumorange,fg=tumgraylight!50!white}
+\setbeamercolor*{block body alerted}  {bg=tumorange!25!white,fg=tumgraydark}
+
+\setbeamercolor*{block title example} {bg=tumgreen,fg=tumgraylight!50!white}
+\setbeamercolor*{block body example}  {bg=tumgreen!25!white,fg=tumgraydark}
+
+\setbeamercolor*{normal text}         {bg=white,fg=tumgraydark}
+\setbeamercolor*{alerted text}        {fg=tumorange} 
+\setbeamercolor*{section in head/foot}{bg=tumwhite,fg=tumblue}
+
+\colorlet{hrulecolor}{tumbluelight}
+  
+  
+\pgfdeclareimage[height=.45\beamer@headheight]{logo}{images/logo-blue-TUM}
+\pgfdeclareimage[height=.45\beamer@headheight]{logocomplete}{images/logo-blue-TUM}
+\ifthenelse{\boolean{uselogos}}{\pgfdeclareimage[height=.45\beamer@headheight]{logodept}{images/logo-blue-\org}}{}

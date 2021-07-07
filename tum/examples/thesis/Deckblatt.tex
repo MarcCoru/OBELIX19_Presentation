@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TUM-Vorlage: Deckblatt für Wissenschaftliche Arbeiten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Rechteinhaber:
+%     Technische Universität München
+%     https://www.tum.de
+% 
+% Gestaltung:
+%     ediundsepp Gestaltungsgesellschaft, München
+%     http://www.ediundsepp.de
+% 
+% Technische Umsetzung:
+%     eWorks GmbH, Frankfurt am Main
+%     http://www.eworks.de
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article} % Dokumentenklasse
+
+\usepackage[utf8]{inputenc} % Textkodierung: UTF-8
+\usepackage[T1]{fontenc} % Zeichensatzkodierung
+
+\usepackage[ngerman]{babel} % Deutsche Lokalisierung
+\usepackage{graphicx} % Grafiken
+\usepackage[absolute]{textpos} % Positionierung
+
+% Schriftart Helvetica:
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{calc} % Berechnungen
+\usepackage{tabto} % Tabulatoren
+\usepackage{parskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Die Inhalte der folgenden Befehle müssen vollständig und korrekt durch die
+% tatsächlichen Informationen ersetzt werden:
+
+\newcommand{\Titel}{%
+    Titel der Arbeit}
+\newcommand{\Untertitel}{%
+    Untertitel}
+\newcommand{\Grad}{%
+    B.Sc./M.Sc. ...}
+\newcommand{\Fakultaet}{%
+    Fakultät für Muster}
+\newcommand{\BetreutVonPerson}{%
+    Univ.-Prof. Dr. Dr. h. c. mult. Max Musterprofessor}
+\newcommand{\BetreutVonLehrstuhl}{%
+    Lehrstuhl für Musterlehre}
+\newcommand{\EingereichtVon}{%
+    Martin Mustermann\\
+    Musterweg 20\\
+    80999 München\\
+    +49 89 123 456 89}
+\newcommand{\EingereichtAmDatum}{%
+    Datum}
+\newcommand{\ErklaerungUeberschrift}{%
+    Anhang I}
+\newcommand{\Ort}{%
+    Ort}
+\newcommand{\Datum}{%
+    Datum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Seitenränder:
+\newcommand{\SeitenrandOben}{43.5mm}
+\newcommand{\SeitenrandRechts}{20mm}
+\newcommand{\SeitenrandLinks}{20mm}
+\newcommand{\SeitenrandUnten}{10mm}
+
+\newcommand{\UniversitaetLogoBreite}{19mm}
+\newcommand{\UniversitaetLogoHoehe}{1cm}
+
+\usepackage[a4paper,
+    top=\SeitenrandOben,
+    bottom=\SeitenrandUnten,
+    inner=\SeitenrandLinks,
+    outer=\SeitenrandRechts,
+    foot=0cm,
+    head=0cm
+]{geometry}
+
+\textblockorigin{\SeitenrandLinks}{\SeitenrandOben} % Ursprung für Positionierung
+
+\setlength{\parindent}{0pt}
+%\setlength{\baselineskip}{32pt}
+\setlength{\parskip}{\baselineskip}
+\TabPositions{4cm}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOKUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{textblock*}{\UniversitaetLogoBreite}[1,0](\textwidth-1mm, 2cm-\SeitenrandOben)%
+    \raggedleft\includegraphics{./Universitaet_Logo_RGB.pdf}%
+\end{textblock*}
+
+
+\begin{textblock*}{\textwidth}[0,0](0cm, 0cm)%
+{\fontsize{24pt}{26pt}\selectfont\textbf{\Titel}}
+
+\vspace*{14pt}
+{\fontsize{18pt}{27pt}\selectfont\textbf{\Untertitel}}
+\end{textblock*}
+
+\vspace*{92.2mm}
+\fontsize{15pt}{17.5pt}\selectfont%
+Wissenschaftliche Arbeit zur Erlangung des Grades\\
+\Grad\\
+an der \Fakultaet{} der Technischen Universität München.
+
+\renewcommand{\baselinestretch}{1.47}
+\normalsize\selectfont
+\vspace*{17.1mm}
+\textbf{Betreut von}\tab
+\begin{minipage}[t]{\textwidth-\CurrentLineWidth}
+\BetreutVonPerson\\
+\BetreutVonLehrstuhl\strut
+\end{minipage}
+
+\vspace*{4.3mm}
+\textbf{Eingereicht von}\tab
+\begin{minipage}[t]{\textwidth-\CurrentLineWidth}
+\EingereichtVon
+\end{minipage}
+
+\vspace*{-1mm}
+\textbf{Eingereicht am}\tab 
+\begin{minipage}[t]{\textwidth-\CurrentLineWidth}
+München, den \Datum\strut
+\end{minipage}
+
+\newpage
+
+\vspace*{-15.8mm}
+\fontsize{19pt}{21pt}\selectfont
+\ErklaerungUeberschrift
+
+\vspace{25.3mm}
+Erklärung
+
+\normalsize\selectfont
+\vspace{13.2mm}
+Ich versichere hiermit, dass ich die von mir eingereichte Abschlussarbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
+
+\vspace{18.1mm}
+\rule[-3.7mm]{\linewidth}{0.5pt}
+\Ort{}, \Datum{}, Unterschrift
+
+\end{document}

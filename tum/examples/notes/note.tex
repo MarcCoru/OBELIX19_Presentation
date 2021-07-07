@@ -1,0 +1,48 @@
+\documentclass[lang=english]{tumnote} % use "ngerman" for german
+
+\newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
+\newcommand{\todayDDMMYYYY}{\leadingzero{\day}.\leadingzero{\month}.\the\year}
+
+\usepackage{lipsum}
+
+
+\begin{document}
+
+\title{My Note}
+\author{Lukas Liebel (lukas.liebel@tum.de)}
+\date{\todayDDMMYYYY}
+\maketitle
+
+\lipsum[1-1]
+\begin{itemize}
+  \item First item
+  \item Second item
+  \begin{itemize}
+    \item A subitem
+    \item Another subitem
+  \end{itemize}
+  \item Third item
+\end{itemize}
+
+\lipsum[2-2]
+\begin{enumerate}
+  \item This
+  \item Is an
+  \begin{enumerate}
+    \item Unexpected
+    \item Subitem
+  \end{enumerate}
+  \item Enumeration
+\end{enumerate}
+
+\section{Section}
+
+\lipsum[3-3]
+
+\subsection{Subsection}
+\lipsum[4-5]
+
+\subsection{Another Subsection}
+\lipsum[6-7]
+
+\end{document}

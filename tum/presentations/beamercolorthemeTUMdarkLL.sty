@@ -1,0 +1,39 @@
+\providecommand{\colorscheme}{dark}
+
+\usecolortheme[named=tumblue]{structure}
+
+\setbeamercolor*{Title bar}           {bg=tumblack,fg=tumwhite}       % titles
+\setbeamercolor*{Location bar}        {bg=tumblack,fg=tumwhite}       % footer
+\setbeamercolor*{frametitle}          {parent=Title bar}
+
+\setbeamercolor*{block title}         {bg=tumgray,fg=tumblack}        % block caption
+\setbeamercolor*{block body}          {bg=tumgraydark,fg=tumwhite}    % block content
+
+\setbeamercolor*{block title alerted} {bg=tumblue,fg=tumblack}        % block caption (alerted)
+\setbeamercolor*{block body alerted}  {bg=tumgraydark,fg=tumwhite}    % block content (alerted)
+
+\setbeamercolor*{block title example} {bg=tumblue,fg=tumwhite}        % block caption (example)
+\setbeamercolor*{block body example}  {bg=tumgraydark,fg=tumwhite}    % block content (example)
+
+\setbeamercolor*{normal text}         {bg=tumblack,fg=tumwhite}       % normal text
+\setbeamercolor*{alerted text}        {fg=tumorange}                  % alerted text
+\setbeamercolor*{section in head/foot}{bg=tumblack,fg=tumblue}        % active section title in headline
+\setbeamertemplate{section in head/foot shaded}{\color{tumwhite}\usebeamertemplate{section in head/foot}} 		% inactive section titles in headline
+\setbeamercolor*{text in head/foot}{bg=tumblack,fg=tumwhite}
+
+\colorlet{hrulecolor}{tumwhite}
+
+\pgfdeclareimage[height=.6\beamer@headheight]{logo}{images/logo-white-TUM}
+\pgfdeclareimage[height=.6\beamer@headheight]{logocomplete}{images/logo-white-TUM}
+\ifthenelse{\boolean{uselogos}}{\pgfdeclareimage[height=.45\beamer@headheight]{logodept}{images/logo-white-\org}}{}
+
+\colorlet{pbfill}{tumblue}                                            % progressbar foreground
+\colorlet{pbbg}{tumwhite}                                             % progressbar background
+\progressbar@pbht=.15ex                                               % height of progressbar
+
+\setbeamercovered{transparent=35}                                     % transparency of hidden text
+\setbeamertemplate{section in toc shaded}[default][35]                % transparency of hidden items in outline
+
+\setbeamercolor{emph}{fg=tumblue}
+\renewcommand<>{\emph}[1]{%
+  {\usebeamercolor[fg]{emph}\only#2{\itshape}#1}%

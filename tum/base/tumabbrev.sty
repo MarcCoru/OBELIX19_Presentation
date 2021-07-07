@@ -1,0 +1,32 @@
+\RequirePackage{xspace}
+
+\newcommand{\xperiod}[1]{%
+  \@ifnextchar{.}
+    {\textit{et\,al}}
+    {\textit{et\,al}\,}%
+}
+
+\newcommand{\ia}{\textit{i{.}a{.}}, }
+\newcommand{\ie}{\textit{i{.}e{.}}, }
+\newcommand{\eg}{\textit{e{.}g{.}}, }
+\newcommand{\cf}{\textit{cf{.}}\,}
+\newcommand{\vs}{\textit{vs{.}}\,}
+\newcommand{\wrt}{wrt.{}\,}
+\newcommand{\iid}{iid.}
+
+\makeatletter
+\newcommand*{\etc}{%
+  \@ifnextchar{.}
+    {\textit{etc}}
+    {\@ifnextchar{,}
+      {\textit{etc}.}
+      {\textit{etc}.\,}}%
+}
+\newcommand*{\etal}{%
+  \@ifnextchar{.}
+    {\textit{et\,al}}
+    {\@ifnextchar{,}
+      {\textit{et\,al}.}
+      {\textit{et\,al}.\,}}%
+}
+\makeatother
