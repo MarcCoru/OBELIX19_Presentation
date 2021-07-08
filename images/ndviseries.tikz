@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+	\node[label={above=0em:\scriptsize growth stages of corn Mimić et al., 2020}, inner sep=0](a){\includegraphics[width=6cm]{images/mimicetal2020_phenology_maize_.png}};
+	
+	\node[below=-1em of a] (b){\includegraphics{images/ndvi}};
+	
+	\coordinate(left)  at ($(a.south west)+(-4.3em,0)$);
+	\coordinate(right) at ($(a.south east)+(1.1em,0)$);
+	
+	\coordinate(veannot) at ($(left)!0.22!(right)$){};
+	\coordinate(vtwoannot) at ($(left)!0.275!(right)$){};
+	\coordinate(vfiveannot) at ($(left)!0.34!(right)$){};
+	\coordinate(vtenannot) at ($(left)!0.42!(right)$){};
+	\coordinate(btnnot) at ($(left)!0.5!(right)$){};
+	\coordinate(rtwoannot) at ($(left)!0.6!(right)$){};
+	\coordinate(rthreeannot) at ($(left)!0.7!(right)$){};
+	\coordinate(rfiveannot) at ($(left)!0.8!(right)$){};
+	\coordinate(harvestannot) at ($(left)!0.9!(right)$){};
+	
+	\coordinate(ve) at      ($ (b.center)+(-4em  ,1em) $);
+	\coordinate(vtwo) at    ($ (b.center)+(-3em  ,1em) $);
+	\coordinate(vfive) at   ($ (b.center)+(-2.5em,3em) $);
+	\coordinate(vten) at    ($ (b.center)+(-2em  ,4em) $);
+	\coordinate(bt) at      ($ (b.center)+(-1.5em,4.5em) $);
+	\coordinate(rtwo) at    ($ (b.center)+(-1em  ,4.5em) $);
+	\coordinate(rthree) at  ($ (b.center)+(-0em  ,2em) $);
+	\coordinate(rfive) at   ($ (b.center)+(1.5em ,0.5em) $);
+	\coordinate(harvest) at ($ (b.center)+(3em   ,0.5em) $);
+	
+	\draw[o-,tumorange](veannot)      -- (ve);
+	\draw[o-,tumorange](vtwoannot)    -- (vtwo);
+	\draw[o-,tumorange](vfiveannot)   -- (vfive);
+	\draw[o-,tumorange](vtenannot)    -- (vten);
+	\draw[o-,tumorange](btnnot)       -- (bt);
+	\draw[o-,tumorange](rtwoannot)    -- (rtwo);
+	\draw[o-,tumorange](rthreeannot)  -- (rthree);
+	\draw[o-,tumorange](rfiveannot)   -- (rfive);
+	\draw[o-,tumorange](harvestannot) -- (harvest);
+	\end{tikzpicture}

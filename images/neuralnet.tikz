@@ -1,0 +1,66 @@
+\tikzstyle{annotation} = [font=\small, text width=3.5cm]
+			\tikzstyle{node} = [circle, draw, font=\small]
+			\tikzstyle{edge} = [-stealth, tumgray]
+			\tikzstyle{operation} = [font=\scriptsize, fill=white, text=black]
+			\tikzstyle{normal} = [font=\scriptsize, text=tumblue]
+			\begin{tikzpicture}[node distance=0, xscale=2]
+			
+			
+			
+%			\node(a){\includegraphics[width=3cm]{nn/x.pdf}};
+%			\node[right=of a](b){\includegraphics[width=4.5cm]{nn/h.pdf}};
+%			\node[right=of b](c){\includegraphics[width=4.5cm]{nn/h2.pdf}};
+%			\node[right=1em of c](d){\includegraphics[width=1.2cm]{nn/y.pdf}};
+			
+%			\coordinate(annotations) at (0,-3);
+%			\node[annotation] at (a |- annotations){(a) Input space \\ $\mathbf{x} = (x_1, x_2)$};
+%			\node[annotation] at (b |- annotations){(b) linear projection $\mathbf{w}_1^T\mathbf{x}$ into $\mathbb{R}^3$};
+%			\node[annotation, xshift=-2em] at (c |- annotations){(c) non-linear distortion with $\tanh(\mathbf{w}_1^T\mathbf{x})$};
+%			\node[annotation] at (d |- annotations){(d) Output class probabilities $y \in [0,1]$};
+			
+			\coordinate(network) at (0,3);
+			\coordinate(networklone) at (1,3);
+			\coordinate(networkltwo) at (2,3);
+			\coordinate(networklthree) at (3,3);
+			\coordinate(networklast) at (4,3);
+			
+			\node[node, above=of networklone](xone){$x_1$};
+			\node[node, below=of networklone](xtwo){$x_2$};
+			\begin{scope}[node distance=1.3em]
+			\node[node, above=of networkltwo](hone){$h_1$};
+			\node[node] at (networkltwo)(htwo){$h_2$};
+			\node[node, below=of networkltwo](hthree){$h_3$};
+			\end{scope}
+			
+			\begin{scope}[node distance=1.3em]
+			\node[node, above=of networklthree](hhone){$\hat{h}_1$};
+			\node[node] at (networklthree)(hhtwo){$\hat{h}_2$};
+			\node[node, below=of networklthree](hhthree){$\hat{h}_3$};
+			\end{scope}
+			
+			%			\node[node] at (networklthree){a};
+			\node[node](y) at (networklast){$y$};
+			
+			\draw[edge] (xone) -- (hone);
+			\draw[edge] (xone) -- (htwo);
+			\draw[edge] (xone) -- (hthree);
+			\node[operation] at ($(networklone)!0.5!(networkltwo)$) {$\mathbf{W}_1$};
+			
+			\draw[edge] (xtwo) -- (hone);
+			\draw[edge] (xtwo) -- (htwo);
+			\draw[edge] (xtwo) -- (hthree);
+			
+			\draw[edge] (hone) -- node[midway]{} (hhone);
+			\draw[edge] (htwo) -- node[midway, operation]{$\tanh$} (hhtwo);
+			\draw[edge] (hthree) -- node[midway]{} (hhthree);
+			
+			\draw[edge] (hhthree) -- node[near start, below, normal, name=lastweight]{$w_{2,3}$} (y);
+			\draw[edge] (hhone) -- node[near start, below, normal]{$w_{2,1}$} (y);
+			\draw[edge] (hhtwo) -- node[near start, below, normal]{$w_{2,2}$} node[near end, operation]{$\Sigma \circ \sigma$} (y);
+			
+%			\draw[-stealth, tumblue] (lastweight) to[bend left] node[near start, yshift=1em, right, font=\tiny, text width=3.5cm]{$\mathbf{w}_2 = (w_{2,1},w_{2,2},w_{2,3})$ defines the normal of the decision plane} ++(-1,-2);
+			
+			\draw[decorate, decoration = {brace}] ($(networklone)+(0,4em)$) -- node[midway, above, font=\small]{feature extraction} ($(networklthree)+(0,4em)$);
+			\draw[decorate, decoration = {brace}] ($(networklthree)+(0,4em)$) -- node[midway, above, font=\small]{classification} ($(networklast)+(0,4em)$);
+			
+			\end{tikzpicture}

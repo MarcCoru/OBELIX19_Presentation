@@ -1,0 +1,84 @@
+\begin{tikzpicture}
+%\pgfplotstableread[col sep = comma]{images/satellite_comparison/ELECTS_uniform.csv}\elects
+%\pgfplotstableread[col sep = comma]{images/satellite_comparison/SR2CF2_uniform.csv}\mori
+
+\begin{groupplot}[
+group style={
+	group size=3 by 1,
+},
+ymajorgrids,
+legend columns=2,
+width=.36\textwidth,
+height=4cm,
+ylabel style={yshift=-1.2em},
+]
+
+\nextgroupplot[
+ylabel={accuracy},
+xlabel={dataset size},
+legend pos=south east]
+
+\addplot[tumblue,mark=*] table[col sep = comma, x=nsamples, y=accuracy]{images/satellite_comparison/ELECTS_uniform.csv};
+\addplot[tumorange,mark=*] table[col sep = comma, x=nsamples, y=accuracy]{images/satellite_comparison/SR2CF2_uniform.csv};
+
+\legend{ELECTS,SR2-CF2}
+
+\nextgroupplot[
+ylabel={earliness},
+xlabel={dataset size},
+legend pos=south east,
+ytick={0,0.5,1},
+yticklabels={1,0.5,0},
+y dir=reverse,
+y axis line style = {stealth-}]
+
+
+\draw[tumgray] (axis cs: 635.5,0) -- (axis cs: 635.5,1);
+\node[font=\sffamily\scriptsize, text=tumgraydark](a) at (axis cs: 3500,.2){median size of UCR datasets};
+\draw[-Stealth, tumgray] (a) -- (axis cs: 635.5,.6);
+
+\addplot[tumblue,mark=*] table[col sep = comma, x=nsamples, y=earliness]{images/satellite_comparison/ELECTS_uniform.csv};
+\addplot[tumorange,mark=*] table[col sep = comma, x=nsamples, y=earliness]{images/satellite_comparison/SR2CF2_uniform.csv};
+
+\legend{ELECTS,SR2-CF2}
+
+%\nextgroupplot[
+%ylabel={earliness},
+%xlabel={dataset size},
+%legend pos=south east,
+%ytick={0,0.5,1},
+%yticklabels={1,0.5,0}]
+%
+%
+%\draw[tumgray] (axis cs: 635.5,0) -- (axis cs: 635.5,1);
+%\node[font=\sffamily\tiny, text=tumgraydark](a) at (axis cs: 3500,.8){median size of UCR datasets};
+%\draw[-Stealth, tumgray] (a) -- (axis cs: 635.5,.6);
+%
+%\addplot[tumblue,mark=*] table[x=nsamples, y=score]{\elects};
+%\addplot[tumorange,mark=*] table[x=nsamples, y=score]{\mori};
+%
+%\legend{ELECTS,SR2-CF2}
+%
+
+\nextgroupplot[
+ylabel={runtime [h]},
+xlabel={dataset size},
+legend style={at={(0,0.9)},anchor=west},
+ymode=log,
+ytick={1,10,100}]
+
+\addplot[tumblue,mark=*] table[col sep = comma, x=nsamples, y=total_runtimes]{images/satellite_comparison/ELECTS_uniform.csv};
+\addplot[tumorange,mark=*] table[col sep = comma, x=nsamples, y=total_runtimes]{images/satellite_comparison/SR2CF2_uniform.csv};
+
+\node[font=\sffamily\tiny, anchor=north] (two) at (axis cs:2500,30) {30.25 h};
+\node[font=\sffamily\tiny, anchor=south] (two) at (axis cs:2500,0.04) {2.90 min};
+
+\node[font=\sffamily\tiny] (two) at (axis cs:5000,30) {104 h};
+\node[font=\sffamily\tiny] (two) at (axis cs:5000,0.2) {3.58 min};
+
+\legend{ELECTS,SR2-CF2}
+
+\end{groupplot}
+
+
+\end{tikzpicture}

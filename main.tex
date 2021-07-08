@@ -32,6 +32,175 @@
   \titlepage
 \end{frame}
 
+%{\setbeamercolor{background canvas}{bg=tumbluedark}
+%	\begin{frame}[plain]
+%		
+%		\vfill
+%		\Huge\color{white}
+%		\begin{center}
+%			\begin{columns}
+%				\column{.5\textwidth}
+%				\vspace{7em}
+%				
+%				\hfill 
+%				Vegetation and Agriculture
+%				\column{.5\textwidth}
+%				
+%				%\includegraphics[width=7cm]{images/fdl}
+%			\end{columns}
+%		\end{center}
+%		
+%		\vfill
+%	\end{frame}
+%}
+
+%\begin{frame}
+%	\frametitle{Power Plants}
+%	\begin{tikzpicture}
+%		\node(a){\includegraphics[height=3cm]{images/powerplants/akw.jpg}};
+%		\node[right=of a](b){\includegraphics[height=3cm]{images/powerplants/windrad.jpg}};
+%		\node[right=of b](b){\includegraphics[height=3cm]{images/powerplants/solar.jpg}};
+%	\end{tikzpicture}
+%	
+%\end{frame}
+%
+%
+\begin{frame}
+	\frametitle{Photosynthesis: Light $\rightarrow$ Life}
+	\framesubtitle{Vegetation}
+	
+	\begin{columns}[b]
+		\column{.5\textwidth}
+		Spectral characteristics
+		\includegraphics[width=\textwidth]{images/leaf_smallannot.pdf}
+		common remote sensing feature: $\text{NDVI} = \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED}}$ \\
+		{\scriptsize images modified from wikipedia cc}
+		\column{.5\textwidth}
+		Temporal characteristics
+		\includemedia[
+		width=\textwidth,
+		activate=pageopen,
+		addresource=mp4/apenne_modis_ndvi.mp4,
+		flashvars={source=mp4/apenne_modis_ndvi.mp4&loop=true&
+			autoPlay=true}
+		]{\includegraphics[width=\textwidth]{mp4/apenne_modis_ndvi.png}}{mp4/apenne_modis_ndvi.mp4}
+		{\scriptsize visualization \href{https://github.com/aaronpenne}{Aaron Penne Github}}
+		
+	\end{columns}
+	
+	\vspace{2em}
+	Vegetation follows \textbf{seasonal life cycles} (phenology) which can be used to \textbf{distinguish categories}. 
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Why do we want to classify vegetation?}
+	\framesubtitle{Distinguishing Vegetation}
+	\begin{columns}
+		\column{.5\textwidth}
+		\begin{description}
+			\item[Food security] Estimate the expected yield (from cultivated area) to predict food prices, shortages in countries that collect few agronomic statistics.
+			\pause
+			\item[Precision Agriculture] Identifying vegetation is a first step to provide personalized recommendations to farmers on machining practices and location-based fertilizer use.
+			\pause
+			\item[Subsidy control] In Europe: monitor and control crop subsidy payments for European farmers.
+			%				\item Precision agriculture: sd
+		\end{description}
+		\column{.5\textwidth}
+		\includegraphics[width=\textwidth]{images/sdg_goals.pdf}
+	\end{columns}
+	
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=tumbluedark}
+	\begin{frame}[plain]
+		
+		\vfill
+		\Huge\color{white}
+		\begin{center}
+			\begin{columns}
+				\column{.5\textwidth}
+				\vspace{7em}
+				
+				\hfill 
+				Earth Observation
+				\column{.5\textwidth}
+				
+				%\includegraphics[width=7cm]{images/fdl}
+			\end{columns}
+		\end{center}
+		
+		\vfill
+	\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Earth Observation}
+	\framesubtitle{Satellite Data}
+	\begin{columns}
+		\column{.5\textwidth}
+			\vspace{-1em}
+			\input{images/ndviseries.tikz}
+			
+			{\tiny Mimić, G., Brdar, S., Brkić, M., Panić, M., Marko, O., \& Crnojević, V. (2020). engineering Meteorological features to Select Stress tolerant Hybrids in Maize. Scientific reports, 10(1), 1-10.}
+		\column{.5\textwidth}
+			Sentinel 2. {\small every 2-5 days at $10m\times10m$ resolution}.
+			\includemedia[
+			width=\textwidth,
+			activate=pageopen,
+			addresource=mp4/sentinel2.mp4,
+			flashvars={source=mp4/sentinel2.mp4&loop=true&
+				autoPlay=true}
+			]{\includegraphics[width=\textwidth]{mp4/sentinel2.png}}{mp4/sentinel2.mp4}
+			Source \href{https://www.esa.int/ESA_Multimedia/Videos/2016/08/Sentinel-2_global_coverage}{ESA}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Classifying Vegetation}
+	\begin{columns}[t]
+		\column{.5\textwidth}
+			\hspace{1em} with hand-defined features
+			\includegraphics[width=6cm]{images/jointplot}
+		\only<1->{
+		\column{.5\textwidth}
+			features learned from data
+			\vspace{2em}
+			\input{images/neuralnet.tikz}
+			\includegraphics[width=\textwidth]{images/head0_conn_input}
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Choosing Observation Period}
+	While we \textbf{learn} our \textbf{features} from \textbf{data}, we use \textbf{hand-chosen observation periods} to select the data.
+%	\begin{itemize}
+%		\item the observation period is usually chosen manually and conservatively (e.g. January to December)
+%		\item some crop classes may be distinguishable earlier than others
+%		\item with data every few days, earlier classifications may make classification results available months earlier
+%	\end{itemize}
+	\begin{tikzpicture}
+		\node[inner sep=0](map){\includegraphics[width=9cm]{images/greenup/greenup_map}};
+		\node[fill=white, opacity=0.9, text opacity=1] at (7,0){\includegraphics[width=8cm]{images/greenup/greenup_plots}};
+		\node[anchor=north west, font=\scriptsize] at (map.south west){Day of first greenup (Modis product MCD12Q2)};
+	\end{tikzpicture}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Related Work}
+%	\begin{columns}
+%		\column{.5\textwidth}
+%		Remote Sensing
+%		
+%		large-scale datasets.
+%		\column{.5\textwidth}
+%		Time Series Community
+%		
+%		tested on small datasets from many applications.
+%	\end{columns}
+%\end{frame}
+
 \input{sections/earlyclassification.tex}
 
 \input{sections/breizhCrops.tex}

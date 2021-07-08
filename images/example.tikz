@@ -33,7 +33,7 @@
 		no marks,  
 		ylabel={$\V{x}$},
 		draw opacity=.8,
-		smooth,
+%		smooth,
 		legend columns=4,
 		legend style={at={(.5,1)},anchor=south, line width=1pt, fill=tumblue!10}
 		]
@@ -76,7 +76,7 @@
 	\legend{3 atmospheric, 2 short-wave infrared, 5 near infrared, 3 visible bands}
 	
 	\nextgroupplot[thin,
-		smooth,
+%		smooth,
 		no marks, 
 		ylabel={$\yhat$},
 		legend style={at={(.5,-.2)},anchor=north, line width=1pt, fill=tumblue!10},

@@ -100,7 +100,7 @@
 \end{frame}
 }
 
-\begin{frame}
+\begin{frame}<presentation:-4>
 \frametitle{Augmenting Classification Models}
 
 \begin{columns}
@@ -203,32 +203,32 @@
 \end{frame}
 
 
-
-\begin{frame}
-	
-	
-	\input{images/loss-accuracyplots.tikz}
-
-
-	\begin{columns}
-%	\column{.5\textwidth}
-%\figtwophasecrossentropy
-%{two-phase training first optimizing for accuracy-only and then for early classifications as well using \emph{lateness penalty} loss.}
-
-	\column{\textwidth}
-\figearlyreward
-{one training phase using the \emph{earliness reward} formulation.}
-\end{columns}
-	
-\end{frame}
-
-\begin{frame}
-	
-	
-		\input{images/trainingstoppingclasses.tikz}
-		{Class-wise analysis of the estimated stopping time during training in the evaluation set.}
-	
-\end{frame}
+%
+%\begin{frame}
+%	
+%	
+%	\input{images/loss-accuracyplots.tikz}
+%
+%
+%	\begin{columns}
+%%	\column{.5\textwidth}
+%%\figtwophasecrossentropy
+%%{two-phase training first optimizing for accuracy-only and then for early classifications as well using \emph{lateness penalty} loss.}
+%
+%	\column{\textwidth}
+%\figearlyreward
+%{one training phase using the \emph{earliness reward} formulation.}
+%\end{columns}
+%	
+%\end{frame}
+%
+%\begin{frame}
+%	
+%	
+%		\input{images/trainingstoppingclasses.tikz}
+%		{Class-wise analysis of the estimated stopping time during training in the evaluation set.}
+%	
+%\end{frame}
 
 \begin{frame}
 \frametitle{Stopping times per crop Class}
@@ -238,17 +238,87 @@
 \end{frame}
 
 
+%\begin{frame}
+%	\frametitle{ICML AI for Social Good Workshop}
+%	\begin{columns}
+%	\column{.5\textwidth}
+%	\includegraphics[width=.6\textwidth]{images/AI4SG_Poster}
+%	
+%	\column{.5\textwidth}
+%	\includegraphics[width=.6\textwidth]{images/AI4SG_Paper}
+%	
+%%	\end{columns}
+%\end{frame}
+
 \begin{frame}
-	\frametitle{ICML AI for Social Good Workshop}
-	\begin{columns}
-	\column{.5\textwidth}
-	\includegraphics[width=.6\textwidth]{images/AI4SG_Poster}
-	
-	\column{.5\textwidth}
-	\includegraphics[width=.6\textwidth]{images/AI4SG_Paper}
-	
-	\end{columns}
+	\frametitle{Comparison of ELECTS (ours) to SR2-CF2 (Mori et al.)}
+	\input{images/satellite_comparison.tikz}
+	{Evaluation of ELECTS (ours) and SR2-CF2 performance on class-balanced subsets of the Remote Sensing dataset.}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Conclusion}
+	
+	\begin{description}
+		\setlength\itemsep{2em}
+		\item[Remote Sensing] \textbf{Good} qualitative \textbf{results} on a \textbf{remote sensing problem} where \textbf{little work towards early classification} is done
+		\item[Time Series Classification] \textbf{Difficulties} on beating\textbf{ state-of-the-art consistently} on \textbf{UCR datasets}
+		\item[Runtime] ELECTS more scalable (applicable) on large data: 4 minute runtime ELECTS versus 104 hours SR2-CF2
+	\end{description}
+	
+\end{frame}
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+		\vfill
+		\begin{center}
+			\Huge\color{tumwhite}
+			\only<1>{
+				\textbf{Thank you!}
+				\includegraphics[width=6cm]{images/epic1}
+			}
+			%		\only<2>{
+			%			\textbf{Questions/Input?}
+			%			\includegraphics[width=7cm]{images/France_white}
+			%		}
+			%		\only<3>{
+			%			\textbf{Collaborations?}
+			%			\includegraphics[width=7cm]{images/France_white}
+			%		}
+			%		
+		\end{center}
+		
+		
+		%	\vspace{1em}	
+		%	\color{white}
+		%	{Twitter}: \textbf{marccoru} | {Github}: \textbf{marccoru} or \textbf{tum-lmf} | \includegraphics[height=.9em]{images/TUM-white}~{Chair} \textbf{lmf.bgu.tum.de/vision} \\ 
+		%	
+		%	\vspace{1em}
+		%	
+		%	\Large
+		%	\url{https://marccoru.github.io/}
+		
+		\vfill
+	\end{frame}
+}
+
+
+
+{\setbeamercolor{background canvas}{bg=black}
+	\begin{frame}[plain]
+		\vfill
+		\begin{center}
+			\Huge\color{tumwhite}
+			\only<1>{
+				\textbf{backup slides...}
+			}
+			
+		\end{center}
+		
+		
+		\vfill
+	\end{frame}
+}
 
 
 {\setbeamercolor{background canvas}{bg=tumbluedark}
@@ -383,60 +453,6 @@
 	\frametitle{The Goal}
 	\includegraphics[width=\textwidth]{images/generalization}
 \end{frame}
-
-
-{\setbeamercolor{background canvas}{bg=black}
-	\begin{frame}[plain]
-	\vfill
-	\begin{center}
-		\Huge\color{tumwhite}
-		\only<1>{
-			\textbf{Thank you!}
-			\includegraphics[width=6cm]{images/epic1}
-		}
-%		\only<2>{
-%			\textbf{Questions/Input?}
-%			\includegraphics[width=7cm]{images/France_white}
-%		}
-		%		\only<3>{
-		%			\textbf{Collaborations?}
-		%			\includegraphics[width=7cm]{images/France_white}
-		%		}
-		%		
-	\end{center}
-	
-	
-%	\vspace{1em}	
-%	\color{white}
-%	{Twitter}: \textbf{marccoru} | {Github}: \textbf{marccoru} or \textbf{tum-lmf} | \includegraphics[height=.9em]{images/TUM-white}~{Chair} \textbf{lmf.bgu.tum.de/vision} \\ 
-%	
-%	\vspace{1em}
-%	
-%	\Large
-%	\url{https://marccoru.github.io/}
-	
-	\vfill
-\end{frame}
-}
-
-
-{\setbeamercolor{background canvas}{bg=black}
-	\begin{frame}[plain]
-	\vfill
-	\begin{center}
-		\Huge\color{tumwhite}
-		\only<1>{
-			\textbf{backup slides...}
-		}
-			
-	\end{center}
-	
-	
-	\vfill
-\end{frame}
-}
-
-
 
 \begin{frame}
 \frametitle{BreizhCrops Dataset (ICML Workshop Submission)}

@@ -28,7 +28,7 @@
 }
 
 \only<4>{
-\node[below=7em of h0, loss](L){$\mathcal{L}(\V{y_t},\yhat_t) = \delta_t\mathcal{L}_{cl}(\V{y_t},\yhat_t)$};
+\node[below=7em of h0, loss](L){$\mathcal{L}(\V{y_t},\yhat_t)$};
 \draw[infer] (L0) -- (L);
 \draw[infer] (d0) -- (L);
 
